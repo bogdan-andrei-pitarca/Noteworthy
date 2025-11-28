@@ -17,7 +17,10 @@ CLEAN_DATA_PATH = os.path.join(DATA_DIR, 'fra_data_processed.csv')
 def clean_and_normalize_data(df: pd.DataFrame) -> pd.DataFrame:
     """Normalizes and combines data for embeddings"""
 
-    REQUIRED_COLUMNS = ['Top', 'Middle', 'Base', 'Brand', 'Gender', 'mainaccord1', 'mainaccord2']
+    REQUIRED_COLUMNS = ['url', 'Top', 'Middle', 'Base', 'Brand', 'Gender', 'Rating Value', 'Rating Count', 'mainaccord1', 'mainaccord2', 'mainaccord3', 'mainaccord4', 'mainaccord5', 'Perfume', 'Year']
+
+    for i in range (1,6):
+        df[f'mainaccord{i}'] = df[f'mainaccord{i}'].fillna('none').astype(str) 
 
     df.dropna(subset=REQUIRED_COLUMNS, inplace=True)
     df.drop_duplicates(subset=['Perfume', 'Brand', 'Year'], inplace=True)
@@ -56,14 +59,14 @@ def clean_and_normalize_data(df: pd.DataFrame) -> pd.DataFrame:
         lambda row: (
             f"{row['Perfume']} by {row['Brand']}, {row['Year_refined']}, "
             f"is a {row['Gender']} fragrance with the following accords: "
-            f"{row['mainaccord1']}, {row['mainaccord2']}. "
+            f"{row['mainaccord1']}, {row['mainaccord2']}, {row['mainaccord3']}, {row['mainaccord4']}, {row['mainaccord5']}. "
             f"It features notes such as: {', '.join(row['all_notes'])}."
         ),
         axis=1
     )
 
     # filter for output
-    df_output = df[['embedding_id','Perfume', 'Brand', 'Gender', 'Year', 'all_notes', 'embedding_text']]
+    df_output = df[['embedding_id','url', 'Perfume', 'Brand', 'Gender', 'Year', 'Rating Value', 'Rating Count', 'all_notes', 'mainaccord1', 'mainaccord2', 'mainaccord3', 'mainaccord4', 'mainaccord5', 'embedding_text']]
 
     return df_output
 
