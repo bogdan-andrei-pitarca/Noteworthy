@@ -1,0 +1,12 @@
+pandas
+numpy
+scikit-learn
+sentence-transformers
+transformers
+faiss-cpu
+torch
+torchaudio
+torchvision
+fastapi
+uvicorn[standard]
+psycopg[binary]
