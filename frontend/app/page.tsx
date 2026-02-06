@@ -105,5 +105,5 @@ export default function AIModelInterface() {
 
       </div>
     </div>
-  )
+  );
 }

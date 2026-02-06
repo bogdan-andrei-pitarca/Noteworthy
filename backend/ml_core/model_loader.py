@@ -2,6 +2,7 @@ import faiss
 import os
 import logging
 from sentence_transformers import SentenceTransformer
+from transformers import T5ForConditionalGeneration, T5Tokenizer
 from typing import Dict, Any
 
 logging.basicConfig(level=logging.INFO)
@@ -36,11 +37,18 @@ def load_ml_assets():
         logging.info("SentenceTransformer model loaded successfully.")
     except Exception as e:
         logging.error(f"Failed to load SentenceTransformer model: {e}")
-        ml_assets['sentence_transformer'] = None
+        ml_assets['embedding_model'] = None
 
-    # TODO: Load T5/BART
-    logging.info("T5/BART generative model placeholder.")
-    ml_assets['generator_model'] = None 
+    logging.info("Loading T5 generatie model 't5-small'")
+    try:
+        # T5-small for now. we upgrade to t5-base later
+        ml_assets['generator_model'] = T5ForConditionalGeneration.from_pretrained('t5-small')
+        ml_assets['generator_tokenizer'] = T5Tokenizer.from_pretrained('t5-small')
+        logging.info("T5 model and tokenizer loaded successfully.")
+    except Exception as e:
+        logging.error(f"Failed to load T5 model/tokenizer: {e}")
+        ml_assets['generator_model'] = None
+        ml_assets['generator_tokenizer'] = None
 
     logging.info("ML assets loading complete.")
 

@@ -81,6 +81,9 @@ def create_embeddings_and_faiss_index(df: pd.DataFrame):
     fragrance_embeddings = model.encode(embedding_texts, show_progress_bar=True, convert_to_numpy=True)
     embeddings = np.array(fragrance_embeddings).astype('float32')
 
+    print("Normalizing embeddings for Cosine Similarity...")
+    faiss.normalize_L2(embeddings)
+
     print("Creating and populating FAISS index...")
 
     # We use IndexFlatIP for cosine similarity search (through inner product)

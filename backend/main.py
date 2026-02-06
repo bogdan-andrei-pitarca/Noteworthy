@@ -140,24 +140,20 @@ async def generate_description(
     Endpoint for Fragrance Notes -> Natural Language Description.
     Uses the fine-tuned T5/BART generative model (currently placeholder).
     """
-    # TODO: Implement generative model inference
+    assets = get_ml_assets()
+    generator_model = assets.get('generator_model')
+    generator_tokenizer = assets.get('generator_tokenizer')
 
-    # 1. Clean and prepare notes input
-    cleaned_notes = [n.strip() for n in notes.split(',') if n.strip()]
-    if not cleaned_notes:
-        raise HTTPException(status_code=400, detail="No valid notes provided.")
-    
-    description = (
-        f"A generated scent profile of a {', '.join(cleaned_notes)} blend: "
-        "This is a rich, warm, and spicy composition, likely best suited for autumn or winter. "
-        "Expect excellent projection and above-average longevity."
-    )
-    
-    return {
-        "notes": cleaned_notes,
-        "description": description,
-        "model_status": "Placeholder_T5_Not_Trained"
-    }
+    # TASK PREFIX FOR T5 FINE TUNING
+    task_prefix = f"describe scent naturally: {notes}"
+
+    inputs = generator_tokenizer(task_prefix, return_tensors="pt")
+    outputs = generator_model.generate(**inputs, max_length=50, num_beams=4, early_stopping=True)
+    description = generator_tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+    return {"description": description}
+
+
 
 if __name__ == "__main__":
     # Command to run the app: uvicorn main:app --reload

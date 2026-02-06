@@ -62,7 +62,7 @@ def initialize_database(conn):
         with conn.cursor() as cur:
             cur.execute(sql_schema)
             conn.commit()
-            logging.info("Database initialized and tables created (if not exist).")
+            logging.info("Database initialized and tables created (if they don't already exist).")
     except Exception as e:
         logging.error(f"Error initializing the database: {e}")
         raise
