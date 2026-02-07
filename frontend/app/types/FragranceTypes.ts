@@ -4,7 +4,7 @@
 
 export interface FragranceRecord {
     embedding_id: number;
-    fragrance_name: string;
+    perfume_name: string;
     brand: string;
     gender: string;
     launch_year: number | null;
@@ -17,7 +17,7 @@ export interface FragranceRecord {
     main_accord_4: string;
     main_accord_5: string;
     all_notes: string;
-    similarity_score: number;
+    similarity_percent: number;
 }
 
 export interface SmellSearchResponse{

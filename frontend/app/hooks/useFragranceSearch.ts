@@ -8,7 +8,11 @@ import { SearchMode, FragranceRecord, DescriptionResponse } from '../types/Fragr
 
 export function useFragranceSearch() {
     const [mode, setMode] = useState<SearchMode>('notes_to_smell');
-    const [query, setQuery] = useState<string>('');
+    
+    const [smellQuery, setSmellQuery] = useState<string>('');
+    const [notesQuery, setNotesQuery] = useState<string>('');
+    // We maintain separate state for each query type to preserve user input when switching modes
+
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -16,6 +20,10 @@ export function useFragranceSearch() {
     const [descriptionResult, setDescriptionResult] = useState<DescriptionResponse | null>(null);
 
     const performSearch = useCallback(async () => {
+
+        // dynamically determine which query to use based on current mode
+        const query = mode === 'notes_to_smell' ? notesQuery : smellQuery;
+
         if (!query.trim()) {
             setError('Please fill out the field before searching.');
             return;
@@ -43,13 +51,15 @@ export function useFragranceSearch() {
         } finally {
             setIsLoading(false);
         }
-    }, [mode, query]);
+    }, [mode, notesQuery, smellQuery]);
 
     return {
         mode,
         setMode,
-        query,
-        setQuery,
+        smellQuery,
+        setSmellQuery,
+        notesQuery,
+        setNotesQuery,
         isLoading,
         error,
         searchMatches,

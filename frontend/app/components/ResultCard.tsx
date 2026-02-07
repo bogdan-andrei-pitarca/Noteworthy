@@ -7,8 +7,8 @@ interface ResultCardProps {
 }
 
 const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
-    const scoreColor = result.similarity_score > 80 ? 'bg-green-100 text-green-800' :
-                       result.similarity_score > 60 ? 'bg-yellow-100 text-yellow-800' :
+    const scoreColor = result.similarity_percent > 80 ? 'bg-green-100 text-green-800' :
+                       result.similarity_percent > 60 ? 'bg-yellow-100 text-yellow-800' :
                        'bg-red-100 text-red-800';
 
     const accords = [
@@ -24,7 +24,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
             <div>
                 <div className="flex justify-between items-start mb-3">
                     <h3 className="text-xl font-bold text-fuschia-800 capitalize leading-tight">
-                        {result.fragrance_name.replace(/_/g, ' ')} by {result.brand} {result.launch_year ? `(${result.launch_year})` : ''}
+                        {(result.perfume_name || '').replace(/_/g, ' ')} by {result.brand} {result.launch_year ? `(${result.launch_year})` : ''}
                     </h3>
                     <a href={result.url} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-fuschia-500 transition ml-2">
                         <ExternalLink className="w-4 h-4" />
@@ -48,7 +48,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
 
             <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
                 <span className={`px-4 py-1.5 text-sm font-bold rounded-full shadow-inner ${scoreColor}`}>
-                    {result.similarity_score}% Match
+                    {result.similarity_percent}% Match
                 </span>
                 <span className="text-xs text-gray-500 italic">Gender: {result.gender}</span>
             </div>

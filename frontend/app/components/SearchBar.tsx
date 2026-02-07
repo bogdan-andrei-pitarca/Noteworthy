@@ -51,7 +51,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 />
                 <button
                     onClick={handleSearch}
-                    className="bg-fuschia-700 text-white p-3 rounded-lg hover:bg-fuschia-800 transition duration-150 shadow-md flex items-center"
+                    className="bg-fuchsia-700 text-white p-3 rounded-lg hover:bg-fuchsia-800 transition duration-150 shadow-md flex items-center"
                 >
                     <Zap className="w-5 h-5" /> Search
                 </button>

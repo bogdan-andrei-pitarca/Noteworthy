@@ -4,7 +4,7 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8
 export const fragranceService = {
     async searchBySmell(query: string, limit: number = 20): Promise<SmellSearchResponse> {
         const encodedQuery = encodeURIComponent(query.trim());
-        const response = await fetch(`${API_BASE_URL}/search/smell?query=${encodedQuery}&limit=${limit}`);
+        const response = await fetch(`${API_BASE_URL}/search/smell?query=${encodedQuery}&k=${limit}`);
 
         if (!response.ok) {
             const errorData = await response.json().catch(
