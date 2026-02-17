@@ -14,4 +14,8 @@ backend/data/*.pkl
 backend/data/*.h5
 backend/data/t5_generator_model/
 backend/data/fra_perfumes.csv 
-backend/data/fra_cleaned.csv        
+backend/data/fra_cleaned.csv     
+**/noteworthy_t5_v1/
+**/checkpoint-*/
+*.bin
+*.safetensors   
