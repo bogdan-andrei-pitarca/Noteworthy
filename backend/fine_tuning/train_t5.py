@@ -7,9 +7,9 @@ import numpy as np
 import nltk
 
 # PATHS
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_PATH = os.path.join(os.path.dirname(__file__), 't5_golden_dataset.csv')
-MODEL_OUTPUT_DIR = os.path.join(os.path.dirname(__file__), 'noteworthy_t5_v1')
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_PATH = os.path.join(SCRIPT_DIR, 'datasets', 't5_golden_dataset_v2.csv')
+MODEL_OUTPUT_DIR = os.path.join(SCRIPT_DIR, 'noteworthy_t5_v1')
 
 # download NLTK data for ROUGE evaluation
 nltk.download('punkt_tab', quiet=True)
