@@ -5,25 +5,32 @@ import os
 
 # Paths
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 'missing_scents_todo.csv')
-OUTPUT_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 't5_new_batch.csv')
+DATA_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 't5_golden_dataset.csv')
+OUTPUT_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 't5_golden_dataset_v2.csv')
 
 def generate_description(notes):
     # updated prompt for better, less repetitive descriptions 
+    # V2: UPDATED AGAIN - avoid overly-luxurious or poetic language. focus on clear analogies. focus on making associations specific to the notes.
     prompt = f"""
-    Write a luxury, atmospheric description for a perfume based on these notes: {notes}.
+    Task: Translate these technical perfume notes into a human-readable "vibe" using real-world analogies.
+    Notes: {notes}
 
     STRICT RULES:
-    1. DO NOT start with "As the fragrance unfolds", "As the scent unfurls", or "This fragrance is".
-    2. DO NOT use the words "sun-kissed", "garden", "breeze", or "stepping into".
-    3. START the description with a mood, a texture, or a specific temperature 
-    (e.g., "Sharp and cold," "Ink-dark and rooted," "Velvety and dense").
-    4. Explain the interaction: e.g., how the '{notes[0]}' balances the '{notes[-1]}'.
-    5. Keep it evocative.
-    6. Max length: 50 words.
+    1. NO POETRY: Avoid "velvety," "dense," "whispers," or "ensnares."
+    2. SENSORY ANALOGIES: Compare the scent to things people know (e.g., household items, specific foods, weather, simple fragrance notes or locations).
+    3. TONE: Helpful, intuitive, and grounded. Focus on clear, relatable analogies.
+    4. DIVERSITY: Ensure the analogies are specific to THESE notes. Do not repeat the same analogies for different scents.
+    5. LIMIT: Max 50 words.
+    6. START: Begin directly with the description.
+    7. NO PERFUMERY JARGON: Do not use "Start/Heart/Base" or "Top/Middle/Bottom notes." 
+    8. NARRATIVE FLOW: Describe the scent as a transformation in one fluid paragraph. 
+    9. THE HOOK: The first sentence must capture the "Main Character" of the smell.
+    10. EXAMPLE STYLE: "Smells like a cold glass of gin and tonic that slowly warms into a bouquet of fresh roses, eventually settling into the dry, woody scent of an old cigar box."
+    11. NO REPETITIVE CLOSINGS: Do not end every description with "skin," "lotion," or "clean laundry." 
+    12. DIVERSE BASES: If the base notes are woody, compare it to a physical place (e.g., "a sawdust-covered workshop"). If they are resinous, think of "old church pews" or "burnt sugar."
     """
     try:
-        response = ollama.generate(model='llama3', prompt=prompt, options={'temperature': 0.9, 'top_p': 0.95})
+        response = ollama.generate(model='llama3', prompt=prompt, options={'temperature': 0.8, 'top_p': 0.95})
         return response['response'].strip().replace('"', '')
     except Exception as e:
         print(f"Error generating description: {e}")
