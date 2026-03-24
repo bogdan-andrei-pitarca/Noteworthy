@@ -6,38 +6,100 @@ import os
 # Paths
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 't5_golden_dataset.csv')
-OUTPUT_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 't5_golden_dataset_v2.csv')
+OUTPUT_PATH = os.path.join(os.path.dirname(__file__), 'datasets', 't5_golden_dataset_v4.csv')
 
 def generate_description(notes):
     # updated prompt for better, less repetitive descriptions 
     # V2: UPDATED AGAIN - avoid overly-luxurious or poetic language. focus on clear analogies. focus on making associations specific to the notes.
+    # V3: agressive against lists, overhaul to avoid AI-isms, more explicit rules. added example of correct style.
+    # V4: tried to fix mode collapse - gave more non-deterministic mappings and increased temperature
     prompt = f"""
-    Task: Translate these technical perfume notes into a human-readable "vibe" using real-world analogies.
     Notes: {notes}
 
-    STRICT RULES:
-    1. NO POETRY: Avoid "velvety," "dense," "whispers," or "ensnares."
-    2. SENSORY ANALOGIES: Compare the scent to things people know (e.g., household items, specific foods, weather, simple fragrance notes or locations).
-    3. TONE: Helpful, intuitive, and grounded. Focus on clear, relatable analogies.
-    4. DIVERSITY: Ensure the analogies are specific to THESE notes. Do not repeat the same analogies for different scents.
-    5. LIMIT: Max 50 words.
-    6. START: Begin directly with the description.
-    7. NO PERFUMERY JARGON: Do not use "Start/Heart/Base" or "Top/Middle/Bottom notes." 
-    8. NARRATIVE FLOW: Describe the scent as a transformation in one fluid paragraph. 
-    9. THE HOOK: The first sentence must capture the "Main Character" of the smell.
-    10. EXAMPLE STYLE: "Smells like a cold glass of gin and tonic that slowly warms into a bouquet of fresh roses, eventually settling into the dry, woody scent of an old cigar box."
-    11. NO REPETITIVE CLOSINGS: Do not end every description with "skin," "lotion," or "clean laundry." 
-    12. DIVERSE BASES: If the base notes are woody, compare it to a physical place (e.g., "a sawdust-covered workshop"). If they are resinous, think of "old church pews" or "burnt sugar."
+    Task: Describe what this fragrance smells like to a normal person.
+
+    GOAL:
+    Translate all notes into concrete, everyday smells.
+
+    RULES:
+
+    1. FORMAT:
+    - One sentence (max 40 words)
+    - Start with: "It smells like"
+
+    2. FOCUS:
+    - Describe only 3–5 dominant smells
+
+    3. NO NOTE NAMES:
+    - NEVER output original note names
+    - ALWAYS translate into real-world smells
+
+    4. CORE MAPPINGS:
+    - patchouli → wet leaves, forest floor
+    - amber → glue, warm plastic, tree sap
+    - sandalwood → pencil shavings, dry wood
+    - cedar → sawdust, dry wood
+    - musk → skin, clean laundry
+    - vetiver → damp soil, roots
+    - incense → smoke, burnt wood
+    - oud → burnt wood, smoky resin
+    - aldehydes → soap, fizzy clean air
+
+    5. FALLBACK (USE THIS WHEN UNKNOWN):
+
+    - flowers → soap, shampoo, powder
+    - fruits → juicy, tart, candy-like fruit
+    - green → crushed leaves, cut grass
+    - woods → sawdust, wooden boards
+    - resin → glue, plastic, smoke
+    - water → rain, wet air, metallic
+    - sweet → sugar, caramel, cream
+    - spice → pepper, dry heat
+
+    IMPORTANT:
+    - NEVER leave a note untranslated
+
+    6. VARIATION (CRITICAL):
+    - Avoid repeating the same phrases
+    - Instead of repeating:
+        "dry wood" → use: sawdust, pencil shavings, wooden boards
+        "warm plastic" → use: glue, melted plastic
+        "sweet" → use: sugar, caramel, candy
+
+    7. STYLE:
+    - No vague words (fresh, elegant, rich, complex)
+    - No storytelling
+    - Optional: describe progression (at first → then → finally)
+
+    GOOD:
+    It smells like citrus peel and soap at first, then rubber, smoke, and sawdust.
+
+    BAD:
+    It smells fresh and elegant
+    It smells like patchouli and amber
+
+    OUTPUT:
+    Return ONLY the sentence.
     """
     try:
-        response = ollama.generate(model='llama3', prompt=prompt, options={'temperature': 0.8, 'top_p': 0.95})
+        response = ollama.generate(model='llama3', prompt=prompt, options={'temperature': 0.65, 'top_p': 0.9})
         return response['response'].strip().replace('"', '')
     except Exception as e:
         print(f"Error generating description: {e}")
         return ""
     
+def clean_output(text):
+    # remove everything before "It smells like"
+    if "It smells like" in text:
+        text = text[text.find("It smells like"):]
+    
+    # keep only first sentence
+    text = text.split(".")[0] + "."
+    
+    return text.strip()
+    
 def main():
-    print("--- Starting Golden Dataset (RE)Generation ---")
+    print("--- Starting Golden Dataset (RE)Generation (V4) ---")
 
     # Load data
     if not os.path.exists(DATA_PATH):
@@ -64,9 +126,14 @@ def main():
     # 3. TEACHER-STUDENT DISTILLATION
     descriptions = []
     # tqdm for progress bar (QOL improvement)
-    for notes in tqdm(df['all_notes'], desc="Regenerating Descriptions"):
-        desc = generate_description(notes)
+    for i, notes in enumerate(tqdm(df['all_notes'], desc="Regenerating Descriptions")):
+        desc = clean_output(generate_description(notes))
         descriptions.append(desc)
+
+        if i < 3:  # print the first few for sanity check
+            print(f"\n--- Sample {i+1} ---")
+            print(f"\nNotes: {notes}")
+            print(f"Generated Description: {desc}\n" + "-"*30)
 
     # 4. SAVE TO CSV
     df['target_description'] = descriptions
