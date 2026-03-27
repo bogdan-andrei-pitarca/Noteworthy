@@ -8,8 +8,9 @@ import nltk
 
 # PATHS
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-DATA_PATH = os.path.join(SCRIPT_DIR, 'datasets', 't5_golden_dataset_v2.csv')
-MODEL_OUTPUT_DIR = os.path.join(SCRIPT_DIR, 'noteworthy_t5_v1')
+DATASETS_PATH = os.path.join(SCRIPT_DIR, 'datasets')
+DATA_PATH = os.path.join(DATASETS_PATH, 'claude', 't5_golden_dataset_claude.csv')
+MODEL_OUTPUT_DIR = os.path.join(SCRIPT_DIR, 'models','noteworthy_t5_v2')
 
 # download NLTK data for ROUGE evaluation
 nltk.download('punkt_tab', quiet=True)
@@ -29,7 +30,7 @@ def main():
 
     # TOKENIZER AND MODEL
     print("--- Loading T5 Tokenizer and Model ---")
-    model_name = 't5-small'  # can be 't5-base' or 't5-large' for better performance but more resource usage
+    model_name = 't5-base'  # can be 't5-base' or 't5-large' for better performance but more resource usage
     tokenizer = T5Tokenizer.from_pretrained(model_name)
     model = T5ForConditionalGeneration.from_pretrained(model_name)
 
@@ -73,14 +74,15 @@ def main():
         output_dir=MODEL_OUTPUT_DIR,
         eval_strategy="epoch",
         learning_rate=5e-5,
-        per_device_train_batch_size=8,
-        per_device_eval_batch_size=8,
+        per_device_train_batch_size=16, # increased from 8 since colab can handle it
+        per_device_eval_batch_size=16, # same 
         weight_decay=0.01,
-        save_total_limit=3,
+        save_total_limit=2, # reduced to save colab disk space
         num_train_epochs=5,
         predict_with_generate=True, # this tells the trainer to actually generate descriptions during evaluation, so that we can compute ROUGE scores on the generated text instead of just the raw logits.
         logging_dir='./logs',
-        use_cpu=True
+        logging_steps=50
+        # use_cpu=True
     )
 
     data_collator = DataCollatorForSeq2Seq(tokenizer, model=model) # dynamically pads inputs and labels to max length so they are all equal within a batch. required to perform matrix multiplication.

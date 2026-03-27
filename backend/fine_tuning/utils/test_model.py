@@ -14,11 +14,23 @@ def test_model():
 
     # Sample input
     test_cases = [
-        "sea salt, sage, grapefruit, seaweed", # fresh/aquatic
-        "dark chocolate, truffle, vanilla, hazelnut", # gourmand/sweet
-        "leather, tobacco, smoke, agarwood", #woody/masculine
-        "lily of the valley, green apple, musk" # floral/fresh
-    ]
+    # aquatic
+    "water notes, rosemary, cardamom, sequoia, musk",
+    # gourmand/sweet  
+    "dark chocolate, truffle, vanilla, hazelnut, tonka bean",
+    # woody/masculine
+    "leather, tobacco, smoke, agarwood, vetiver",
+    # floral/fresh
+    "lily of the valley, green apple, musk, peony",
+    # smoky
+    "whiskey, incense, birch, tobacco, agarwood",
+    # lactonic
+    "milk, wheat, coconut, immortelle, sandalwood",
+    # citrus 
+    "bergamot, lemon, neroli, cedar, white musk",
+    # earthy 
+    "truffle, blackberry, oakmoss, patchouli, incense",
+]
 
     print("\n--- Generating descriptions for test cases ---")
     for notes in test_cases:

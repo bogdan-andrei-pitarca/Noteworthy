@@ -1,0 +1,20 @@
+# ── Anthropic API ─────────────────────────────────────────────────────────────
+anthropic>=0.40.0          # Batch API requires >= 0.40.0
+
+# ── Data handling ─────────────────────────────────────────────────────────────
+pandas>=2.0.0
+numpy>=1.24.0
+
+# ── Hugging Face stack ────────────────────────────────────────────────────────
+transformers>=4.40.0       # T5ForConditionalGeneration, T5Tokenizer
+datasets>=2.18.0           # Dataset.from_pandas(), train_test_split
+evaluate>=0.4.0            # ROUGE metric
+accelerate>=0.27.0         # Required backend for Seq2SeqTrainer
+
+# ── Training utilities ────────────────────────────────────────────────────────
+torch>=2.1.0               # CPU training
+nltk>=3.8.0                # Sentence tokenization for ROUGE evaluation
+sentencepiece>=0.1.99      # T5 tokenizer dependency
+
+# ── Environment ───────────────────────────────────────────────────────────────
+python-dotenv>=1.0.0       # load_dotenv() for ANTHROPIC_API_KEY
