@@ -4,12 +4,14 @@ import logging
 from sentence_transformers import SentenceTransformer
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 from typing import Dict, Any
+from pathlib import Path
 
 logging.basicConfig(level=logging.INFO)
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
 DATA_DIR = os.path.join(BASE_DIR, 'data')
 FAISS_INDEX_PATH = os.path.join(DATA_DIR, 'fra_faiss_index.bin')
+FT_MODEL_PATH = os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_t5_v2')
 
 ml_assets: Dict[str, Any] = {}
 
@@ -43,9 +45,20 @@ def load_ml_assets():
     try:
         # T5-small for now. we upgrade to t5-base later
         # UPGRADED BY MAR. 29: T5-base for better performance. 
-        FT_MODEL_PATH = os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_t5_v2') # path to the fine-tuned T5 model
-        ml_assets['generator_model'] = T5ForConditionalGeneration.from_pretrained(FT_MODEL_PATH)
-        ml_assets['generator_tokenizer'] = T5Tokenizer.from_pretrained(FT_MODEL_PATH)
+        if not os.path.exists(FT_MODEL_PATH):
+            logging.error(f"Model path does not exist: {FT_MODEL_PATH}") 
+
+        print(f"Attempting to load T5 model from: {FT_MODEL_PATH}")
+
+        model_path = str(Path(FT_MODEL_PATH).resolve())
+        logging.info(f"Resolved model path: {model_path}")
+
+        ml_assets['generator_model'] = T5ForConditionalGeneration.from_pretrained(
+            model_path, local_files_only=True
+        )
+        ml_assets['generator_tokenizer'] = T5Tokenizer.from_pretrained(
+            model_path, local_files_only=True
+        )
         logging.info("T5 model and tokenizer loaded successfully.")
     except Exception as e:
         logging.error(f"Failed to load T5 model/tokenizer: {e}")

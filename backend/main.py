@@ -144,11 +144,17 @@ async def generate_description(
     generator_model = assets.get('generator_model')
     generator_tokenizer = assets.get('generator_tokenizer')
 
+    if generator_model is None or generator_tokenizer is None:
+        raise HTTPException(
+            status_code=503, 
+            detail="T5 Model is not loaded. Check backend logs for path errors."
+        )
+
     # TASK PREFIX FOR T5 FINE TUNING
     task_prefix = f"describe fragrance: {notes}"
 
     inputs = generator_tokenizer(task_prefix, return_tensors="pt")
-    outputs = generator_model.generate(**inputs, max_length=50, num_beams=4, early_stopping=True)
+    outputs = generator_model.generate(**inputs, max_length=50, num_beams=5, no_repeat_ngram_size=2, early_stopping=True)
     description = generator_tokenizer.decode(outputs[0], skip_special_tokens=True)
 
     return {"description": description}

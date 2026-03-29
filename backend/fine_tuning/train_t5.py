@@ -107,9 +107,17 @@ def main():
     trainer.train()
 
     # SAVE THE MODEL
-    print(f"--- Training complete! Saving model to {MODEL_OUTPUT_DIR} ---")
-    trainer.save_model(MODEL_OUTPUT_DIR)
+    # 1. Save the model weights and config
+    trainer.save_model(MODEL_OUTPUT_DIR) 
+    
+    # 2. Save the tokenizer explicitly
+    # Using the tokenizer object directly ensures all files are bundled
     tokenizer.save_pretrained(MODEL_OUTPUT_DIR)
+    
+    # 3. EXTRA SAFETY: Manually save the vocabulary (the .model file)
+    # This specifically creates the spiece.model file T5 needs
+    tokenizer.save_vocabulary(MODEL_OUTPUT_DIR)
+    
     print("Model and tokenizer saved successfully.")
 
 if __name__ == "__main__":
