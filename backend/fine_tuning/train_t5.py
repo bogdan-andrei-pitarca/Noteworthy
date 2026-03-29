@@ -7,10 +7,9 @@ import numpy as np
 import nltk
 
 # PATHS
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-DATASETS_PATH = os.path.join(SCRIPT_DIR, 'datasets')
-DATA_PATH = os.path.join(DATASETS_PATH, 'claude', 't5_golden_dataset_claude.csv')
-MODEL_OUTPUT_DIR = os.path.join(SCRIPT_DIR, 'models','noteworthy_t5_v2')
+# adapted for colab - in local, these are set in the utils files and imported into this one, but for better modularity and to avoid path issues in colab, I'm defining them directly here.
+DATA_PATH = '/content/t5_golden_dataset_claude.csv'
+MODEL_OUTPUT_DIR = '/content/noteworthy_t5_v2'
 
 # download NLTK data for ROUGE evaluation
 nltk.download('punkt_tab', quiet=True)
@@ -47,7 +46,8 @@ def main():
     tokenized_datasets = dataset.map(preprocess_function, batched=True)
 
     # METRICS (ROUGE-L)
-    metric = evaluate.load('rouge')
+    rouge_metric = evaluate.load('rouge')
+    bertscore_metric = evaluate.load('bertscore')
 
     def compute_metrics(eval_pred):
         predictions, labels = eval_pred
@@ -61,13 +61,18 @@ def main():
         decoded_preds = ["\n".join(nltk.sent_tokenize(pred.strip())) for pred in decoded_preds]
         decoded_labels = ["\n".join(nltk.sent_tokenize(label.strip())) for label in decoded_labels]
 
-        result = metric.compute(predictions=decoded_preds, references=decoded_labels, use_stemmer=True) # use_stemmer to improve matching by reducing words to their root form
+        rouge_result = rouge_metric.compute(predictions=decoded_preds, references=decoded_labels, use_stemmer=True) # use_stemmer to improve matching by reducing words to their root form
         # compares the generated description to the golden description
         
-        # extract ROUGE-L score
-        result = {key: value * 100 for key, value in result.items()}
-        # rouge metric returns three scores (precision, recall, f1). We take the f1 score as the main metric for evaluation, and multiply by 100 to convert to percentage.
-        return {k: round(v, 4) for k, v in result.items()}
+        bertscore_result = bertscore_metric.compute(predictions=decoded_preds, references=decoded_labels, lang='en') # computes BERTScore, which uses contextual embeddings to evaluate the quality of generated text. 
+        # It gives us precision, recall, and F1 scores based on how well the generated description matches the golden description in terms of meaning, not just exact word overlap.
+
+        return{
+            # rouge scores x 100
+            **{k: round(v * 100, 4) for k, v in rouge_result.items()},
+            # bertscore - take the mean F1 across all examples
+            'bertscore_f1': round(sum(bertscore_result['f1']) / len(bertscore_result['f1']) * 100, 4)
+        }
     
     # TRAINING ARGUMENTS
     training_args = Seq2SeqTrainingArguments(

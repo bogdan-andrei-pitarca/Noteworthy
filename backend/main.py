@@ -145,7 +145,7 @@ async def generate_description(
     generator_tokenizer = assets.get('generator_tokenizer')
 
     # TASK PREFIX FOR T5 FINE TUNING
-    task_prefix = f"describe scent naturally: {notes}"
+    task_prefix = f"describe fragrance: {notes}"
 
     inputs = generator_tokenizer(task_prefix, return_tensors="pt")
     outputs = generator_model.generate(**inputs, max_length=50, num_beams=4, early_stopping=True)
