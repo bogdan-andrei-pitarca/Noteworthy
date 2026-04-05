@@ -5,10 +5,20 @@ from pydantic import BaseModel
 import logging
 from typing import List, Dict, Any, Optional
 import numpy as np
+import redis
 from ml_core.model_loader import get_ml_assets, load_ml_assets
 from repository import fragrance_repo
 
 logging.basicConfig(level=logging.INFO)
+
+try:
+    redis_client = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True) # decode_responses=True for string values
+    redis_client.ping() # test
+    logging.info("Connected to Redis successfully.")
+except redis.ConnectionError as e:
+    logging.warning(f"Failed to connect to Redis: {e}")
+    redis_client=None
+
 app = FastAPI(title="Noteworthy Fragrances API", version="1.0")
 
 # CORS Middleware
@@ -138,7 +148,8 @@ async def generate_description(
 ):
     """
     Endpoint for Fragrance Notes -> Natural Language Description.
-    Uses the fine-tuned T5/BART generative model (currently placeholder).
+    Uses the fine-tuned T5.
+    Includes Redis caching to prevent redudant ML inferences.
     """
     assets = get_ml_assets()
     generator_model = assets.get('generator_model')
@@ -152,9 +163,23 @@ async def generate_description(
     
     notes = sanitise_notes_input(notes)
     if len(notes) < 3:
-        return {"description": "Please provide at least one fragrance note"}
+        return {"description": "Please provide at least one fragrance note", "cached": False}
+    
+    # check Redis cache first
+    # create unique key for redis (e.g. "notes_to_desc:note1,note2,note3")
+    cache_key = f"notes_to_desc:{notes.lower()}"
+
+    if redis_client:
+        try:
+            cached_description = redis_client.get(cache_key)
+            if cached_description:
+                logging.info(f"Cache hit for notes: {notes}")
+                return {"description": cached_description, "cached": True}
+        except Exception as e:
+            logging.error(f"Error accessing Redis cache: {e}")
 
     # TASK PREFIX FOR T5 FINE TUNING
+    logging.info(f"Cache miss for notes: {notes}. Generating description via T5...")
     task_prefix = f"describe fragrance: {notes}"
 
     inputs = generator_tokenizer(task_prefix, return_tensors="pt")
@@ -169,7 +194,16 @@ async def generate_description(
     )
     description = generator_tokenizer.decode(outputs[0], skip_special_tokens=True)
 
-    return {"description": description}
+    # save to cache
+    if redis_client:
+        try:
+            # save result with TTL of 24 hours (86400 seconds)
+            redis_client.setex(cache_key, 86400, description)
+            logging.info(f"Saved description to cache for notes: {notes}")
+        except Exception as e:
+            logging.error(f"Error saving to Redis cache: {e}")
+
+    return {"description": description, "cached": False}
 
 
 def sanitise_notes_input(notes: str) -> str:

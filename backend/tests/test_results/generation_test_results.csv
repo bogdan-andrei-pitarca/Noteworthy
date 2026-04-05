@@ -1,11 +1,11 @@
 input_notes,output,latency_sec
-vanilla,It smells like warm vanilla candy mixed with a hint of damp forest floor.,1.01
-cedarwood,It smells like cedarwood candy and a hint of woody wood.,1.1
-"bergamot, lemon, black pepper, leather, tobacco, oud, rose, iris, patchouli, vetiver, oakmoss, amber, civet","It smells like lemon candy and lemon peel at first, then rose-scented soap, finishing with warm skin and pencil shavings.",1.61
-"grapefruit, yuzu, mint, basil, lavender, rosemary, pine, cedar, sandalwood, musk, tonka bean, vanilla","It smells like grapefruit candy and mint at first, then dries down to pencil shavings and damp forest floor.",1.49
-"aquatic sea salt, heavy dark smoke, sweet cotton candy",It smells like salty ocean air mixed with sweet cotton candy.,1.08
-"icy mint, burning hot chili pepper, warm amber","It smells like mint candy and hot chili pepper at first, then warm amber, with a hint of cold powder.",1.11
-"pepperoni pizza, motor oil, gasoline","It smells like pepperoni pizza mixed with olive oil and gasoline at first, then shifts into a lighter, more refined version.",1.24
-"wet dog, old library books, copper coins","It smells like wet dog, old library books, copper coins.",1.13
-"solar notes, moonlight accord, stardust, frozen water","It smells like moonlight and stardust at first, then dries down to earth with a hint of cold water.",1.28
-"roasted coffee beans, dark chocolate, bitter almond, warm musk",It smells like coffee grounds and dark chocolate mixed with warm musk.,1.15
+vanilla,It smells like warm vanilla candy mixed with a hint of damp forest floor.,0.02
+cedarwood,It smells like cedarwood candy and a hint of woody wood.,0.01
+"bergamot, lemon, black pepper, leather, tobacco, oud, rose, iris, patchouli, vetiver, oakmoss, amber, civet","It smells like lemon candy and lemon peel at first, then rose-scented soap, finishing with warm skin and pencil shavings.",0.0
+"grapefruit, yuzu, mint, basil, lavender, rosemary, pine, cedar, sandalwood, musk, tonka bean, vanilla","It smells like grapefruit candy and mint at first, then dries down to pencil shavings and damp forest floor.",0.0
+"aquatic sea salt, heavy dark smoke, sweet cotton candy",It smells like salty ocean air mixed with sweet cotton candy.,0.0
+"icy mint, burning hot chili pepper, warm amber","It smells like mint candy and hot chili pepper at first, then warm amber, with a hint of cold powder.",0.0
+"pepperoni pizza, motor oil, gasoline","It smells like pepperoni pizza mixed with olive oil and gasoline at first, then shifts into a lighter, more refined version.",0.0
+"wet dog, old library books, copper coins","It smells like wet dog, old library books, copper coins.",0.0
+"solar notes, moonlight accord, stardust, frozen water","It smells like moonlight and stardust at first, then dries down to earth with a hint of cold water.",0.0
+"roasted coffee beans, dark chocolate, bitter almond, warm musk",It smells like coffee grounds and dark chocolate mixed with warm musk.,0.0
