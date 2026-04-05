@@ -149,15 +149,38 @@ async def generate_description(
             status_code=503, 
             detail="T5 Model is not loaded. Check backend logs for path errors."
         )
+    
+    notes = sanitise_notes_input(notes)
+    if len(notes) < 3:
+        return {"description": "Please provide at least one fragrance note"}
 
     # TASK PREFIX FOR T5 FINE TUNING
     task_prefix = f"describe fragrance: {notes}"
 
     inputs = generator_tokenizer(task_prefix, return_tensors="pt")
-    outputs = generator_model.generate(**inputs, max_length=50, num_beams=5, no_repeat_ngram_size=2, early_stopping=True)
+    outputs = generator_model.generate(
+    **inputs,
+    max_new_tokens=60,
+    num_beams=4,
+    no_repeat_ngram_size=2,
+    repetition_penalty=1.3,
+    early_stopping=True,
+    forced_bos_token_id=generator_tokenizer.encode("It")[0]
+    )
     description = generator_tokenizer.decode(outputs[0], skip_special_tokens=True)
 
     return {"description": description}
+
+
+def sanitise_notes_input(notes: str) -> str:
+    """
+    Sanitizes the input notes string by removing extra spaces and ensuring consistent formatting.
+    """
+    notes = notes.strip().strip(':').strip()
+    # remove accidental prefix duplications
+    if notes.lower().startswith("describe fragrance:"):
+        notes = notes[len('describe fragrance:'):].strip()
+    return notes
 
 
 
