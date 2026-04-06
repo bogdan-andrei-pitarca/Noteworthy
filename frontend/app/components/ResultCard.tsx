@@ -1,12 +1,18 @@
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
+import { useState } from 'react';
+import { ExternalLink, Sparkles } from 'lucide-react';
 import { FragranceRecord } from '../types/FragranceTypes';
+import { fragranceService } from '../services/api';
 
 interface ResultCardProps {
     result: FragranceRecord;
 }
 
 const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
+    // local state for AI description
+    const [aiDescription, setAiDescription] = useState<string | null>(null);
+    const [isGenerating, setIsGenerating] = useState<boolean>(false);
+
     const scoreColor = result.similarity_percent > 80 ? 'bg-green-100 text-green-800' :
                        result.similarity_percent > 60 ? 'bg-yellow-100 text-yellow-800' :
                        'bg-red-100 text-red-800';
@@ -18,6 +24,21 @@ const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
         result.main_accord_4,
         result.main_accord_5
     ].filter(accord => accord && accord.toLowerCase() !== 'none');
+
+
+    // calls backend T5 API
+    const handleGenerateDescription = async () => {
+        setIsGenerating(true);
+        try{
+            const data = await fragranceService.generateDescription(result.all_notes);
+            setAiDescription(data.description);
+        } catch (error) {
+            console.error("Error generating description:", error);
+            setAiDescription("Sorry, an error occurred while generating the description.");
+        } finally {
+            setIsGenerating(false);
+        }
+    }
 
     return (
         <div className="bg-white p-5 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition duration-200 transform hover:scale-[1.02] flex flex-col justify-between">
@@ -43,6 +64,26 @@ const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
                 <div className="text-xs text-gray-600 space-y-1">
                     <p><strong className="text-gray-700">Rating: {result.rating_value ?? 'N/A'} ({result.rating_count ?? '0'} reviews)</strong></p>
                     <p><strong className="text-gray-700">Launch Year: {result.launch_year ?? 'N/A'}</strong></p>
+                </div>
+            </div>
+
+            <div className="mt-auto">
+                {/* AI GENERATED DESCRIPTION SECTION */}
+                <div className="bg-gray-50 p-3 rounded-lg border border-gray-100 mb-4 min-h-[80px] flex flex-col justify-center">
+                    {aiDescription ? (
+                        <div className="text-sm text-gray-700 italic font-serif leading-relaxed">
+                            <Sparkles className="w-3 h-3 inline-block mr-1 text-fuschia-500 mb-1" />
+                            "{aiDescription}"
+                        </div>
+                    ) : (
+                        <button
+                            onClick={handleGenerateDescription}
+                            disabled={isGenerating}
+                            className="w-full py-2 px-4 bg-fuchsia-100 text-fuchsia-700 text-sm font-semibold rounded-md hover:bg-fuchsia-200 transition disabled:opacity-50"
+                        >
+                            {isGenerating ? 'Generating...' : 'Find out how this smells!'}
+                        </button>
+                    )}
                 </div>
             </div>
 

@@ -34,7 +34,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                         : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     }`}
                 >
-                    <Search className="w-4 h-4 mr-2" /> Smell to Notes
+                    <Search className="w-4 h-4 mr-2" /> Description to Notes
                 </button>
             </div>
 
