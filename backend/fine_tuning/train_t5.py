@@ -8,8 +8,8 @@ import nltk
 
 # PATHS
 # adapted for colab - in local, these are set in the utils files and imported into this one, but for better modularity and to avoid path issues in colab, I'm defining them directly here.
-DATA_PATH = '/content/t5_golden_dataset_claude.csv'
-MODEL_OUTPUT_DIR = '/content/noteworthy_t5_v2'
+DATA_PATH = '/content/t5_golden_dataset_claude_v2.csv'
+MODEL_OUTPUT_DIR = '/content/noteworthy_t5_v3'
 
 # download NLTK data for ROUGE evaluation
 nltk.download('punkt_tab', quiet=True)

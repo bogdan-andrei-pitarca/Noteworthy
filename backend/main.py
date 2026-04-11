@@ -8,6 +8,7 @@ import numpy as np
 import redis
 from ml_core.model_loader import get_ml_assets, load_ml_assets
 from repository import fragrance_repo
+from ml_core.predictor import FragrancePredictor
 
 logging.basicConfig(level=logging.INFO)
 
@@ -65,6 +66,9 @@ async def startup_event():
     # Load ML assets when the application starts
     logging.info("Loading ML assets on startup...")
     load_ml_assets()
+    assets = get_ml_assets()
+    if assets.get('generator_model') and assets.get('generator_tokenizer'):
+        app.state.predictor = FragrancePredictor(assets['generator_model'], assets['generator_tokenizer'])
     logging.info("FastAPI startup complete. ML assets loaded successfully.")
 
 # Helper function for semantic search
@@ -161,6 +165,8 @@ async def generate_description(
             detail="T5 Model is not loaded. Check backend logs for path errors."
         )
     
+    predictor = app.state.predictor
+    
     notes = sanitise_notes_input(notes)
     if len(notes) < 3:
         return {"description": "Please provide at least one fragrance note", "cached": False}
@@ -168,7 +174,6 @@ async def generate_description(
     # check Redis cache first
     # create unique key for redis (e.g. "notes_to_desc:note1,note2,note3")
     cache_key = f"notes_to_desc:{notes.lower()}"
-
     if redis_client:
         try:
             cached_description = redis_client.get(cache_key)
@@ -180,19 +185,12 @@ async def generate_description(
 
     # TASK PREFIX FOR T5 FINE TUNING
     logging.info(f"Cache miss for notes: {notes}. Generating description via T5...")
-    task_prefix = f"describe fragrance: {notes}"
-
-    inputs = generator_tokenizer(task_prefix, return_tensors="pt")
-    outputs = generator_model.generate(
-    **inputs,
-    max_new_tokens=60,
-    num_beams=4,
-    no_repeat_ngram_size=2,
-    repetition_penalty=1.3,
-    early_stopping=True,
-    forced_bos_token_id=generator_tokenizer.encode("It")[0]
-    )
-    description = generator_tokenizer.decode(outputs[0], skip_special_tokens=True)
+    
+    try:
+        description = predictor.generate_description(notes)
+    except Exception as e:
+        logging.error(f"Error during description generation: {e}")
+        raise HTTPException(status_code=500, detail="Error during description generation.")
 
     # save to cache
     if redis_client:
@@ -208,13 +206,20 @@ async def generate_description(
 
 def sanitise_notes_input(notes: str) -> str:
     """
-    Sanitizes the input notes string by removing extra spaces and ensuring consistent formatting.
+    Ensures the input exactly matches the ['note1', 'note2'] format 
+    the model learned during training.
     """
     notes = notes.strip().strip(':').strip()
-    # remove accidental prefix duplications
-    if notes.lower().startswith("describe fragrance:"):
-        notes = notes[len('describe fragrance:'):].strip()
-    return notes
+
+    if notes.lower().startswith("describe fragrance"):
+        notes = notes[len("describe fragrance"):].strip()
+
+    if notes.startswith("[") and notes.endswith("]"):
+        return notes
+
+    # This turns "lemon, neroli" -> ["lemon", "neroli"] -> "['lemon', 'neroli']"
+    notes_list = [n.strip().lower() for n in notes.split(",") if n.strip()]
+    return str(notes_list)
 
 
 

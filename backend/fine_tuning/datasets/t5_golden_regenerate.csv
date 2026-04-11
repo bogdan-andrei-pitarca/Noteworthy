@@ -1,0 +1,403 @@
+all_notes,mainaccord1,embedding_id
+"['lavender', 'martini', 'bergamot', 'mandarin orange', 'palisander rosewood', 'patchouli', 'orchid', 'narcissus', 'musk', 'woodsy notes', 'cedar', 'white amber']",musky,6646
+"['citruses', 'incense', 'rose', 'sandalwood', 'leather', 'vanilla', 'musk']",smoky,7368
+"['floral notes', 'rose', 'coffee', 'vanila', 'white musk', 'amber']",rose,10945
+"['white peach', 'sicilian mandarin', 'ylang-ylang', 'jasmine', 'benzoin', 'cedar']",yellow floral,1526
+"['lavender', 'mandarin orange', 'black currant', 'petitgrain', 'lavender', 'orange blossom', 'jasmine', 'madagascar vanilla', 'musk', 'cedar', 'ambergris']",white floral,9672
+"['mandarin orange', 'neroli', 'bergamot', 'star anise', 'olive blossom', 'tarragon', 'tonka bean', 'tobacco', 'guaiac wood', 'cedar']",anis,17498
+"['neroli', 'orange blossom', 'grapefruit', 'jasmine', 'rose', 'tuberose', 'musk', 'sandalwood', 'orris root', 'amber', 'vanilla']",white floral,2412
+"['sicilian mandarin', 'pink peony', 'damask rose', 'apricot', 'peach', 'white musk']",floral,14733
+"['almond', 'spices', 'lavender', 'bergamot', 'thyme', 'rosemary', 'cherry', 'vanilla', 'incense', 'bulgarian rose', 'leather', 'tonka bean', 'sandalwood']",sweet,21017
+"['tea', 'artemisia', 'bergamot', 'orange blossom', 'bitter orange', 'pepper', 'cardamom', 'coriander', 'musk', 'woody notes', 'jasmine', 'amber', 'rose']",fresh spicy,17248
+"['hazelnut', 'bergamot', 'cannabis', 'lemon', 'cacao', 'walnut', 'cinnamon', 'caramel', 'tobacco', 'pimento', 'rum', 'brazil nut', 'vanilla pod', 'macadamia', 'benzoin', 'cashew', 'peru balsam', 'myrrh', 'woody notes', 'labdanum', 'leather']",nutty,21088
+"['apple', 'ginger', 'bergamot', 'sage', 'juniper berries', 'geranium', 'amberwood', 'tonka bean', 'cedar', 'vetiver', 'olibanum']",aromatic,20702
+"['tincture of rose', 'freesia', 'litchi', 'raspberry', 'lily-of-the-valley', 'jasmine', 'lilac', 'peony', 'lily', 'musk', 'patchouli']",white floral,5235
+"['citruses', 'bergamot', 'lemon', 'cedar', 'mandarin orange', 'iris', 'patchouli', 'vetiver', 'jasmine', 'rose', 'vanilla', 'incense', 'leather', 'opoponax', 'civet', 'sandalwood', 'tonka bean', 'musk']",citrus,11774
+"['agarwood (oud)', 'aldehydes', 'bergamot', 'amber', 'rose', 'civetta', 'leather', 'patchouli', 'musk']",animalic,9039
+"['peach', 'rose', 'apricot blossom', 'lilac', 'pineapple', 'lily-of-the-valley', 'bergamot', 'rose', 'iris', 'heliotrope', 'jasmine', 'peach', 'apricot', 'vanilla', 'sandalwood', 'amber', 'musk']",fruity,2512
+"['lotus', 'melon', 'freesia', 'rose water', 'rose', 'calone', 'cyclamen', 'lily-of-the-valley', 'lily', 'water peony', 'carnation', 'musk', 'tuberose', 'exotic woods', 'osmanthus', 'cedar', 'sandalwood', 'amber']",floral,5749
+"['cinnamon', 'mandarin orange', 'lavender', 'lemon', 'fruity notes', 'incense', 'cumin', 'red cedar', 'tobacco', 'vanilla', 'cedar', 'leather', 'benzoin', 'iso e super', 'cypress', 'patchouli']",warm spicy,19156
+"['lavender', 'bergamot', 'mint', 'clove', 'lily-of-the-valley', 'cinnamon', 'amber', 'patchouli', 'myrhh']",lavender,2797
+"['magnolia', 'calabrian bergamot', 'orange blossom', 'green almond', 'vanilla']",almond,11467
+"['aldehydes', 'rose', 'orange blossom', 'hawthorn', 'musk', 'sandalwood']",aldehydic,7000
+"['palm leaf', 'gardenia', 'coconut', 'sea salt', 'vanilla', 'sandalwood', 'virginia cedar', 'benzoin']",coconut,3609
+"['white lily', 'hiacynth', 'honeysuckle', 'galbanum', 'orange blossom', 'lavender', 'bergamot', 'black currant', 'lemon', 'lily', 'lily-of-the-valley', 'moroccan jasmine', 'carnation', 'honeysuckle', 'tuberose', 'ylang-ylang', 'iris', 'rose', 'orris root', 'oakmoss', 'incense', 'musk', 'leather', 'sandalwood', 'vetiver', 'cedar', 'patchouli', 'amber']",white floral,1140
+"['lavender', 'mint', 'fruity', 'spicy notes', 'coriander', 'green notes', 'bergamot', 'caramel', 'patchouli', 'honey', 'milk', 'cedar', 'jasmine', 'lily-of-the-valley', 'coffee', 'patchouli', 'vanilla', 'tonka bean', 'benzoin', 'amber', 'sandalwood', 'musk']",sweet,12503
+"['mandarin orange', 'madagascar pepper', 'lemon', 'chinotto', 'rosemary', 'geranium', 'rose', 'pepperwood\x99', 'vanilla', 'tonka bean', 'sandalwood', 'texas cedar', 'patchouli', 'oakmoss']",citrus,19687
+"['tobacco', 'cacao', 'vanilla', 'osmanthus', 'benzoin', 'dried fruits', 'kopi luwak coffee', 'almond', 'coffee', 'leather', 'immortelle', 'whiskey', 'black elder', 'jasmine sambac', 'marigold', 'rose', 'castoreum', 'patchouli', 'ambergris', 'civet', 'spices', 'woody notes', 'muskrat', 'hyrax', 'musk', 'propolis']",animalic,21152
+"['violet leaf', 'coriander', 'bergamot', 'rose', 'black pepper', 'lily-of-the-valley', 'patchouli', 'ambergris', 'bourbon vanilla']",patchouli,21258
+"['watery notes', 'violet', 'melon', 'wildflowers', 'solar notes', 'jasmine', 'orange blossom', 'violet', 'iris', 'white musk']",fresh,7141
+"['italian mandarin', 'rose', 'egyptian jasmine', 'patchouli', 'musk']",patchouli,14732
+"['bergamot', 'sichuan pepper', 'lavender', 'star anise', 'nutmeg', 'ambroxan', 'vanilla']",fresh spicy,17490
+"['thyme', 'rose petals', 'ylang-ylang', 'cumin', 'labdanum', 'sweat', 'animal notes', 'sandalwood']",animalic,5054
+"['wheat', 'pear', 'anise', 'clove', 'iris', 'rice', 'hazelnut', 'white musk', 'amber']",nutty,14260
+"['bergamot', 'goji berries', 'pomegranate', 'hibiscus', 'water lily', 'musk', 'virginia cedar']",floral,10553
+"['aldehydes', 'coriander', 'clary sage', 'artemisia', 'bergamot', 'patchouli', 'carnation', 'geranium', 'vetiver', 'cinnamon', 'jasmine', 'orris root', 'lavender', 'civet', 'honey', 'leather', 'musk', 'oakmoss', 'amber', 'tonka bean', 'vanilla']",musky,2524
+"['coconut', 'red apple', 'mandarin orange', 'jasmine', 'freesia', 'magnolia', 'cotton flower', 'sandalwood']",coconut,17159
+"['lavender', 'mint', 'vanilla', 'benzoin', 'honey', 'tonka bean', 'tobacco']",vanilla,21730
+"['saffron', 'ylang-ylang', 'cardamom', 'geranium', 'leather', 'egyptian jasmine', 'labdanum', 'animal notes', 'patchouli']",animalic,3576
+"['pomegranate', 'persimmon', 'green accord', 'black orchid', 'lotus', 'champaca', 'mahogany', 'amber', 'black violet', 'whipped cream']",woody,6522
+"['saffron', 'ginger', 'sicilian mandarin', 'sicilian bergamot', 'amberwood', 'moroccan rose', 'egyptian jasmine', 'indonesian patchouli leaf', 'madagascar vanilla', 'white musk', 'sandalwood', 'oakmoss']",warm spicy,14788
+"['mandarin orange', 'melon', 'jasmine', 'peach', 'ylang-ylang', 'oakmoss', 'vetiver']",earthy,15934
+"['pink pepper', 'pear', 'grapefruit', 'rose', 'peony', 'geranium', 'vanilla', 'musk', 'tonka bean']",rose,1019
+"['mandarin orange', 'jasmine', 'ginger', 'lily', 'salt', 'vanilla', 'ambergris', 'sandalwood']",salty,16814
+"['rose', 'mimosa', 'hiacynth', 'geranium', 'green notes', 'nasturtium', 'orange blossom', 'hawthorn', 'cassia', 'bergamot', 'rose', 'violet', 'lily', 'lime blossom', 'ylang-ylang', 'lily-of-the-valley', 'jasmine', 'orris root', 'iris', 'musk', 'heliotrope', 'sandalwood', 'oakmoss', 'amber', 'cedar']",floral,7477
+"['black cherry', 'raspberry', 'jasmine', 'rose', 'mimosa', 'vanilla', 'birch', 'vetiver']",cherry,4415
+"['black currant', 'pink pepper', 'bergamot', 'jasmine', 'jasmine sambac', 'jasmine tea', 'bourbon vanilla', 'cashmeran', 'guaiac wood']",woody,16030
+"['bergamot', 'ginger', 'mandarin orange', 'cardamom', 'lily', 'jasmine', 'violet leaf', 'pink pepper', 'rose', 'peony', 'black currant', 'woody notes', 'oakmoss', 'white musk', 'palisander rosewood', 'amber', 'vanilla', 'praline']",citrus,3948
+"['nutmeg', 'gardenia', 'african orange flower', 'green notes', 'bergamot', 'tuberose', 'jasmine', 'honeysuckle', 'iris', 'peony', 'mace', 'vanilla', 'amber', 'woodsy notes', 'guaiac wood', 'virginia cedar']",white floral,10276
+"['watery notes', 'grapefruit', 'raspberry', 'peony', 'jasmine', 'iris', 'pink pepper', 'suede', 'cedar', 'amber']",aquatic,6945
+"['metallic notes', 'aldehydes', 'cardamon', 'black pepper', 'water notes', 'violet leaf', 'ginger', 'neroli', 'lavender', 'beeswax', 'leather', 'lime (linden blossom)', 'cyclamen', 'oakmoss', 'honey', 'woody notes', 'amber', 'tonka bean', 'patchouli', 'vanilla', 'white musk', 'myrrh', 'cedar', 'gurjan balsam']",lavender,18657
+"['peach', 'citruses', 'plum', 'bergamot', 'mandarin orange', 'cinnamon', 'jasmine', 'lily-of-the-valley', 'vanille', 'sandalwood', 'amber', 'musk']",cinnamon,10324
+"['litchi', 'cassis', 'mandarin orange', 'water lily', 'peony', 'jasmine', 'ambroxan', 'praline', 'musk', 'vanilla', 'oak moss']",fresh,19632
+"['ginger', 'saffron', 'coriander', 'heliotrope', 'tobacco', 'agarwood (oud)', 'amberwood', 'olibanum', 'bourbon vanilla', 'cedar', 'musk', 'labdanum']",tobacco,19567
+"['fennel', 'mint', 'green notes', 'clary sage', 'oakmoss', 'fern', 'angelica', 'clover', 'galbanum', 'violet leaf', 'mastic or lentisque', 'oakmoss', 'soil tincture', 'boletus edulis', 'chestnut', 'vetiver', 'resins', 'pine tree needles', 'labdanum', 'leather']",earthy,6433
+"['lavender', 'bergamot', 'green leaves', 'coffee', 'cedar', 'vanilla', 'patchouli', 'tonka bean', 'amber']",coffee,17954
+"['watermelon', 'peach', 'bergamot', 'plum', 'violet', 'pine tree needles', 'mint', 'galbanum', 'carnation', 'cyclamen', 'hiacynth', 'lily', 'jasmine', 'rose', 'oakmoss', 'leather', 'cedar', 'musk', 'amber']",ozonic,19574
+"['pineapple leaf', 'mandarin orange', 'bergamot', 'jasmine', 'brazilian rosewood', 'patchouli', 'vanilla', 'musk']",patchouli,11195
+"['bergamot', 'petitgrain', 'lime (linden) blossom', 'lily-of-the-valley', 'tarragon', 'jasmine', 'rose', 'beeswax']",yellow floral,8643
+"['black pepper', 'sage', 'truffle', 'woodsy notes', 'vanila', 'frankincense']",earthy,9248
+"['dew drop', 'green leaves', 'clove', 'bluebell', 'persimmon', 'peach', 'musk', 'powdery notes']",musky,11256
+"['apple', 'sea notes', 'mint', 'coffee', 'milk', 'amber', 'leather', 'cedar', 'sandalwood', 'ambergris', 'musk']",coffee,10143
+"['lime (linden blossom)', 'lily-of-the-valley', 'lilac', 'magnolia', 'bergamot', 'mandarin orange', 'jasmine', 'tuberose', 'ylang-ylang', 'peach', 'bulgarian rose', 'violet', 'carnation', 'nutmeg', 'musk', 'iris', 'sandalwood', 'amber', 'vanilla', 'cloves']",floral,7119
+"['jasmine', 'orange', 'bergamot', 'sicilian mandarin', 'gardenia', 'orange blossom', 'sandalwood', 'white amber', 'cedar', 'white musk']",white floral,13119
+"['lavender', 'citruses', 'cappuccino', 'cedar', 'vanilla']",coffee,17093
+"['pepper', 'orange blossom', 'patchouli', 'lavender', 'coffee', 'milk', 'tonka bean', 'siam benzoin', 'cypriol oil or nagarmotha', 'vanilla', 'cedar', 'vetiver']",lavender,12242
+"['truffle', 'bergamot', 'strawberry', 'jasmine', 'tuberose', 'african orange flower', 'vanille', 'amber', 'virginia cedar']",white floral,9664
+"['almond', 'lime', 'pear', 'candied almond', 'sugar', 'peony', 'vanilla', 'tonka bean', 'amber', 'mahogany']",sweet,11197
+"['chestnut', 'sugar', 'sage', 'lavender', 'vanilla', 'smoke']",vanilla,19324
+"['tea leaf', 'black pepper', 'cardamom', 'whiskey', 'incense', 'opium', 'birch', 'tobacco', 'agarwood (oud)']",smoky,9717
+"['pear', 'tangerine', 'bergamot', 'strawberry', 'vanilla orchid', 'black rose', 'passionfruit', 'praline', 'caramel', 'litchi', 'vanilla', 'patchouli', 'incense', 'coffee', 'licorice', 'coumarin', 'papyrus']",sweet,14157
+"['rose petals', 'lemon', 'bergamot', 'rose', 'salt', 'lime (linden) blossom', 'grass', 'sea water', 'musk', 'oakmoss']",marine,4962
+"['lavender', 'clary sage', 'leather', 'bitter almond', 'vanilla', 'orris', 'leather', 'tonka bean', 'cashmeran', 'white woods', 'amber']",aromatic,5797
+"['rhubarb', 'violet leaf', 'lily-of-the-valley', 'rose', 'oakmoss', 'patchouli', 'musk']",white floral,1086
+"['apple', 'tea', 'ozonic notes', 'mandarin orange', 'osmanthus', 'magnolia', 'lily', 'earthy notes', 'patchouli', 'jasmine', 'amber', 'orris', 'bamboo', 'musk', 'civet', 'sandalwood', 'vanilla']",earthy,3932
+"['licorice', 'lime', 'star anise', 'cacao pod', 'violet', 'jasmine', 'amber', 'patchouli', 'sandalwood', 'cedar']",soft spicy,15009
+"['pink pepper', 'red currant', 'bay leaf', 'rose', 'lotus', 'patchouli', 'vanilla', 'amber', 'musk']",soft spicy,9628
+"['ginger', 'bitter orange', 'jasmine sambac', 'orange blossom', 'rose', 'honey', 'amber', 'caramel', 'vanilla', 'sandalwood', 'cashmere wood']",honey,12808
+"['pear', 'apple', 'citruses', 'ambrette (musk mallow)', 'amyl salicylate', 'moss', 'jasmine', 'iso e super', 'cetalox', 'ambrettolide', 'helvetolide']",musky,12816
+"['green notes', 'rice flower', 'iris', 'bergamot', 'lotus', 'rhubarb', 'lily', 'ginger', 'orchid', 'musk', 'sandalwood', 'amber']",green,3264
+"['pear', 'black currant', 'pink pepper', 'grapefruit', 'pineapple', 'rose', 'jasmine', 'heliotrope', 'vanilla', 'cedar', 'amberwood', 'patchouli']",fruity,5740
+"['ginger', 'bitter orange', 'mandarin orange', 'bergamot', 'kulfi', 'rose', 'orange blossom', 'jasmine', 'vanilla', 'amber', 'sandalwood', 'mastic or lentisque']",sweet,19534
+"['lemon', 'bergamot', 'neroli', 'rose de mai', 'hyacinth', 'cedar', 'clary sage', 'geranium', 'tonka bean', 'musk', 'amber']",citrus,19538
+"['orris root', 'rum', 'iris', 'rose', 'jasmine', 'agarwood (oud)', 'woodsy notes', 'civetta']",iris,14747
+"['peach', 'apricot', 'pear', 'black currant', 'green apple', 'sandalwood', 'jasmine', 'moss', 'vanilla', 'cedar', 'musk']",fruity,11718
+"['anise', 'spices', 'melon', 'eucalyptus', 'woodsy notes', 'musk']",anis,815
+"['narcissus', 'night blooming jasmine', 'almond', 'sandalwood']",almond,6868
+"['pear', 'mandarin orange', 'green notes', 'orchid', 'toffee', 'patchouli']",sweet,5490
+"['frankincense', 'raspberry', 'saffron', 'pear', 'musk', 'damask rose', 'orange blossom', 'agarwood', 'leather', 'patchouli', 'ambergris']",oud,21352
+"['black currant', 'mandarin orange', 'orange blossom', 'hibiscus seed', 'grapefruit blossom', 'patchouli', 'amber', 'musk']",patchouli,3681
+"['peach', 'bergamot', 'mandarin orange', 'lemon', 'water lily', 'mimosa', 'tuberose', 'melon', 'lotus', 'pineapple', 'jasmine', 'lily-of-the-valley', 'rose', 'patchouli', 'black locust', 'sandalwood', 'cedar', 'tonka bean']",white floral,2359
+"['beeswax', 'birch', 'cloves', 'cardamom', 'leather', 'turkish rose', 'orange blossom', 'jasmine', 'civet', 'beeswax', 'agarwood (oud)', 'sandalwood', 'amber', 'cedar', 'patchouli', 'vetiver', 'cypriol oil or nagarmotha', 'musk']",animalic,21270
+"['peach', 'mandarin orange', 'orange', 'caramel', 'orange blossom', 'jasmine', 'amber', 'sandalwood', 'guaiac wood', 'cedar']",caramel,10656
+"['litchi', 'peony', 'amalfi lemon', 'pink pepper', 'rose', 'jasmine', 'freesia', 'patchouli', 'vetiver', 'cedar', 'ambrette (musk mallow)']",woody,13893
+"['orange', 'violet', 'rooibos tea', 'cinnamon', 'iris', 'incense', 'vanilla']",smoky,11490
+"['cappuccino', 'coffee', 'sweet notes', 'coffee', 'caramel', 'almond', 'vanilla', 'resin', 'amber']",coffee,6135
+"['brazilian rosewood', 'coriander', 'mahogany', 'sicilian mandarin', 'cinnamon', 'damask rose', 'carnation', 'sandalwood', 'tobacco', 'vanilla', 'leather', 'amber', 'ambrette (musk mallow)']",woody,17965
+"['citruses', 'cassia', 'pink pepper', 'lily-of-the-valley', 'mimosa', 'violet', 'heliotrope', 'vetiver', 'vanilla']",fresh,3168
+"['spices', 'aldehydes', 'narcissus', 'lavender', 'orange', 'peach', 'coca-cola', 'bergamot', 'spicy notes', 'cloves', 'cinnamon', 'rose', 'ylang-ylang', 'jasmine', 'lily-of-the-valley', 'cassia', 'orchid', 'incense', 'tolu balsam', 'peru balsam', 'oakmoss', 'patchouli', 'amber', 'vetiver', 'vanilla', 'musk']",warm spicy,4260
+"['bergamot', 'mandarin orange', 'lemon', 'bitter orange', 'lavender', 'rosemary', 'myrtle', 'african orange flower', 'neroli', 'jasmine', 'pitosporum', 'amber', 'angelica', 'ambrette (musk mallow)']",citrus,10347
+"['aldehydes', 'orange', 'honey', 'geranium', 'musk', 'patchouli', 'amber']",aldehydic,4780
+"['freesia', 'lily-of-the-valley', 'rose', 'palm tree', 'narcissus', 'lily', 'gardenia', 'black currant', 'musk', 'oakmoss']",green,9276
+"['hazelnut', 'coffee', 'cinnamon', 'tuberose', 'coconut', 'jasmine sambac', 'vanilla', 'white musk', 'cedar']",nutty,10975
+"['violet leaf', 'bergamot', 'black tea', 'cinnamon', 'pimento', 'tobacco leaf', 'myrrh', 'musk', 'olive tree']",warm spicy,20334
+"['violet leaf', 'cardamom', 'red currant', 'almond', 'lily-of-the-valley', 'jasmine', 'heliotrope', 'musk', 'benzoin']",almond,2386
+"['orange', 'mandarin orange', 'bergamot', 'orange blossom', 'turkish rose', 'jasmine', 'mimosa', 'ylang-ylang', 'patchouli', 'white musk', 'vanilla', 'vetiver', 'tonka bean', 'opoponax']",citrus,15648
+"['aldehydes', 'grapefruit', 'freesia', 'jasmine', 'lily-of-the-valley', 'orange', 'orchid', 'musk', 'sandalwood']",aldehydic,167
+"['lemon', 'bergamot', 'carambola (star fruit)', 'cardamom', 'brazilian rosewood', 'cedar', 'tarragon', 'sage', 'pepper', 'musk', 'woodsy notes', 'saffron', 'amber', 'sycamore']",citrus,16573
+"['bergamot', 'lily', 'lilac', 'neroli', 'jasmine', 'cloves', 'cinnamon', 'oakmoss', 'civet', 'sandalwood', 'musk']",mossy,16599
+"['nutmeg', 'cinnamon', 'cardamom', 'grapefruit', 'lavender', 'licorice', 'sandalwood', 'amber', 'patchouli', 'haitian vetiver']",warm spicy,20070
+"['calabrian bergamot', 'pepper', 'sichuan pepper', 'lavender', 'pink pepper', 'vetiver', 'patchouli', 'geranium', 'elemi', 'ambroxan', 'cedar', 'labdanum']",fresh spicy,7972
+"['bergamot', 'lemon', 'mandarin orange', 'orange blossom', 'white nerium oleander', 'fig leaf', 'cypress', 'red cedar', 'juniper', 'pistachio', 'musk']",aromatic,16801
+"['lavender', 'pink pepper', 'neroli', 'aldehydes', 'orris', 'petalia', 'blackberry leaf', 'orange blossom', 'musk', 'woodsy notes', 'vetiver', 'cedar', 'coumarin']",lavender,4691
+"['melon', 'brandy', 'pear', 'mastic or lentisque', 'ginger', 'agave', 'salt', 'suede', 'clary sage', 'tonka bean', 'amber', 'vetiver']",aquatic,9246
+"['mignonette', 'mandarin orange', 'sage', 'nectarine', 'blue hyacinth', 'peach blossom', 'rose hip', 'iris', 'red cyclamen', 'violet root', 'musk', 'sandalwood', 'cedar']",floral,4055
+"['grapefruit', 'pineapple', 'bergamot', 'orange', 'rose', 'freesia', 'red apple', 'lotus', 'hyacinth', 'gardenia', 'lily-of-the-valley', 'violet', 'orris', 'patchouli', 'cedar', 'musk', 'amber', 'incense', 'pine']",citrus,14220
+"['peach', 'coconut', 'mango', 'bergamot', 'fruits', 'geranium', 'jasmine', 'floral notes', 'lily-of-the-valley', 'vanilla', 'amber', 'sandalwood', 'musk', 'patchouli', 'woodsy notes']",vanilla,8271
+"['bergamot', 'pepper', 'star anise', 'mint', 'ginger', 'sage', 'iris', 'boxwood', 'labdanum']",fresh spicy,12341
+"['pear', 'jasmine', 'honey']",honey,11781
+"['ylang-ylang', 'rose', 'bergamot', 'orris root', 'jasmine', 'peru balsam']",balsamic,3139
+"['aldehydes', 'african orange flower', 'bergamot', 'carnation', 'ylang-ylang', 'jasmine', 'rose', 'iris', 'sandalwood', 'vanille', 'amber']",aldehydic,20216
+"['lemon', 'green notes', 'bergamot', 'mandarin orange', 'pineapple', 'cardamom', 'papaya', 'lily-of-the-valley', 'jasmine', 'violet', 'rose', 'nutmeg', 'orris root', 'freesia', 'green accord', 'musk', 'cedar', 'sandalwood', 'oakmoss', 'green tea', 'amber']",citrus,6255
+"['violet', 'pink grapefruit', 'bergamot', 'peony', 'iris', 'woodsy notes']",violet,8631
+"['aldehydes', 'rose', 'pink pepper', 'peony', 'violet', 'african orange flower', 'musk', 'woodsy notes', 'sandalwood']",fresh,3861
+"['allspice', 'haitian vetiver', 'tobacco']",tobacco,13364
+"['saffron', 'mandarin orange', 'bergamot', 'patchouli', 'ylang-ylang', 'hawthorn', 'jasmine', 'birch', 'styrax', 'orris root']",leather,19341
+"['chamomile', 'acai berry', 'lavender', 'violet leaf', 'cumin', 'beeswax', 'marigold', 'nard himalayan (jatamansi)', 'anise', 'jasmine', 'hay', 'mushroom', 'oakmoss', 'olibanum', 'myrrh', 'tonka bean', 'vanilla']",herbal,3323
+"['coconut', 'ylang-ylang', 'peach', 'karo karounde', 'orange', 'jasmine', 'gardenia', 'violet', 'freesia', 'osmanthus', 'rose', 'vanilla', 'sandalwood', 'amber', 'musk']",vanilla,1523
+"['aldehydes', 'bergamot', 'bourbon geranium', 'ylang-ylang', 'tuberose', 'rose', 'jasmine', 'olibanum', 'iris', 'vanilla', 'vetiver', 'sandalwood', 'styrax', 'patchouli']",aldehydic,13002
+"['mandarin orange', 'incense', 'bergamot', 'ylang-ylang', 'jasmine', 'iris', 'caramel', 'amber', 'musk', 'vetiver']",caramel,3446
+"['pistachio', 'cotton candy', 'popcorn', 'walnut', 'hazelnut', 'violet']",nutty,7053
+"['black currant', 'red berries', 'cassia', 'bitter orange', 'mandarin orange', 'blackberry', 'peony', 'violet', 'freesia', 'jasmine', 'lily-of-the-valley', 'cedar', 'musk', 'heliotrope']",fruity,16224
+"['davana', 'coffee', 'tonka bean', 'agarwood (oud)', 'sandalwood', 'labdanum']",oud,437
+"['rum', 'osmanthus', 'leather', 'jasmine', 'rose', 'patchouli', 'vanille', 'amber', 'musk']",patchouli,14248
+"['thyme', 'tea', 'lily-of-the-valley', 'saffron', 'rose', 'suede', 'musk', 'sandalwood', 'olibanum', 'amber']",musky,16567
+"['clary sage', 'black currant', 'tobacco leaf', 'nutmeg', 'orris', 'tonka bean', 'oakmoss']",tobacco,21206
+"['grapefruit', 'narcissus', 'lily-of-the-valley', 'rose', 'mimosa', 'tuberose', 'leather', 'iris']",leather,9944
+"['hiacynth', 'galbanum', 'iris', 'bergamot', 'lemon', 'tuberose', 'aldehydes', 'jasmine', 'ylang-ylang', 'cloves', 'orris root', 'violet', 'spicy notes', 'rose', 'oakmoss', 'vetiver', 'sandalwood', 'musk', 'resins', 'amber', 'patchouli']",green,16051
+"['black violet', 'saffron', 'honey', 'lavender', 'tonka bean', 'cedar', 'patchouli']",violet,16013
+"['black currant', 'caraway', 'coriander', 'jasmine', 'lily-of-the-valley', 'oakmoss', 'sandalwood', 'musk']",mossy,20806
+"['aldehydes', 'lime peel', 'bitter orange', 'coriander leaf', 'jasmine', 'pitosporum', 'metallic notes', 'musk', 'amber', 'cashmere wood']",metallic,8272
+"['green notes', 'bulgarian rose', 'saffron', 'patchouli', 'cedar', 'tobacco', 'musk', 'vanilla']",tobacco,9669
+"['caraway', 'cinnamon', 'pink nerium oleander', 'damask rose', 'tea', 'geranium', 'jasmine', 'agarwood (oud)', 'olibanum', 'patchouli', 'amber', 'sandalowood', 'guaiac wood', 'vanilla', 'orris root', 'musk']",fresh spicy,15039
+"['italian lemon', 'turkish rose', 'vanilla', 'white musk', 'cedar']",rose,12822
+"['aldehydes', 'green notes', 'honeysuckle', 'bergamot', 'peach', 'lemon', 'rose', 'iris', 'geranium', 'ylang-ylang', 'lily-of-the-valley', 'jasmine', 'magnolia', 'gardenia', 'oakmoss', 'tahitian vetiver', 'musk', 'sandalwood', 'tonka bean', 'amber']",aldehydic,9365
+"['tobacco leaf', 'bergamot', 'amber', 'birch', 'leather', 'vanilla', 'sandalwood', 'guaiac wood', 'cedar', 'musk']",tobacco,18751
+"['chestnut', 'hazelnut', 'green mandarin', 'honey', 'cinnamon leaf', 'jasmine sambac', 'tobacco', 'leather', 'peru balsam', 'labdanum', 'siam benzoin', 'orcanox\x99', 'cypriol oil or nagarmotha']",nutty,17910
+"['vanilla', 'vanilla orchid', 'cacao pod', 'rum']",cacao,14383
+"['african orange flower', 'neroli', 'orange', 'mandarin orange', 'iris', 'galbanum', 'mastic or lentisque', 'incense', 'virginia cedar', 'benzoin', 'vetiver']",iris,15432
+"['orange', 'bergamot', 'grapefruit', 'litchi', 'rose', 'italian jasmine', 'patchouli', 'tahitian vetiver', 'bourbon vanilla', 'white musk']",citrus,17730
+"['bitter orange', 'red currant', 'pink pepper', 'green tea', 'peony', 'jasmine', 'violet', 'cedar', 'musk', 'oakmoss', 'amber']",citrus,11542
+"['leather', 'tobacco', 'cardamom', 'labdanum', 'singapore patchouli', 'violet leaves', 'jasmine sambac', 'musk', 'cambodian oud', 'indian oud', 'ambergris', 'oakmoss']",animalic,9659
+"['cherry', 'pink pepper', 'cardamom', 'pomelo', 'bergamot', 'mandarin orange', 'black pepper', 'blackberry', 'apricot', 'lotus', 'cacao', 'musk', 'sandalowood', 'amber']",cacao,18224
+"['cherry', 'spices', 'coffee', 'white tobacco', 'patchouli', 'atlas cedar', 'rose', 'tonka bean', 'amber', 'musk']",cherry,3042
+"['sicilian lemon', 'jasmine', 'orange', 'black cherry', 'heliotrope', 'amber', 'woody notes']",cherry,4968
+"['apple', 'smoke', 'cinnamon', 'tobacco', 'moss', 'bourbon vanilla', 'orcanox\x99']",tobacco,17959
+"['clover', 'violet leaf', 'green mandarin', 'tuberose', 'mimosa', 'jasmine sambac', 'tonka bean', 'amber', 'bourbon vanilla']",tuberose,11096
+"['sea water', 'lilac', 'jasmine', 'rose', 'fenugreek', 'patchouli', 'musk', 'tonka bean', 'vanilla']",marine,3600
+"['absinthe', 'boysenberry', 'coffee', 'jasmine sambac', 'orange blossom', 'vanilla', 'licorice', 'sandalwood']",coffee,10357
+"['lavender', 'bergamot', 'cappuccino', 'raspberry', 'jasmine', 'virginia cedar', 'lily-of-the-valley', 'vanille', 'amber', 'sandalwood', 'patchouli']",coffee,16835
+"['bergamot', 'citruses', 'jasmine', 'rose', 'peach', 'ylang-ylang', 'jasmine', 'rose', 'lilac', 'oakmoss', 'spices', 'cinnamon', 'vetiver', 'amber']",mossy,15380
+"['apple', 'cassis', 'pineapple', 'cacao', 'iris', 'egyptian jasmine', 'patchouli', 'amber', 'vanilla', 'musk', 'sandalwood']",cacao,3524
+"['litchi', 'red currant', 'rose', 'vanilla', 'vetiver']",fruity,11732
+"['jasmine', 'cashmere wood', 'orris root', 'vanilla pod', 'white amber', 'myrrh', 'incense']",amber,20348
+"['neroli', 'bergamot', 'pink pepper', 'coriander', 'orange blossom', 'honeysuckle', 'jasmine', 'iris', 'rose', 'sugar', 'vanilla', 'caramel', 'musk', 'civet', 'labdanum']",sweet,13449
+"['artemisia', 'basil', 'tangerine', 'bergamot', 'amalfi lemon', 'white honey', 'rose', 'jasmine', 'peach', 'pepper', 'civetta', 'oak moss', 'leather', 'patchouli', 'woodsy notes', 'virginia cedar']",animalic,19832
+"['grapefruit', 'lavender', 'birch', 'woodsy notes']",lavender,5756
+"['mint', 'green apple', 'lemon', 'tonka bean', 'ambroxan', 'geranium', 'madagascar vanilla', 'virginian cedar', 'atlas cedar', 'vetiver', 'oakmoss']",vanilla,14515
+"['lemon', 'bergamot', 'jasmine', 'lily-of-the-valley', 'hazelnut', 'vanilla', 'amber', 'musk']",nutty,13719
+"['iris', 'bulgarian rose', 'musk', 'tuberose', 'orange blossom', 'tonka bean', 'vanilla', 'white cedar extract', 'cedar', 'sandalwood', 'vetiver']",powdery,12505
+"['cinnamon', 'nutmeg', 'bergamot', 'dates', 'praline', 'tuberose', 'mahonial', 'vanilla', 'tonka bean', 'amberwood', 'myrrh', 'benzoin', 'akigalawood']",sweet,20774
+"['sweet pea', 'mandarin orange', 'gardenia', 'orchid', 'musk', 'sandalwood', 'woodsy notes', 'vanilla']",floral,8989
+"['lemon', 'peach', 'ginger', 'mandarin orange', 'lavender', 'bergamot', 'pepper', 'cedar', 'patchouli', 'vetiver', 'brazilian rosewood', 'rose', 'jasmine', 'gardenia', 'freesia', 'anise', 'vanilla', 'tonka bean', 'sandalwood', 'coconut', 'amber', 'benzoin', 'musk', 'leather', 'oakmoss']",citrus,19785
+"['honey', 'cassis', 'neroli', 'orris', 'carnation', 'tuberose', 'rose', 'jasmine', 'moss', 'patchouli', 'amber', 'musk']",earthy,6717
+"['african orange flower', 'osmanthus', 'bergamot', 'musk', 'amber', 'vetiver', 'vanille', 'patchouli']",musky,12504
+"['spicy notes', 'osmanthus', 'saffron', 'citruses', 'rosemary', 'thyme', 'grapefruit', 'tobacco', 'guaiac wood', 'patchouli', 'vetiver', 'tonka bean', 'amber', 'musk']",tobacco,20586
+"['lavender', 'cinnamon', 'nutmeg', 'citruses', 'agarwood (oud)', 'violet', 'jasmine', 'patchouli leaf', 'rose', 'sea notes', 'leather', 'woody notes', 'white musk', 'amber', 'vetiver']",lavender,14787
+"['tea', 'bergamot', 'osmanthus', 'orchid', 'jasmine', 'rose', 'freesia', 'african orange flower', 'patchouli', 'musk', 'vanilla']",floral,9362
+"['mandarin orange', 'red apple', 'bergamot', 'magnolia', 'iris', 'ylang-ylang', 'jasmine', 'white honey', 'vanille', 'amber', 'benzoin', 'musk']",floral,14138
+"['aldehydes', 'bulgarian rose', 'ylang-ylang', 'jasmine', 'may rose', 'amber', 'liatris', 'vetiver']",aldehydic,18345
+"['artemisia', 'incense', 'lemon', 'leather', 'chamomile', 'apricot', 'iris', 'vanilla', 'amber', 'virginia cedar', 'musk']",herbal,8457
+"['musk', 'lime (linden) blossom', 'citruses', 'castoreum', 'iris', 'vanila', 'musk', 'ash', 'cedar', 'amber']",smoky,1216
+"['sesame', 'bitter almond', 'ceylon cinnamon', 'peanut', 'orris root', 'coffee', 'praline', 'haitian vetiver', 'java vetiver oil']",nutty,5914
+"['black currant', 'bergamot', 'green notes', 'jasmine sambac', 'lily-of-the-valley', 'vanilla', 'tonka bean', 'sandalwood', 'cedar']",vanilla,8058
+"['cherry', 'pink pepper', 'bergamot', 'violet', 'jasmine', 'freesia', 'tonka bean', 'amber', 'sandalwood', 'musk']",cherry,5213
+"['coffee', 'bergamot', 'lemon', 'coffee', 'sandalwood', 'lily-of-the-valley', 'cedar', 'amber', 'musk']",coffee,17671
+"['grapefruit', 'mandarin orange', 'black currant', 'orange blossom', 'jasmine', 'ylang-ylang', 'tuberose', 'lily-of-the-valley', 'pear', 'pink pepper', 'musk', 'sandalwood', 'cashmeran', 'orris']",white floral,2926
+"['blood orange', 'mandarin orange', 'honey', 'gardenia', 'orange blossom', 'jasmine', 'peach', 'beeswax', 'caramel', 'patchouli', 'licorice']",honey,7149
+"['lavender', 'lemon', 'bergamot', 'rosemary', 'mint', 'lemon verbena', 'basil', 'artemisia', 'juniper', 'coriander', 'cinnamon', 'carnation', 'wormwood', 'angelica', 'jasmine', 'oakmoss', 'pine tree needles', 'leather', 'fir', 'sandalwood', 'vetiver', 'patchouli', 'cedar', 'amber', 'resins']",aromatic,10998
+"['amalfi lemon', 'tagetes', 'black currant', 'bergamot', 'african orange flower', 'violet', 'cyclamen', 'jasmine', 'vetiver', 'musk', 'amber', 'virginia cedar']",aromatic,16188
+"['lavender', 'lemon', 'caraway', 'basil', 'bergamot', 'clary sage', 'iris', 'star anise', 'vetiver', 'sandalwood', 'patchouli', 'cedar', 'juniper berries', 'cardamom', 'oakmoss', 'leather', 'amber', 'musk', 'tonka bean']",aromatic,8578
+"['violet leaf', 'cedar', 'jasmine sambac', 'orris', 'leather', 'woody notes', 'tobacco']",leather,19969
+"['grapefruit', 'mandarin orange', 'oak moss', 'juniper', 'patchouli', 'pepper', 'iris', 'carnation', 'syringa', 'rose', 'french labdanum', 'jasmine', 'lily-of-the-valley', 'ylang-ylang', 'musk', 'amber']",woody,14543
+"['amalfi lemon', 'pear', 'bergamot', 'neroli', 'mimosa', 'freesia', 'water lily', 'african orange flower', 'musk', 'guaiac wood', 'amber']",citrus,2670
+"['aldehydes', 'lemon', 'neroli', 'mandarin orange', 'bergamot', 'orange', 'lime', 'ylang-ylang', 'jasmine', 'may rose', 'white musk', 'orris root', 'cedar', 'vanila']",citrus,15933
+"['lavender', 'bergamot', 'sage', 'iris', 'cacao', 'amber', 'leather', 'vetiver', 'patchouli']",iris,21014
+"['black pepper', 'tobacco', 'pineapple', 'patchouli', 'coffee', 'iris', 'vanilla', 'amber', 'dry wood', 'benzoin', 'labdanum']",amber,19344
+"['blackberry', 'bitter orange', 'neroli', 'bergamot', 'cherry', 'jasmine', 'orange blossom', 'gardenia', 'peony', 'vanilla', 'almond', 'sandalowood', 'amber', 'patchouli']",cherry,16547
+"['bergamot', 'pink pepper', 'jasmine', 'rose', 'patchouli', 'tonka bean']",patchouli,4544
+"['tobacco leaf', 'spicy notes', 'vanilla', 'cacao', 'tonka bean', 'tobacco blossom', 'dried fruits', 'woody notes']",vanilla,18422
+"['ginger', 'bergamot', 'lavender', 'cotton flower', 'vanilla', 'amberwood']",lavender,2134
+"['cherry', 'strawberry', 'pineapple', 'mandarin orange', 'popcorn', 'caramel', 'rose', 'jasmine', 'violet', 'patchouli', 'musk', 'amber']",sweet,12190
+"['blood orange', 'black currant', 'clementine', 'pear', 'mandarin orange', 'ginger', 'ginger flower', 'tuberose', 'freesia', 'hibiscus seed', 'vanilla', 'sandalwood', 'musk', 'california cedar']",citrus,11775
+"['almond', 'coffee', 'bergamot', 'lemon', 'tuberose', 'jasmine sambac', 'orange blossom', 'orris', 'bulgarian rose', 'tonka bean', 'cacao', 'vanilla', 'praline', 'sandalwood', 'musk', 'amber', 'cashmere wood', 'cinnamon', 'patchouli', 'cedar']",sweet,8916
+"['juniper berries', 'basil', 'artemisia', 'caraway', 'coriander', 'bergamot', 'pine tree needles', 'leather', 'chamomile', 'pepper', 'carnation', 'geranium', 'jasmine', 'rose', 'tobacco', 'oakmoss', 'patchouli', 'cedar', 'vetiver', 'musk', 'amber']",woody,7183
+"['cherry', 'pomegranate', 'pink pepper', 'lemon', 'grapefruit', 'apple', 'pear', 'litchi', 'blackberry', 'apricot', 'yogurt', 'ice', 'hazelnut', 'peony', 'lily-of-the-valley', 'jasmine', 'freesia', 'gardenia', 'plum blossom', 'mango', 'vanilla', 'amber', 'sandalwood', 'almond', 'musk', 'chestnut', 'chocolate', 'honey', 'nutella', 'cotton candy']",nutty,14810
+"['bergamot', 'black currant', 'apple', 'lemon', 'pink pepper', 'pineapple', 'patchouli', 'moroccan jasmine', 'birch', 'musk', 'oak moss', 'ambroxan', 'cedarwood']",fruity,20205
+"['blackberry', 'mandarin leaf', 'silk tree blossom', 'jasmine', 'orange blossom', 'night blooming cereus', 'rose', 'vanilla', 'tonka bean', 'mysore sandalwood']",vanilla,15355
+"['saffron', 'nutmeg', 'lavender', 'agarwood (oud)', 'patchouli', 'agarwood (oud)', 'patchouli', 'musk']",oud,17527
+"['pink pepper', 'citruses', 'water notes', 'geranium', 'vetiver', 'amber', 'patchouli']",aquatic,9260
+"['lemon', 'sweet orange', 'rose', 'lime', 'absinthe', 'beeswax', 'orange blossom', 'peach', 'jasmine', 'bulgarian rose', 'musk', 'civet', 'animal notes', 'sandalwood', 'patchouli', 'siam benzoin', 'ambergris', 'opoponax', 'incense']",animalic,18914
+"['narcissus', 'datura', 'peach', 'plum', 'himalayan poppy', 'mandarin orange', 'black currant', 'bergamot', 'green notes', 'mimosa', 'vanilla flower', 'tuberose', 'ylang-ylang', 'orange blossom', 'jasmine', 'freesia', 'heliotrope', 'rose', 'leather', 'vanilla', 'orange blossom', 'amber', 'tonka bean', 'musk', 'cedar']",yellow floral,11529
+"['peony', 'litchi', 'freesia', 'rose', 'lily-of-the-valley', 'magnolia', 'virginia cedar', 'amber']",floral,10244
+"['coffee', 'turkey red rose', 'roasted coffee beans', 'french rose', 'woodsy notes', 'vanilla', 'caramel', 'white musk', 'amber']",coffee,15986
+"['elemi', 'mandarin orange', 'pink pepper', 'bergamot', 'immortelle', 'heliotrope', 'jasmine', 'iris', 'peru balsam', 'labdanum', 'patchouli', 'musk']",balsamic,3145
+"['coconut water', 'bergamot', 'jasmine', 'heliotrope', 'bourbon vanilla', 'cashmeran']",vanilla,7448
+"['blood orange', 'damask rose', 'bulgarian rose', 'neroli', 'patchouli']",patchouli,16207
+"['mate', 'black pepper', 'pink pepper', 'cardamom', 'bergamot', 'water lily', 'magnolia', 'rose', 'violet', 'osmanthus', 'jasmine', 'copaiba balm', 'breu-branco', 'myrrh', 'patchouli', 'benzoin', 'olibanum', 'vetiver', 'labdanum', 'coumarin', 'vanilla', 'carrot']",balsamic,20469
+"['ambergris', 'cardamom', 'coriander', 'cinnamon', 'peach', 'ylang-ylang', 'orange blossom', 'leather', 'woodsy notes']",animalic,16799
+"['pear', 'bergamot', 'floral notes', 'leather', 'vanilla', 'vetiver', 'amber', 'musk']",vanilla,16505
+"['red algae', 'myrtle', 'immortelle', 'chamomile', 'thyme', 'musk', 'vanilla', 'cedar', 'patchouli']",herbal,9193
+"['aldehydes', 'incense', 'clove', 'fruity notes', 'basil', 'green notes', 'bergamot', 'mandarin orange', 'narcissus', 'lily', 'jasmine', 'tuberose', 'mimosa', 'orris root', 'lily-of-the-valley', 'rose', 'orange blossom', 'benzoin', 'myrrh', 'amber', 'sandalwood', 'oakmoss', 'vanilla', 'cedar', 'musk', 'patchouli']",amber,9345
+"['grapefruit', 'lemon', 'mint', 'pink pepper', 'ginger', 'nutmeg', 'jasmine', 'iso e super', 'incense', 'vetiver', 'cedar', 'sandalwood', 'patchouli', 'labdanum', 'white musk']",citrus,17013
+"['bergamot', 'pink pepper', 'clary sage', 'haitian vetiver', 'leather', 'ambroxan', 'akigalawood', 'indonesian patchouli leaf', 'cacao pod']",woody,18639
+"['pomegranate', 'blood mandarin', 'tea', 'tuberose', 'freesia', 'sandalwood', 'musk']",tuberose,6564
+"['lavender', 'fruity notes', 'jasmine', 'green notes', 'lily-of-the-valley', 'musk', 'sandalowood', 'woody notes']",lavender,20005
+"['mandarin orange', 'licorice', 'star anise', 'floral notes', 'bourbon vanilla', 'bitter almond']",soft spicy,2096
+"['grass', 'nectarine', 'pear blossom', 'jasmine', 'white musk', 'vanilla']",fresh,2124
+"['red apple', 'apricot', 'mandarin orange', 'cinnamon', 'jasmine', 'caramel', 'vanilla', 'sandalwood']",caramel,13450
+"['violet leaf', 'red berries', 'violet', 'white flowers', 'white woods']",violet,6038
+"['violet', 'orange', 'bergamot', 'coffee', 'pear', 'iris', 'orange blossom', 'rose', 'caramel', 'vanilla', 'patchouli']",caramel,9921
+"['litchi', 'rhubarb', 'bergamot', 'nutmeg', 'turkish rose', 'peony', 'musk', 'petalia', 'vanilla', 'cashmeran', 'incense', 'cedar', 'haitian vetiver']",rose,12261
+"['pear', 'melon', 'magnolia', 'peach', 'mandarin orange', 'bergamot', 'jasmine', 'lily-of-the-valley', 'tuberose', 'freesia', 'rose', 'orchid', 'plum', 'violet', 'musk', 'vanilla', 'blackberry', 'cedar']",white floral,5221
+"['truffle', 'gardenia', 'black currant', 'ylang-ylang', 'jasmine', 'bergamot', 'mandarin orange', 'amalfi lemon', 'orchid', 'spices', 'gardenia', 'fruity notes', 'ylang-ylang', 'jasmine', 'lotus', 'mexican chocolate', 'patchouli', 'vanille', 'incense', 'amber', 'sandalwood', 'vetiver', 'white musk']",warm spicy,9010
+"['plum', 'cinnamon', 'tangerine', 'tincture of rose', 'wormwood', 'iris', 'musk', 'patchouli']",iris,13596
+"['lemon', 'neroli', 'jasmine', 'violet', 'heliotrope', 'musk', 'cedar', 'vetiver', 'amber']",powdery,12337
+"['vanilla', 'basil', 'bergamot', 'mandarin orange', 'green notes', 'peach', 'lemon', 'spices', 'sandalwood', 'coriander', 'oakmoss', 'cedar', 'orange blossom', 'jasmine', 'rose', 'amber', 'incense', 'vanilla', 'civet', 'musk', 'vetiver']",amber,3866
+"['floral notes', 'coffee', 'bulgarian rose', 'vanilla', 'white musk', 'amber']",coffee,1187
+"['cypress', 'vetiver', 'cashmere wood', 'musk']",woody,17294
+"['mandarin orange', 'bergamot', 'pink pepper', 'elemi resin', 'sweet pea', 'heliotrope', 'wallflower', 'elemi', 'patchouli', 'tonka bean', 'amber']",soft spicy,5250
+"['lemon', 'bergamot', 'mimosa', 'black locust', 'broom', 'musk', 'white woods']",yellow floral,18112
+"['sea salt', 'lemon', 'pink pepper', 'jasmine', 'seagrass', 'bay leaf', 'salt', 'caramel', 'brown sugar', 'cedar']",caramel,3449
+"['rum', 'honey', 'mandarin orange', 'bergamot', 'black orchid', 'orchid', 'jasmine', 'heliotrope', 'hyacinth', 'rose oil', 'narcissus', 'magnolia', 'orange blossom', 'vanilla', 'myrrh', 'suede', 'sandalwood', 'peru balsam', 'labdanum']",floral,12855
+"['chamomile', 'artemisia', 'ylang-ylang', 'hyacinth', 'patchouli', 'black pepper', 'honey', 'incense', 'leather']",patchouli,15995
+"['grapefruit', 'bergamot', 'pepper', 'lavender', 'cardamom', 'artemisia', 'cedar', 'vetiver', 'olibanum']",fresh spicy,8931
+"['smoke', 'bitter orange', 'bourbon vanilla', 'cedar']",smoky,16750
+"['plum', 'ozonic notes', 'grapefruit', 'bergamot', 'hazelnut', 'honey', 'cedar', 'cashmere wood', 'orange blossom', 'jasmine', 'amberwood', 'patchouli', 'oakmoss', 'vetiver']",woody,20580
+"['mandarin orange', 'patchouli', 'bergamot', 'cinnamon', 'amber', 'virginia cedar', 'leather', 'musk', 'woodsy notes']",cinnamon,16059
+"['raspberry', 'geranium', 'neroli', 'tuberose', 'iris', 'orange blossom', 'jasmine sambac', 'vanilla', 'caramel', 'sandalwood', 'heliotrope', 'white musk', 'patchouli']",powdery,3284
+"['watermelon', 'mandarin orange', 'bergamot', 'lotus', 'jasmine', 'rose', 'mexican chocolate', 'rice', 'patchouli']",chocolate,15473
+"['ylang-ylang', 'carambola (star fruit)', 'mango', 'violet leaves', 'lemon', 'bergamot', 'pink pepper', 'frangipani', 'coconut', 'sea notes', 'cashmeran', 'skin', 'sea salt', 'jasmine', 'saffron', 'clove', 'vanilla', 'musk', 'sandalwood', 'woody notes', 'opoponax', 'amber', 'patchouli', 'vetiver']",tropical,6615
+"['kiwi', 'red litchi', 'quince', 'white chocolate', 'cupcake', 'orchid', 'jasmine', 'musk', 'orris root', 'woodsy notes']",sweet,9550
+"['galbanum', 'cassis', 'cassia', 'hiacynth', 'bulgarian rose', 'raspberry', 'bergamot', 'honey', 'narcissus', 'cedar', 'orris root', 'ylang-ylang', 'tuberose', 'jasmine', 'lily-of-the-valley', 'oakmoss', 'spices', 'civet', 'patchouli', 'incense', 'myrrh', 'amber', 'sandalwood', 'vetiver', 'musk']",woody,14467
+"['apple leaf', 'italian mandarin', 'japanese osmanthus', 'yellow freesia', 'magnolia', 'boronia', 'musk', 'white iris']",floral,10631
+"['carnation', 'coriander', 'rose', 'angelica', 'neroli', 'bergamot', 'amalfi lemon', 'patchouli', 'hyacinth', 'jasmine', 'ylang-ylang', 'mimosa', 'oak moss', 'civetta', 'castoreum', 'vetiver', 'sandalwood', 'musk', 'amber']",woody,11703
+"['mimosa', 'bitter orange', 'coriander', 'jasmine', 'tangerine', 'narcissus', 'black currant', 'amber', 'sandalwood', 'vanille', 'ambrette (musk mallow)']",yellow floral,13742
+"['bergamot', 'tropical fruit', 'jasmine', 'juniper berries', 'tincture of rose', 'oak moss', 'sandalwood', 'amber']",mossy,978
+"['fern', 'fig', 'citruses', 'jasmine', 'rose', 'lily-of-the-valley', 'oakmoss', 'musk', 'amber']",mossy,4889
+"['lily', 'citruses', 'lily', 'green lily', 'green notes']",white floral,13456
+"['reed', 'mint', 'green lilac', 'mandarin orange', 'pink pepper', 'water lily', 'pepper', 'violet', 'white peach', 'amaryllis', 'rose', 'cedar', 'white musk', 'vanilla']",floral,7721
+"['orange', 'blood grapefruit', 'indian mandarin', 'bergamot', 'apple', 'plum', 'lily-of-the-valley', 'freesia', 'orchid', 'rose', 'mimosa', 'lily', 'magnolia', 'musk', 'amber']",citrus,1671
+"['mandarin orange', 'sicilian bergamot', 'gardenia', 'magnolia', 'myrrh', 'orange blossom', 'jasmine', 'coconut', 'caramel', 'sandalwood', 'amber', 'vetiver']",coconut,21349
+"['lavender', 'lemon', 'bergamot', 'mandarin orange', 'sage', 'juniper berries', 'basil', 'geranium', 'jasmine', 'coriander', 'orange blossom', 'lily-of-the-valley', 'lily', 'sandalwood', 'musk', 'vetiver', 'brazilian rosewood', 'amber']",aromatic,5458
+"['lime', 'lemon', 'bergamot', 'jasmine', 'orange', 'mandarin orange', 'neroli', 'sea notes', 'jasmine', 'calone', 'rosemary', 'peach', 'freesia', 'hiacynth', 'cyclamen', 'violet', 'coriander', 'rose', 'nutmeg', 'mignonette', 'white musk', 'cedar', 'oakmoss', 'patchouli', 'amber']",citrus,15364
+"['cloves', 'pink pepper', 'orange blossom', 'chestnut', 'guaiac wood', 'juniper', 'vanilla', 'peru balsam', 'cashmeran']",woody,18638
+"['orange blossom', 'cactus flower', 'bergamot', 'mandarin orange', 'lily', 'freesia', 'gardenia', 'jasmine', 'lily-of-the-valley', 'white camelia', 'rose', 'peony', 'musk', 'sandalwood']",white floral,10872
+"['pink pepper', 'litchi', 'co2 extracts', 'sicilian bergamot', 'jasmine sambac', 'rose', 'magnolia', 'popcorn', 'caramel', 'cacao', 'salt', 'labdanum']",caramel,1265
+"['cinnamon', 'lavender', 'coriander', 'mandarin orange', 'lime', 'bergamot', 'grapefruit', 'myrhh', 'nutmeg', 'carnation', 'brazilian rosewood', 'pine tree', 'sage', 'jasmine', 'red berries', 'amber', 'vanilla', 'sandalwood', 'musk', 'patchouli', 'vetiver']",warm spicy,7395
+"['mint', 'rose', 'carnation', 'cannabis', 'vetiver', 'amber']",aromatic,11904
+"['wild berries', 'mandarin orange', 'gardenia', 'honeysuckle', 'jasmine', 'caramel', 'praline', 'vanilla', 'amber', 'sandalwood']",sweet,10921
+"['watermelon', 'lavender', 'bergamot', 'lotus', 'jasmine', 'musk', 'sandalwood', 'amber']",ozonic,12936
+"['caramel', 'bulgarian rose', 'australian sandalwood', 'musk', 'himalayan cedar']",caramel,9056
+"['grapefruit', 'green mango', 'tomato', 'carrot', 'lotus', 'bulrush', 'orange', 'hiacynth', 'peony', 'musk', 'iris', 'incense', 'labdanum', 'cinnamon']",citrus,15678
+"['cognac', 'tobacco', 'vanilla', 'cannabis', 'smoke', 'incense', 'agarwood (oud)']",smoky,1792
+"['orange', 'elemi resin', 'lemon', 'amber', 'pepper', 'pink pepper', 'violet', 'fir', 'cedar', 'madagascar vetiver', 'oakmoss', 'benzoin']",woody,13809
+"['yellow mandarin', 'aldehydes', 'cardamom', 'mimosa absolute', 'solar notes', 'violet leaf', 'beeswax', 'musk', 'cedar']",aldehydic,13375
+"['rose', 'clove', 'raspberry', 'black currant', 'cinnamon', 'patchouli', 'incense', 'sandalwood', 'musk', 'benzoin', 'amber']",warm spicy,14119
+"['bergamot', 'rose', 'jasmine', 'citruses', 'peach', 'ylang-ylang', 'rose', 'lilac', 'jasmine', 'oakmoss', 'spices', 'vetiver', 'cinnamon', 'amber']",earthy,12801
+"['aldehydes', 'coriander', 'peach', 'bergamot', 'lemon', 'lilac', 'orris root', 'ylang-ylang', 'lily-of-the-valley', 'rose', 'jasmine', 'civet', 'sandalwood', 'musk', 'benzoin', 'vetiver', 'vanilla', 'peru balsam', 'amber', 'tonka bean']",fresh,17358
+"['pear', 'bergamot', 'pink pepper', 'rose', 'jasmine', 'white musk', 'vanilla', 'patchouli', 'cedar']",rose,6311
+"['coriander', 'cumin', 'petitgrain', 'lavender', 'labdanum', 'birch', 'jasmine', 'geranium', 'amber', 'cedar', 'vetiver', 'patchouli', 'oakmoss']",woody,20894
+"['pepper', 'truffle', 'lily-of-the-valley', 'pink pepper', 'oakmoss', 'patchouli', 'musk', 'ambrette (musk mallow)']",earthy,1910
+"['mimosa', 'iris', 'rose', 'freesia', 'violet', 'lily-of-the-valley', 'jasmine', 'bergamot', 'chamomile', 'iris', 'narcissus', 'galbanum', 'geranium', 'coriander', 'jasmine', 'brazilian rosewood', 'orange blossom', 'tuberose', 'musk', 'sandalwood', 'cedar', 'vanilla', 'amber']",powdery,7505
+"['aldehydes', 'black currant', 'lavender', 'basil', 'bergamot', 'mandarin orange', 'lemon', 'lily-of-the-valley', 'magnolia', 'iris', 'fir']",fresh,21173
+"['gardenia', 'carnation', 'jasmine', 'patchouli', 'flowers', 'sandalwood', 'sea notes', 'caramel', 'coffee']",caramel,19160
+"['raspberry', 'mandarin orange', 'bergamot', 'violet', 'rose petals', 'gardenia', 'sandalwood']",violet,5020
+"['geranium', 'bergamot', 'italian mandarin', 'grasse rose', 'damask rose', 'white musk']",rose,4485
+"['wasabi', 'violet leaf', 'mandarin orange', 'pear', 'pebbles', 'hedione', 'orris root', 'peony', 'rose', 'vetiver', 'white musk', 'incense', 'sandalwood']",mineral,8913
+"['citruses', 'sweet pea', 'caramel', 'benzoin', 'white musk']",caramel,10630
+"['pitahaya', 'litchi', 'jasmine', 'hibiscus', 'sea notes', 'vanilla', 'musk']",tropical,11559
+"['ginger', 'bitter orange', 'bergamot', 'tuberose', 'orange blossom', 'jasmine', 'sandalwood', 'vanilla']",white floral,3886
+"['galbanum', 'hiacynth', 'bergamot', 'neroli', 'iris', 'orris root', 'rose', 'lily-of-the-valley', 'narcissus', 'jasmine', 'ylang-ylang', 'oakmoss', 'vetiver', 'leather', 'cedar', 'musk', 'sandalwood']",green,15020
+"['wild berries', 'gardenia', 'lily of the valley', 'honeysuckle', 'jasmine sambac', 'vanilla orchid', 'caramel', 'vanilla', 'sandalwood', 'praline']",caramel,17993
+"['lemon', 'pineapple', 'bergamot', 'black currant', 'apple', 'birch', 'jasmine', 'rose', 'musk', 'ambergris', 'patchouli', 'vanilla']",citrus,16746
+"['plum', 'chinese cinnamon wood', 'iris', 'violet', 'lily', 'anise', 'jasmine', 'mimosa', 'cassia', 'ylang-ylang', 'heliotrope', 'orris root', 'orange blossom', 'tahitian tiare flower', 'incense', 'vanilla', 'benzoin', 'sandalwood', 'musk']",powdery,5972
+"['lavender', 'sage', 'bergamot', 'iris', 'cacao', 'amber', 'cardamom', 'leather', 'tahitian vetiver', 'patchouli']",iris,20842
+"['italian orange', 'jasmine', 'bitter orange', 'jasmine', 'orange blossom', 'ginger', 'honey', 'vanilla', 'sandalwood']",citrus,11236
+"['osmanthus', 'jasmine', 'may rose', 'indian tuberose', 'narcissus', 'amber', 'cedar']",floral,5970
+"['orange blossom', 'mandarin orange', 'bergamot', 'amalfi lemon', 'cinnamon', 'heliotrope', 'jasmine', 'cardamom', 'lily-of-the-valley', 'vanilla', 'tonka bean', 'sandalwood', 'patchouli', 'honey', 'tobacco', 'vetiver']",vanilla,725
+"['apple', 'plum', 'lemon', 'bergamot', 'oakmoss', 'geranium', 'cinnamon', 'mahogany', 'carnation', 'vanilla', 'sandalwood', 'cedar', 'vetiver', 'olive tree']",woody,14456
+"['bergamot', 'pink pepper', 'elemi', 'atlas cedar', 'cashmere wood', 'patchouli', 'iso e super', 'haitian vetiver', 'white musk']",woody,15942
+"['cloves', 'pepper', 'coriander', 'west indian bay', 'plum', 'jasmine', 'mandarin orange', 'citruses', 'bergamot', 'carnation', 'cinnamon', 'sandalwood', 'patchouli', 'orris root', 'rose', 'peach', 'lily-of-the-valley', 'incense', 'myrrh', 'sandalwood', 'tolu balsam', 'amber', 'opoponax', 'benzoin', 'labdanum', 'vanilla', 'musk', 'castoreum', 'cedar', 'vetiver', 'coconut']",warm spicy,10662
+"['juniper', 'lemon', 'bergamot', 'pepper', 'pine needles', 'incense', 'orris root', 'vanilla', 'sandalwood', 'amber']",woody,11202
+"['lavender', 'bergamot', 'iris', 'jasmine sambac', 'rose', 'tahitian vanilla', 'coumarin', 'australian sandalwood', 'licorice', 'benzoin', 'patchouli']",vanilla,13804
+"['bergamot', 'myrtle', 'hazelnut', 'chocolate', 'roasted coffee beans', 'leather', 'cedar']",woody,19225
+"['african orange flower', 'jasmine', 'white honey', 'patchouli', 'rose', 'virginia cedar']",white floral,12737
+"['coconut nectar', 'neroli', 'bergamot', 'mandarin orange', 'monoi oil', 'ylang-ylang', 'orange blossom', 'jasmine', 'coconut milk', 'musk', 'ambrette (musk mallow)']",coconut,9094
+"['neroli', 'black pepper', 'cardamom', 'carrot seeds', 'iris', 'violet', 'geranium', 'mate', 'amber', 'cedar', 'sandalwood', 'patchouli']",powdery,21117
+"['licorice', 'citruses', 'grapefruit', 'bergamot', 'lavender', 'star anise', 'vanilla', 'almond', 'sandalwood', 'amber', 'cedar']",soft spicy,16596
+"['apple tree blossom', 'mandarin orange', 'camelia', 'black currant', 'lemon', 'honeysuckle', 'grapefruit', 'rose', 'lily', 'mint', 'violet', 'magnolia', 'jasmine', 'cedar', 'sandalwood', 'leather']",citrus,7765
+"['green notes', 'mandarin orange', 'jasmine', 'peony', 'pear blossom', 'woodsy notes', 'pistachio', 'musk']",green,7667
+"['green notes', 'freesia', 'pink pepper', 'violet', 'violet leaf', 'tuberose', 'red berries', 'lily-of-the-valley', 'peony', 'lilac', 'lily', 'rose', 'jasmine', 'geranium', 'karo karounde', 'musk', 'cedar', 'sandalwood', 'patchouli']",floral,6276
+"['coriander', 'pepper oil', 'nutmeg', 'bergamot', 'lemon', 'mandarin orange', 'may rose', 'mimosa', 'iris', 'jasmine', 'lily-of-the-valley', 'peach', 'honey', 'oakmoss', 'patchouli', 'musk', 'sandalwood']",honey,11587
+"['orange blossom', 'star anise', 'rose', 'mandarin orange', 'pear', 'bergamot', 'ylang-ylang', 'ginger', 'orchid', 'iris', 'tuberose', 'plum', 'vanilla', 'amber', 'musk', 'cinnamon', 'sandalwood']",white floral,9283
+"['white flowers', 'coriander', 'peony', 'bergamot', 'ambrette (musk mallow)', 'rose', 'jasmine', 'patchouli', 'woody notes', 'incense']",woody,6069
+"['heliotrope', 'white violet', 'lilac', 'musk', 'arum lily', 'vanilla', 'amber']",powdery,13549
+"['lime (linden) blossom', 'melon', 'bergamot', 'mandarin orange', 'mimosa', 'jasmine', 'ylang-ylang', 'wormwood', 'thyme', 'cedar', 'sandalwood']",yellow floral,5925
+"['cardamom', 'mimosa', 'tonka bean']",yellow floral,15680
+"['sichuan pepper', 'rose', 'tangerine', 'ylang-ylang', 'patchouli', 'tiramisu', 'jasmine', 'coffee', 'cacao', 'whipped cream', 'guaiac wood']",coffee,372
+"['rose', 'green notes', 'jasmine', 'sour cherry', 'apple', 'orange blossom', 'black currant', 'white musk', 'patchouli', 'white amber']",cherry,4986
+"['pink pepper', 'jasmine', 'iris', 'patchouli', 'musk', 'vanilla']",musky,13458
+"['cashew', 'apple', 'bergamot', 'freesia', 'orange blossom', 'rose', 'musk', 'amber', 'coumarin']",nutty,21561
+"['cherry', 'violet leaves', 'chamomile', 'geranium', 'rose', 'mimosa', 'amber', 'blonde woods', 'cedarwood']",cherry,21720
+"['green notes', 'floral notes', 'chrysanthemum', 'violet', 'spices', 'incense', 'ash', 'woodsy notes']",smoky,20868
+"['mimosa', 'violet leaf', 'cyclamen', 'bitter orange blossom', 'angelica', 'narcissus', 'orris', 'amber']",yellow floral,10971
+"['bergamot', 'mandarin orange', 'aldehydes', 'fruity notes', 'ylang-ylang', 'mimosa', 'rose', 'jasmine', 'lily-of-the-valley', 'clove', 'cinnamon', 'nutmeg', 'benzoin', 'vanilla', 'tonka bean', 'frankincense', 'patchouli', 'sandalwood', 'tolu balsam', 'amber', 'musk']",yellow floral,10356
+"['lily', 'jasmine', 'magnolia', 'woodsy notes', 'amber', 'ylang-ylang', 'sandalwood', 'white honey', 'pepper', 'mandarin orange']",woody,9586
+"['green leaves', 'mango', 'passionfruit', 'fir', 'red currant', 'heliotrope', 'hyacinth', 'ylang-ylang', 'hog plum', 'jasmine', 'rose', 'papaya', 'vanilla', 'musk', 'amber', 'princess tree or paulownia', 'allspice']",tropical,4536
+"['saffron', 'cinnamon', 'agarwood (oud)', 'rose', 'agarwood (oud)', 'amber', 'cedarwood']",oud,14469
+"['bergamot', 'violet leaves', 'mandarin orange', 'tuberose', 'rose', 'jasmine', 'ylang-ylang', 'neroli', 'orris', 'cedar', 'sandalwood']",tuberose,13109
+"['green mandarin', 'italian lemon', 'violet leaf', 'eucalyptus', 'bulgarian rose', 'musk', 'patchouli', 'madagascar vanilla', 'amber']",ozonic,2243
+"['sour cherry', 'almond', 'red berries', 'bergamot', 'licorice', 'rose', 'tea', 'taif rose', 'vanilla', 'anise', 'tonka bean', 'patchouli', 'iris']",sweet,2642
+"['brazilian orange', 'raspberry', 'sicilian lemon', 'rose', 'petitgrain paraguay', 'red thyme', 'honeysuckle', 'leather', 'guaiac wood', 'atlas cedar']",leather,21015
+"['grapefruit', 'orange blossom', 'sage', 'nutmeg', 'orris root', 'pimento', 'vetiver', 'woodsy notes', 'oakmoss', 'amber']",woody,19533
+"['lemon', 'bergamot', 'mint', 'orange peel', 'rhubarb', 'jasmine', 'oakmoss', 'musk', 'fennel', 'carnation', 'white amber', 'green tea', 'jasmine', 'oakmoss', 'musk', 'celery seeds', 'caraway', 'cloves', 'amber']",citrus,6271
+"['fruity notes', 'lily', 'tuberose', 'jasmine', 'tincture of rose', 'white honey', 'vanille', 'patchouli', 'woodsy notes']",honey,14881
+"['galbanum', 'neroli', 'mandarin orange', 'iris', 'jasmine', 'vetiver', 'musk', 'tonka bean']",iris,15932
+"['cascalone', 'violet leaf', 'orris', 'mimosa', 'pear', 'paradisone', 'heliotrope', 'ambroxan', 'ylang-ylang']",yellow floral,2374
+"['aldehydes', 'bulgarian rose', 'jasmine', 'amber', 'musk', 'vanilla']",aldehydic,16676
+"['bergamot', 'orange', 'green notes', 'iris', 'patchouli', 'vetiver', 'rose', 'jasmine', 'vanille', 'caramel', 'tonka bean', 'musk']",vanilla,13807
+"['acai berry', 'sea salt', 'driftwood']",salty,6506
+"['pink pepper', 'african orange flower', 'iris', 'lilac', 'hyacinth', 'heliotrope', 'wisteria', 'powdery notes', 'rice', 'musk']",powdery,10878
+"['black currant', 'pear', 'iris', 'jasmine', 'orange blossom', 'praline', 'vanilla', 'patchouli', 'tonka bean']",sweet,2511
+"['chrysanthemum', 'narcissus', 'violet leaf', 'labdanum', 'carnation', 'ambergris', 'patchouli', 'moss', 'leather', 'musk']",mossy,2791
+"['violet', 'bergamot', 'grapefruit', 'fig leaf', 'iris', 'vanilla', 'vetiver']",violet,10906
+"['black pepper', 'bay leaf', 'bergamot', 'rum', 'woody notes', 'cinnamon', 'clary sage', 'african geranium', 'incense', 'leather', 'benzoin', 'cedar', 'patchouli']",woody,15787
+"['yuzu', 'lemon', 'bergamot', 'lemon verbena', 'mandarin orange', 'cypress', 'calone', 'coriander', 'tarragon', 'sage', 'blue lotus', 'nutmeg', 'lily-of-the-valley', 'bourbon geranium', 'saffron', 'ceylon cinnamon', 'mignonette', 'tahitian vetiver', 'musk', 'cedar', 'sandalwood', 'amber', 'tobacco']",citrus,16501
+"['raspberry', 'red berries', 'bergamot', 'lemon', 'violet', 'rose', 'orange blossom', 'iris', 'tonka bean', 'resins', 'musk', 'sandalwood']",violet,4721
+"['apple', 'sage', 'milk', 'heliotrope', 'lily-of-the-valley', 'violet', 'jasmine', 'musk', 'benzoin', 'vetiver', 'cedar', 'amber']",lactonic,6364
+"['mandarin orange', 'pink pepper', 'jasmine', 'nutmeg', 'patchouli', 'vetiver']",patchouli,6668
+"['galbanum', 'ginger', 'clary sage', 'rose petals', 'mimosa absolute', 'tuberose', 'lily-of-the-valley', 'heliotrope', 'jasmine', 'mineral notes', 'oakmoss', 'hinoki wood', 'musk']",mineral,15770
+"['grapefruit', 'lemon', 'watery notes', 'white flowers', 'gardenia', 'green notes', 'sweet pea', 'musk', 'woody notes']",citrus,11249
+"['jasmine', 'bulgarian rose', 'orange blossom', 'musk', 'coumarin', 'cedar', 'vetiver', 'patchouli']",musky,14485
+"['aldehydes', 'ylang-ylang', 'neroli', 'bergamot', 'peach', 'iris', 'jasmine', 'rose', 'lily-of-the-valley', 'sandalwood', 'vanilla', 'oakmoss', 'vetiver', 'patchouli']",woody,2624
+"['vanilla orchid', 'jasmine', 'brown sugar', 'tonka bean', 'amber', 'amberwood', 'musk', 'patchouli']",sweet,17517
+"['aldehydes', 'green leaves', 'raspberry', 'jasmine', 'lily-of-the-valley', 'rose', 'violet', 'orris root', 'geranium', 'musk', 'tonka bean', 'sandalwood', 'oakmoss', 'cedar', 'amber']",aldehydic,2158
+"['mandarin orange', 'bergamot', 'lily-of-the-valley', 'myrhh', 'jasmine', 'opoponax', 'amber', 'patchouli', 'vanille']",amber,8705
+"['bergamot', 'incense', 'jasmine', 'vanilla', 'benzoin', 'woodsy notes', 'ambroxan']",amber,21558
+"['pink grapefruit', 'sicilian bergamot', 'red currant leaf', 'cactus', 'orchid', 'vanilla', 'red cedar', 'amber']",citrus,7958
+"['cinnamon', 'lavender', 'bergamot', 'leather', 'mimosa', 'tobacco leaf', 'guaiac wood', 'opoponax', 'oakmoss']",tobacco,18967
+"['brandy', 'anise', 'cabreuva', 'coffee', 'orange blossom', 'jasmine', 'vanilla', 'patchouli', 'musk']",coffee,15472
+"['green leaves', 'guava', 'passionfruit', 'papaya', 'grapefruit', 'mango', 'mandarin orange', 'lily-of-the-valley', 'freesia', 'lily', 'marigold', 'neroli', 'jasmine', 'rose', 'oakmoss', 'vetiver', 'orris root', 'sandalwood']",tropical,5059
+"['artemisia', 'bergamot', 'patchouli', 'cardamom', 'coriander', 'immortelle', 'leather', 'french labdanum', 'elemi resin', 'birch', 'vanilla', 'virginia cedar']",leather,18044
+"['pear', 'bergamot', 'tuberose', 'orange blossom', 'jasmine sambac', 'patchouli', 'vanilla', 'ambroxan', 'vetiver']",white floral,10594
+"['grapefruit', 'orange', 'lemon', 'red currant', 'sugar cane', 'bulrush', 'lily-of-the-valley', 'tea rose', 'cinnamon', 'musk', 'cedar', 'thanaka wood']",citrus,9318
+"['galbanum', 'aldehydes', 'caraway', 'gardenia', 'bergamot', 'rose', 'carnation', 'iris', 'narcissus', 'jasmine', 'oakmoss', 'leather', 'vetiver', 'amber', 'patchouli', 'coconut']",earthy,21521
+"['sea notes', 'sea salt', 'fennel', 'apple blossom', 'osmanthus', 'roasted coffee beans', 'sesame']",marine,681
+"['orange blossom', 'peach', 'plum', 'neroli', 'brazilian rosewood', 'mandarin orange', 'violet', 'tuberose', 'mimosa', 'gardenia', 'ylang-ylang', 'jasmine', 'black locust', 'carnation', 'red berries', 'black currant', 'rose', 'cassia', 'orchid', 'sandalwood', 'amber', 'woody notes', 'vanilla', 'musk', 'tonka bean', 'cedar']",white floral,8292
+"['mandarin orange', 'tarragon', 'rosemary', 'basil', 'anise', 'neroli', 'geranium', 'lily-of-the-valley', 'vanilla', 'almond', 'tonka bean', 'benzoin', 'cedar']",vanilla,16492
+"['lavender', 'rosemary', 'neroli', 'petitgrain', 'geranium', 'clary sage', 'galbanum', 'jasmine', 'oakmoss', 'vetiver', 'cedar', 'sandalwood', 'amber']",aromatic,18177
+"['honey', 'jasmine sambac', 'calabrian bergamot', 'agarwood (oud)', 'black tea', 'sandalwood', 'amber', 'musk', 'madagascar vanilla']",honey,17562
+"['aldehydes', 'ylang-ylang', 'neroli', 'jasmine', 'rose', 'vanilla', 'sandalwood', 'vetiver']",aldehydic,20066
+"['lemon', 'mandarin orange', 'peach', 'passionfruit', 'bergamot', 'honeysuckle', 'jasmine', 'magnolia', 'freesia', 'water lily', 'orange blossom', 'peony', 'may rose', 'vanilla', 'sandalwood', 'amber', 'vetiver', 'patchouli']",citrus,14098
+"['peony', 'citruses', 'mandarin orange', 'osmanthus', 'rose', 'sandalwood', 'pink pepper', 'patchouli']",floral,2794
+"['black currant', 'orange', 'mandarin orange', 'grapefruit', 'cassia', 'bergamot', 'rose', 'apricot', 'jasmine', 'lily', 'lily-of-the-valley', 'vanilla', 'tonka bean', 'musk', 'amber', 'virginia cedar']",citrus,4241
+"['violet', 'sea notes', 'banana leaf', 'petitgrain', 'violet', 'magnolia', 'lily-of-the-valley', 'tuberose', 'pepper', 'incense', 'sandalwood', 'madagascar vanilla', 'myrrh']",violet,4438
+"['raspberry', 'neroli', 'mandarin orange', 'orange blossom', 'jasmine', 'marshmallow', 'vanilla', 'sandalwood', 'heliotrope']",sweet,12194
+"['neroli', 'pink pepper', 'bergamot', 'coffee', 'rose', 'hazelnut', 'orange blossom', 'jasmine', 'vanilla', 'amberwood', 'ambroxan', 'musk']",coffee,14556
+"['aldehydes', 'jasmine', 'rose', 'iris', 'vanilla', 'woodsy notes']",aldehydic,19497
+"['lemon leaf', 'bergamot', 'tamarind', 'elemi', 'white pepper', 'nutmeg', 'cardamom', 'violet', 'cedar', 'musk', 'oakmoss', 'amber']",fresh spicy,14773
+"['apricot', 'kumquat', 'tangerine', 'honey', 'gardenia', 'narcissus', 'patchouli', 'sandalwood', 'musk']",honey,2924
+"['quince', 'grapefruit', 'hyacinth', 'jasmine', 'musk', 'iris', 'virginia cedar', 'amber']",floral,15647
+"['casablanca lily', 'gardenia', 'jasmine', 'mandarin orange', 'incense', 'fruity notes', 'white pepper', 'tobacco', 'peach', 'rose', 'sandalwood', 'patchouli', 'amber', 'vanilla']",white floral,11869
+"['chrysanthemum', 'orris', 'elemi', 'rum', 'vetiver', 'rose', 'ash', 'leather', 'labdanum']",smoky,19190
+"['orange blossom', 'bergamot', 'tuberose', 'indian jasmine', 'madagascar vanilla', 'white musk', 'virginian cedar']",white floral,4492
+"['metallic notes', 'green leaves', 'grapefruit', 'pink rose', 'incense', 'ambergris', 'cashmere wood', 'sandalwood']",metallic,12695
+"['lemon', 'cedar', 'citron', 'water hyacinth', 'pink pepper', 'jasmine', 'white musk', 'patchouli', 'vetiver', 'teak wood', 'iris', 'amber']",woody,14429
+"['bergamot', 'lavender', 'cinnamon', 'leather', 'mimosa', 'guaiac wood', 'tobacco', 'opoponax', 'oakmoss']",cinnamon,7609
+"['lavender', 'cinnamon', 'pineapple', 'juniper berries', 'mint', 'bergamot', 'rosemary', 'cardamom', 'coriander', 'orange blossom', 'violet', 'geranium', 'jasmine', 'raspberry', 'vanilla', 'sandalwood', 'dark chocolate', 'musk', 'amber', 'patchouli', 'vetiver', 'oakmoss']",sweet,11815
+"['bergamot', 'cedarmoss', 'patchouli']",mossy,11458
+"['lemon', 'bergamot', 'neroli', 'lime (linden) blossom', 'pear', 'ylang-ylang', 'musk', 'sandalwood']",yellow floral,2450
+"['nutmeg', 'plum', 'mace', 'rose', 'tuberose', 'jasmine', 'orchid', 'ylang-ylang', 'orange blossom', 'sandalwood', 'amber', 'vanilla', 'cashmere wood', 'cedar', 'wormwood', 'orris']",fresh spicy,2363
+"['almond blossom', 'clementine', 'cyclamen', 'jasmine', 'peony', 'amaryllis', 'vanilla', 'amber', 'benzoin', 'white musk']",floral,15123
+"['magnolia', 'pear', 'lotus', 'jasmine', 'tuberose', 'cyclamen', 'musk', 'vanilla', 'white woods', 'sandalwood']",floral,4472
+"['sicilian lemon', 'apple', 'cedar', 'bellflower', 'bamboo', 'jasmine', 'white rose', 'cedar', 'musk', 'amber']",citrus,6825
+"['galbanum', 'birch', 'chamomile', 'angelica', 'mastic or lentisque', 'incense', 'musk', 'osmanthus', 'magnolia', 'leather', 'guaiac wood', 'oud', 'ambergris', 'vetiver', 'patchouli', 'oakmoss']",smoky,15916
+"['lavender', 'tangerine', 'bergamot', 'cinnamon', 'cloves', 'musk', 'vanilla', 'tonka bean', 'amber', 'sandalwood', 'guaiac wood', 'cedar']",warm spicy,17750
+"['orange', 'jasmine', 'artemisia']",herbal,8545
+"['water notes', 'rosemary', 'cardamom', 'sequoia', 'musk', 'patchouli']",aquatic,738
+"['coca-cola', 'grapefruit', 'cassis', 'rose', 'jasmine', 'lily-of-the-valley', 'vanilla', 'musk', 'cedar']",coca-cola,8912
+"['cloves', 'pink pepper', 'orange blossom', 'chestnut', 'guaiac wood', 'juniper', 'vanilla', 'peru balsam', 'cashmeran']",balsamic,20140
+"['anise', 'neroli', 'coriander', 'bergamot', 'lemon', 'heliotrope', 'carnation', 'violet', 'cloves', 'neroli', 'ylang-ylang', 'bulgarian rose', 'jasmine', 'orchid', 'tuberose', 'iris', 'vanilla', 'benzoin', 'sandalwood', 'tonka bean', 'musk', 'vetiver']",powdery,19495
+"['star anise', 'pomelo', 'black pepper', 'geranium', 'iris', 'incense', 'patchouli', 'haitian vetiver', 'benzoin']",anis,8749
+"['mimosa', 'bergamot', 'mimosa', 'lily', 'hiacynth', 'narcissus', 'benzoin', 'jasmine']",yellow floral,13486

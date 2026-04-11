@@ -28,7 +28,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 DATASETS_DIR = os.path.join(SCRIPT_DIR, 'datasets')
 CLAUDE_DIR = os.path.join(DATASETS_DIR, 'claude')
 
-INPUT_PATH = os.path.join(DATASETS_DIR, 't5_sample_stratified.csv')
+INPUT_PATH = os.path.join(DATASETS_DIR, 't5_golden_regenerate.csv') # temp change to t5_golden_regenerate.csv after we clean the dataset and identify which rows to regenerate
 BATCH_JSONL = os.path.join(CLAUDE_DIR, 'batch_requests.jsonl')
 BATCH_ID_FILE = os.path.join(CLAUDE_DIR, 'batch_id.txt')
 RESULTS_JSONL = os.path.join(CLAUDE_DIR, 'batch_results.jsonl')
@@ -40,53 +40,48 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 SYSTEM_PROMPT = """You translate perfume note lists into one-sentence smell descriptions for normal people.
 
-RULES:
-1. Output exactly one sentence, starting with "It smells like"
-2. Maximum 40 words
-3. NEVER name the original notes — always translate them into everyday smells
-4. Describe 3–5 dominant smells only
-5. No poetic language, no storytelling, no vague words like "fresh", "elegant", "rich"
-6. Physical textures are welcome: oily, powdery, sharp, fuzzy, waxy, thick
+OUTPUT FORMAT:
+- Exactly one sentence starting with "It smells like"
+- Maximum 35 words
+- Never name the original notes
+- Describe 3-5 dominant smells only
 
-TRANSLATE NOTES USING THESE ANALOGIES (do not copy these words mechanically — use them as inspiration):
-- citrus notes → lemon candy, orange peel, citrus cleaner
-- bergamot → Earl Grey tea, citrus rind
-- aldehydes → fizzy soap, clean laundry, metallic air
-- musk → warm skin, clean sheets, baby powder
-- sandalwood → pencil shavings, dry wood, a freshly opened book
-- cedar → sawdust, a wooden pencil box
-- vetiver → damp soil, wet roots, rain on concrete
-- patchouli → wet autumn leaves, forest floor, old fabric
-- amber → tree sap, warm glue, dry resin
-- incense → church smoke, burnt wood, smouldering paper
-- oud → smoky leather, burnt resin, old wood
-- vanilla → warm cake batter, sweet cream, sugar
-- tonka bean → sweet hay, caramel, worn leather
-- iris/orris → cold powder, violet candy, dusty fabric
-- rose → rose-scented soap, rose water, Turkish delight
-- jasmine → white flowers, slightly rubbery sweetness
-- lavender → soap, dry herb, linen spray
-- tobacco → dry leaves, light smoke, old paper
-- leather → worn jacket, new shoes, saddle
-- coffee → roasted grounds, espresso steam
-- coconut → sunscreen, sweet cream, tropical candy
-- green notes → cut grass, crushed leaves, green stems
-- aquatic/water notes → wet pavement, rain, metallic water
-- smoke → campfire ash, burnt wood, charcoal
-- honey → beeswax, sweet syrup, floral sugar
-- spices (cinnamon/clove/cardamom) → warm kitchen spice, mulled wine
-- fruity notes → ripe candy fruit, jam, juice
+BANNED PHRASES — never use these:
+- walking past, walking through, walking into
+- where someone, someone just
+- forest floor, warm skin, lemon candy, pencil shavings
+- hint of, mixed with
 
-STYLE VARIATION — use a different structure each time, for example:
+BANNED STRUCTURES — never use these sentence patterns:
+- "It smells like [place] where someone [verb]ed [thing]"
+- "It smells like being in [place]"
+- Any sentence requiring more than one scene or location
+
+REQUIRED: describe the actual smell directly. Not a scene. Not a story.
+Write what your nose detects, not what your eyes see.
+
+GOOD EXAMPLES:
+- "It smells like Earl Grey tea and citrus rind at first, then dry wood and something faintly smoky."
+- "It smells like rose water, powdered sugar, and the inside of an old wooden box."
+- "It smells like sunscreen, white flowers, and the sweet-sticky residue of tropical fruit."
+- "It smells like burnt resin, dark leather, and the bitter edge of espresso."
+- "It smells like cold stone, wet earth roots, and a faintly medicinal powder."
+
+BAD EXAMPLES (do not write like this):
+- "It smells like walking past a flower shop where someone just drizzled honey..."
+- "It smells like a spice cabinet in an old library where someone peeled oranges..."
+
+VARY YOUR STRUCTURE — use different patterns each time:
+- "It smells like X and Y, with Z underneath."
+- "It smells like X — dry and slightly Z, with a base of Y."
 - "It smells like X at first, then Y, finishing with Z."
-- "It smells like X and Y — dry, with a hint of Z."
 - "It smells like X, slightly Z, with a background of Y."
-- "It smells like being in X place." (only when it fits naturally)
 
-OUTPUT: Return only the sentence. No explanation, no alternatives, no punctuation beyond the final period."""
+OUTPUT: Return only the sentence. No explanation."""
+
 
 def build_user_prompt(notes: str) -> str:
-    return f"Notes: {notes}\n\nDescribe what this fragrance smells like to a normal person."
+    return f"{notes}\n\nDescribe what this fragrance smells like to a normal person."
 
 def prepare_batch():
     """
@@ -274,7 +269,7 @@ def retrieve_results():
     # t5 only needs all_notes and target_description
     # we keep mainaccord1 to audit for family distribution
 
-    output_df = df[['all_notes', 'mainaccord1', 'target_description']]
+    output_df = df[['embedding_id', 'all_notes', 'mainaccord1', 'target_description']]
     output_df.to_csv(OUTPUT_PATH, index=False)
 
     logging.info(f"Final dataset with {len(output_df)} rows saved to {OUTPUT_PATH}")
