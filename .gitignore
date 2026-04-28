@@ -15,6 +15,7 @@ backend/data/*.h5
 backend/data/t5_generator_model/
 backend/data/fra_perfumes.csv 
 backend/data/fra_cleaned.csv     
+backend/fine_tuning/models/*.zip
 **/noteworthy_t5_v1/
 **/checkpoint-*/
 *.bin

@@ -12,6 +12,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, 'data')
 FAISS_INDEX_PATH = os.path.join(DATA_DIR, 'fra_faiss_index.bin')
 FT_MODEL_PATH = os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_t5_v3') # PATH TO MODEL - CHANGE IF UPDATED
+# SBERT_MODEL_PATH = os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v1') # PATH TO MODEL - CHANGE IF UPDATED
+SBERT_MODEL_PATH = 'all-MiniLM-L6-v2'
 
 ml_assets: Dict[str, Any] = {}
 
@@ -32,9 +34,9 @@ def load_ml_assets():
         ml_assets['faiss_index'] = None
 
     # 2. Load SentenceTransformer model
-    logging.info("Loading SentenceTransformer model 'all-MiniLM-L6-v2'")
+    logging.info(f"Loading SentenceTransformer model from {SBERT_MODEL_PATH}")
     try:
-        embedding_model = SentenceTransformer('all-MiniLM-L6-v2')
+        embedding_model = SentenceTransformer(SBERT_MODEL_PATH)
         ml_assets['embedding_model'] = embedding_model
         logging.info("SentenceTransformer model loaded successfully.")
     except Exception as e:

@@ -1,0 +1,7 @@
+# -- Core SBERT Training --
+sentence-transformers>=3.0.0  # Core library for MNRL and embeddings
+pandas>=2.0.0                 # For loading your Anchor-Positive pairs
+torch>=2.1.0                  # Backend for tensor operations
+
+# -- Utilities --
+tqdm>=4.66.0                  # For the training progress bars
