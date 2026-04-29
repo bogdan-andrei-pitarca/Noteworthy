@@ -3,21 +3,49 @@ import numpy as np
 import faiss
 from sentence_transformers import SentenceTransformer
 import os
-import re
+import sys
 from typing import List
 
 # Configuration of file paths
 # Set BASE_DIR to the parent directory of `ml_core`, which is the `backend/` folder.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(BASE_DIR, 'data')
-RAW_CSV_PATH = os.path.join(DATA_DIR, 'fra_cleaned.csv')
-FAISS_INDEX_PATH = os.path.join(DATA_DIR, 'fra_faiss_index.bin')
-CLEAN_DATA_PATH = os.path.join(DATA_DIR, 'fra_data_processed.csv')
-# DATA_WITH_DESC_PATH = os.path.join(DATA_DIR, 'fra_data_with_descriptions.csv')
-# MODEL_PATH = os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v1')
-MODEL_PATH = 'all-MiniLM-L6-v2' 
 
-def clean_and_normalize_data(df: pd.DataFrame) -> pd.DataFrame:
+RAW_CSV_PATH = os.path.join(DATA_DIR, 'fra_cleaned.csv')
+
+CLEAN_DATA_PATH = os.path.join(DATA_DIR, 'fra_data_processed.csv')
+DATA_WITH_DESC_PATH = os.path.join(DATA_DIR, 'fra_data_with_descriptions.csv')
+
+# MODEL_PATH = os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v1')
+
+# output index paths, one for each variant (baseline, hybrid, sbert)
+FAISS_PATHS = {
+    'baseline': os.path.join(DATA_DIR, 'fra_faiss_index_baseline.bin'),
+    'hybrid': os.path.join(DATA_DIR, 'fra_faiss_index_hybrid.bin'),
+    'sbert': os.path.join(DATA_DIR, 'fra_faiss_index_sbert.bin')
+}
+
+# SBERT model paths, one for each variant 
+SBERT_MODELS = {
+    'baseline': 'all-MiniLM-L6-v2',  # baseline uses the standard pre-trained model
+    'hybrid': 'all-MiniLM-L6-v2',    # hybrid also uses the standard pre-trained model
+    'sbert': os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v1')  # sbert variant uses the fine-tuned model
+}
+
+# decides whether to include T5 descriptions
+USE_T5 = {
+    'baseline': False,
+    'hybrid': True,
+    'sbert': True,
+}
+
+def normalize_notes(notes):
+    """Cleans brackets and quotes from the notes string"""
+    if pd.isna(notes):
+        return "notes unknown"
+    return str(notes).replace('[', '').replace(']', '').replace("'", "").replace('"', '')
+
+def clean_and_normalize_data(df: pd.DataFrame, include_t5: bool) -> pd.DataFrame:
     """Normalizes and combines data for embeddings"""
 
     REQUIRED_COLUMNS = ['url', 'Brand', 'Gender', 'Perfume', 'all_notes']
@@ -35,23 +63,6 @@ def clean_and_normalize_data(df: pd.DataFrame) -> pd.DataFrame:
     
     # handling year data
     df['Year'] = pd.to_numeric(df['Year'], errors='coerce')
-    df['Year_refined'] = df['Year'].apply(
-        lambda y: f"released in {int(y)}" if not pd.isna(y) else "unknown"
-    )
-
-    # NORMALIZE AND COMBINE NOTES
-    # def normalize_notes(notes_str: str) -> List[str]:
-    #     """Splits, cleans and lowercases string of notes. May be redundant but ensures consistency."""
-    #     notes_str = str(notes_str).replace(';', ',').replace('|', ',').replace(' and ', ',')
-    #     notes = [n.strip().lower() for n in notes_str.split(',') if n.strip()]
-    #     return notes
-
-    def normalize_notes(notes):
-        if pd.isna(notes):
-            return "notes unknown"
-        return str(notes).replace('[', '').replace(']', '').replace("'", "").replace('"', '')
-    # this turns ['note1', 'note2'] into "note1, note2" 
-    
     df['clean_notes'] = df['all_notes'].apply(normalize_notes)
 
     # CREATE UNIQUE EMBEDDING ID
@@ -60,17 +71,21 @@ def clean_and_normalize_data(df: pd.DataFrame) -> pd.DataFrame:
 
     print(f"Data cleaned: {len(df)} entries remaining after cleaning.")
 
-    # create text input for sentence transformer
-    df['embedding_text'] = df.apply(
-        lambda row: (
-            f"Fragrance: {row['Perfume']} by {row['Brand']}. "
-            f"Target Gender: {row['Gender']}. "
-            f"Vibe and Accords: {row['mainaccord1']}, {row['mainaccord2']}. "
-            f"Technical Ingredient Notes: {row['clean_notes']}. "
-            # f"Sensory AI Description: {row['t5_description']}."
-        ),
-        axis=1
-    )
+    def build_text(row):
+        text = (
+            f"{row['Perfume']} by {row['Brand']}, {row['Year']}. "
+            f"{row['Gender']}. "
+            f"{row['mainaccord1']}, {row['mainaccord2']}. "
+        )
+
+        if include_t5 and 't5_description' in row and pd.notna(row.get('t5_description')):
+            text += f" Sensory AI Description: {row['t5_description']}."
+
+        text += f" Notes: {row['clean_notes']}."
+
+        return text
+    
+    df['embedding_text'] = df.apply(build_text, axis=1)
 
     # filter for output
     output_cols = ['embedding_id','url', 'Perfume', 'Brand', 'Gender', 'Year', 'Rating Value', 'Rating Count', 'all_notes', 'embedding_text']
@@ -82,16 +97,18 @@ def clean_and_normalize_data(df: pd.DataFrame) -> pd.DataFrame:
 
     return df[final_cols]
 
-def create_embeddings_and_faiss_index(df: pd.DataFrame):
+def create_embeddings_and_faiss_index(df: pd.DataFrame, model_path: str, index_path: str):
     """Generates embeddings and creates a FAISS index"""
 
-    print("Loading fine-tuned SBERT model...")
-    model = SentenceTransformer(MODEL_PATH)
+    print(f"Loading fine-tuned SBERT model from {model_path}...")
+    model = SentenceTransformer(model_path)
 
     print("Generating embeddings...(may take a while)")
-    embedding_texts = df['embedding_text'].tolist()
-    fragrance_embeddings = model.encode(embedding_texts, show_progress_bar=True, convert_to_numpy=True)
-    embeddings = np.array(fragrance_embeddings).astype('float32')
+    embeddings = model.encode(
+        df['embedding_text'].tolist(), 
+        show_progress_bar=True, 
+        convert_to_numpy=True
+    ).astype('float32')
 
     print("Normalizing embeddings for Cosine Similarity...")
     faiss.normalize_L2(embeddings)
@@ -106,27 +123,40 @@ def create_embeddings_and_faiss_index(df: pd.DataFrame):
     index.add(embeddings)
 
     print(f"Total embeddings in index: {index.ntotal}")
-    print("Saving FAISS index to disk...")
+    print(f"Saving FAISS index to {index_path}...")
 
-    faiss.write_index(index, FAISS_INDEX_PATH)
+    faiss.write_index(index, index_path)
     df.to_csv(CLEAN_DATA_PATH, index=False)
 
     print("FAISS index and cleaned data saved successfully.")
     
 if __name__ == "__main__":
-    if not os.path.exists(DATA_DIR):
-        os.makedirs(DATA_DIR)
-    if not os.path.exists(CLEAN_DATA_PATH):
-        raise FileNotFoundError(f"Data file not found at {CLEAN_DATA_PATH}. Please ensure the CSV file is present.")
-    else:
-        print("Loading raw data...")
-        df = pd.read_csv(CLEAN_DATA_PATH, encoding='latin1')
+    if len(sys.argv) < 2 or sys.argv[1] not in FAISS_PATHS:
+        print(f"Usage: python {sys.argv[0]} [variant]")
+        print("  baseline  → MiniLM, no T5 descriptions")
+        print("  hybrid    → MiniLM + T5 descriptions")
+        print("  sbert     → fine-tuned SBERT + T5 descriptions")
+        sys.exit(1)
+    
+    variant = sys.argv[1]
+    include_t5 = USE_T5[variant]
+    model_path = SBERT_MODELS[variant]
+    index_path = FAISS_PATHS[variant]
 
-        print("Cleaning and normalizing data...")
-        cleaned_df = clean_and_normalize_data(df)
+    print(f"\n=== Building variant: {variant.upper()} ===")
+    print(f"  SBERT model: {model_path}")
+    print(f"  T5 descriptions: {include_t5}")
+    print(f"  Output index: {index_path}\n")
 
-        print("Creating embeddings and FAISS index...")
-        create_embeddings_and_faiss_index(cleaned_df)
+    # choose input data
+    input_path = DATA_WITH_DESC_PATH if include_t5 else CLEAN_DATA_PATH
+
+    if not os.path.exists(input_path):
+        raise FileNotFoundError(f"Input data not found at {input_path}. Please run the appropriate data preparation scripts first.")
+    
+    df = pd.read_csv(input_path)
+    cleaned_df = clean_and_normalize_data(df, include_t5=include_t5)
+    create_embeddings_and_faiss_index(cleaned_df, model_path=model_path, index_path=index_path)
 
 
 

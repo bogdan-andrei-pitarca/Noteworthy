@@ -12,6 +12,7 @@ OVERUSED_COMBINATIONS = [
     ('earthy', 'slightly sweet'),
     ('spice market', 'dawn'),
     ('flower shop', 'dawn'),
+    ('at',  'dawn')
 ]
 
 
@@ -49,7 +50,7 @@ class FragrancePredictor:
                 max_new_tokens=60,
                 num_beams=4,
                 no_repeat_ngram_size=2,
-                repetition_penalty=1.5,
+                repetition_penalty=1.7,
                 early_stopping=True,
                 forced_bos_token_id=self.tokenizer.encode("It")[0]
             )

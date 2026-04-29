@@ -5,15 +5,35 @@ from sentence_transformers import SentenceTransformer
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 from typing import Dict, Any
 from pathlib import Path
+from dotenv import load_dotenv
+
 
 logging.basicConfig(level=logging.INFO)
+load_dotenv()  # Load environment variables from .env file
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
 DATA_DIR = os.path.join(BASE_DIR, 'data')
-FAISS_INDEX_PATH = os.path.join(DATA_DIR, 'fra_faiss_index.bin')
+FAISS_MODE = os.environ.get('FAISS_MODE', 'sbert')
 FT_MODEL_PATH = os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_t5_v3') # PATH TO MODEL - CHANGE IF UPDATED
-# SBERT_MODEL_PATH = os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v1') # PATH TO MODEL - CHANGE IF UPDATED
-SBERT_MODEL_PATH = 'all-MiniLM-L6-v2'
+
+FAISS_INDEX_PATHS = {
+    'baseline': os.path.join(DATA_DIR, 'fra_faiss_index_baseline.bin'),
+    'hybrid': os.path.join(DATA_DIR, 'fra_faiss_index_hybrid.bin'),
+    'sbert': os.path.join(DATA_DIR, 'fra_faiss_index_sbert.bin')
+}
+
+SBERT_MODEL_PATHS = {
+    'baseline': 'all-MiniLM-L6-v2',  # baseline uses the standard pre-trained model
+    'hybrid': 'all-MiniLM-L6-v2',    # hybrid also uses the standard pre-trained model
+    'sbert': os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v1')  # sbert variant uses the fine-tuned model
+}
+
+FAISS_INDEX_PATH = FAISS_INDEX_PATHS[FAISS_MODE]
+SBERT_MODEL_PATH = SBERT_MODEL_PATHS[FAISS_MODE]
+
+logging.info(f"FAISS mode: {FAISS_MODE}")
+logging.info(f"Using FAISS index path: {FAISS_INDEX_PATH}")
+logging.info(f"Using SBERT model path: {SBERT_MODEL_PATH}")
 
 ml_assets: Dict[str, Any] = {}
 
@@ -43,7 +63,7 @@ def load_ml_assets():
         logging.error(f"Failed to load SentenceTransformer model: {e}")
         ml_assets['embedding_model'] = None
 
-    logging.info("Loading T5 generatie model 't5-base'")
+    logging.info("Loading T5 generative model 't5-base'")
     try:
         # T5-small for now. we upgrade to t5-base later
         # UPGRADED BY MAR. 29: T5-base for better performance. 
