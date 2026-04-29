@@ -13,7 +13,6 @@ load_dotenv()  # Load environment variables from .env file
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
 DATA_DIR = os.path.join(BASE_DIR, 'data')
-FAISS_MODE = os.environ.get('FAISS_MODE', 'sbert')
 FT_MODEL_PATH = os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_t5_v3') # PATH TO MODEL - CHANGE IF UPDATED
 
 FAISS_INDEX_PATHS = {
@@ -23,19 +22,14 @@ FAISS_INDEX_PATHS = {
 }
 
 SBERT_MODEL_PATHS = {
-    'baseline': 'all-MiniLM-L6-v2',  # baseline uses the standard pre-trained model
-    'hybrid': 'all-MiniLM-L6-v2',    # hybrid also uses the standard pre-trained model
-    'sbert': os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v1')  # sbert variant uses the fine-tuned model
+    'base': 'all-MiniLM-L6-v2',  # baseline uses the standard pre-trained model
+    'finetuned': os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v1')  # sbert variant uses the fine-tuned model
 }
 
-FAISS_INDEX_PATH = FAISS_INDEX_PATHS[FAISS_MODE]
-SBERT_MODEL_PATH = SBERT_MODEL_PATHS[FAISS_MODE]
-
-logging.info(f"FAISS mode: {FAISS_MODE}")
-logging.info(f"Using FAISS index path: {FAISS_INDEX_PATH}")
-logging.info(f"Using SBERT model path: {SBERT_MODEL_PATH}")
-
-ml_assets: Dict[str, Any] = {}
+ml_assets: Dict[str, Any] = {
+    'faiss_indices': {},
+    'embedding_models': {}
+}
 
 def load_ml_assets():
     """
@@ -43,25 +37,25 @@ def load_ml_assets():
     """
     global ml_assets
 
-    # 1. Load FAISS index
-    logging.info(f"Loading FAISS index from {FAISS_INDEX_PATH}")
-    try:
-        faiss_index = faiss.read_index(FAISS_INDEX_PATH)
-        ml_assets['faiss_index'] = faiss_index
-        logging.info("FAISS index loaded successfully.")
-    except Exception as e:
-        logging.error(f"Failed to load FAISS index: {e}")
-        ml_assets['faiss_index'] = None
+    for mode, path in FAISS_INDEX_PATHS.items():
+        logging.info(f"Loading {mode.upper()} FAISS index from {path}")
+        try:
+            if os.path.exists(path):
+                ml_assets['faiss_indices'][mode] = faiss.read_index(path)
+                logging.info(f"{mode.upper()} FAISS index loaded successfully.")
+            else:
+                logging.warning(f"Index {path} not found. Skipping {mode}.")
+        except Exception as e:
+            logging.error(f"Failed to load {mode.upper()} FAISS index: {e}")
+            ml_assets['faiss_indices'][mode] = None
 
-    # 2. Load SentenceTransformer model
-    logging.info(f"Loading SentenceTransformer model from {SBERT_MODEL_PATH}")
-    try:
-        embedding_model = SentenceTransformer(SBERT_MODEL_PATH)
-        ml_assets['embedding_model'] = embedding_model
-        logging.info("SentenceTransformer model loaded successfully.")
-    except Exception as e:
-        logging.error(f"Failed to load SentenceTransformer model: {e}")
-        ml_assets['embedding_model'] = None
+    for m_type, path in SBERT_MODEL_PATHS.items():
+        logging.info(f"Loading {m_type.upper()} SBERT model from {path}")
+        try:
+            ml_assets['embedding_models'][m_type] = SentenceTransformer(path)
+        except Exception as e:
+            logging.error(f"Failed to load {m_type} SBERT model: {e}")
+            ml_assets['embedding_models'][m_type] = None
 
     logging.info("Loading T5 generative model 't5-base'")
     try:

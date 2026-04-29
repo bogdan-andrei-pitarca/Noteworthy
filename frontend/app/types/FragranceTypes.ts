@@ -32,3 +32,4 @@ export interface DescriptionResponse{
 }
 
 export type SearchMode = 'notes_to_smell' | 'smell_to_notes';
+export type SearchEngine = 'baseline' | 'hybrid' | 'sbert';

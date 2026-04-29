@@ -73,7 +73,7 @@ async def startup_event():
 
 # Helper function for semantic search
 
-def perform_semantic_search(query: str, k: int = 20) -> List[Dict[str, Any]]:
+def perform_semantic_search(query: str, k: int = 20, engine: str = 'hybrid') -> List[Dict[str, Any]]:
     """
     Performs semantic search using the FAISS index and SentenceTransformer model.
 
@@ -81,13 +81,17 @@ def perform_semantic_search(query: str, k: int = 20) -> List[Dict[str, Any]]:
     :type query: str
     :param k: Description
     :type k: int
+    :param engine: Description
+    :type engine: str
     :return: Description
     :rtype: List[Dict[str, Any]]
     """
 
     assets = get_ml_assets()
-    faiss_index = assets.get('faiss_index')
-    embedding_model = assets.get('embedding_model')
+    faiss_index = assets['faiss_indices'].get(engine)
+
+    model_type = 'finetuned' if engine == 'sbert' else 'base'
+    embedding_model = assets['embedding_models'].get(model_type)
 
     if not faiss_index or not embedding_model:
         raise HTTPException(status_code=503, detail="AI services not fully initialized.")
@@ -137,13 +141,14 @@ async def root():
 @app.get("/search/smell", response_model=SmellSearchResponse, tags=["AI Retrieval"])
 async def search_by_smell(
     query: str = Query(..., min_length=3, description="Natural language description of the desired fragrance's characteristics."),
-    k: int = Query(20, gt=0, le=100, description="Number of top similar fragrances to retrieve.")
+    k: int = Query(20, gt=0, le=100, description="Number of top similar fragrances to retrieve."),\
+    engine: str = Query('hybrid', pattern="^(baseline|hybrid|sbert)$", description="Which FAISS index and embedding model to use for search.")
 ):
     """
     Perform a semantic search for fragrances based on a textual description of smell characteristics.
     """
     logging.info(f"Received smell search query: {query} with top k={k}")
-    results = perform_semantic_search(query, k)
+    results = perform_semantic_search(query, k, engine)
     return {"query": query, "results": results}
 
 @app.get("/search/notes_to_description", tags=["AI Generation"])

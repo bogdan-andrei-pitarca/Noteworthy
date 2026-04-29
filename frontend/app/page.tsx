@@ -10,6 +10,8 @@ export default function AIModelInterface() {
   const {
     mode,
     setMode,
+    engine,
+    setEngine,
     smellQuery,
     setSmellQuery,
     notesQuery,
@@ -39,6 +41,8 @@ export default function AIModelInterface() {
           <SearchBar
             mode={mode}
             setMode={setMode}
+            engine={engine}
+            setEngine={setEngine}
             query={activeQuery}
             setQuery={setActiveQuery}
             handleSearch={performSearch}

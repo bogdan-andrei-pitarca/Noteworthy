@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { fragranceService } from '../services/api';
-import { SearchMode, FragranceRecord, DescriptionResponse } from '../types/FragranceTypes';
+import { SearchMode, SearchEngine, FragranceRecord, DescriptionResponse } from '../types/FragranceTypes';
 
 /**
  * Custom hook to manage fragrance search functionality.
@@ -8,6 +8,7 @@ import { SearchMode, FragranceRecord, DescriptionResponse } from '../types/Fragr
 
 export function useFragranceSearch() {
     const [mode, setMode] = useState<SearchMode>('notes_to_smell');
+    const [engine, setEngine] = useState<SearchEngine>('hybrid'); // default search engine
     
     const [smellQuery, setSmellQuery] = useState<string>('');
     const [notesQuery, setNotesQuery] = useState<string>('');
@@ -39,7 +40,7 @@ export function useFragranceSearch() {
                 const data = await fragranceService.generateDescription(query);
                 setDescriptionResult(data);
             } else {
-                const data = await fragranceService.searchBySmell(query);
+                const data = await fragranceService.searchBySmell(query, engine);
                 if (data.results.length > 0) {
                     setSearchMatches(data.results);
                 } else {
@@ -51,11 +52,13 @@ export function useFragranceSearch() {
         } finally {
             setIsLoading(false);
         }
-    }, [mode, notesQuery, smellQuery]);
+    }, [mode, engine, notesQuery, smellQuery]);
 
     return {
         mode,
         setMode,
+        engine,
+        setEngine,
         smellQuery,
         setSmellQuery,
         notesQuery,

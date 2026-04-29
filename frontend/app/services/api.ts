@@ -2,9 +2,9 @@ import { SmellSearchResponse, DescriptionResponse } from "../types/FragranceType
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
 
 export const fragranceService = {
-    async searchBySmell(query: string, limit: number = 20): Promise<SmellSearchResponse> {
+    async searchBySmell(query: string, engine: string, limit: number = 20): Promise<SmellSearchResponse> {
         const encodedQuery = encodeURIComponent(query.trim());
-        const response = await fetch(`${API_BASE_URL}/search/smell?query=${encodedQuery}&k=${limit}`);
+        const response = await fetch(`${API_BASE_URL}/search/smell?query=${encodedQuery}&k=${limit}&engine=${engine}`);
 
         if (!response.ok) {
             const errorData = await response.json().catch(
