@@ -71,6 +71,42 @@ async def startup_event():
         app.state.predictor = FragrancePredictor(assets['generator_model'], assets['generator_tokenizer'])
     logging.info("FastAPI startup complete. ML assets loaded successfully.")
 
+
+ACCORD_KEYWORDS = {
+    'leather': ['leather', 'suede', 'animalic'],
+    'smoky': ['smoky', 'smoke', 'tobacco', 'birch'],
+    'woody': ['woody', 'wood', 'cedar', 'sandalwood', 'forest'],
+    'fresh': ['fresh', 'clean', 'laundry', 'aquatic', 'marine'],
+    'floral': ['floral', 'flower', 'rose', 'jasmine', 'bloom'],
+    'sweet': ['sweet', 'vanilla', 'caramel', 'gourmand', 'candy'],
+    'citrus': ['citrus', 'lemon', 'orange', 'bergamot', 'grapefruit'],
+    'spicy': ['spicy', 'pepper', 'cinnamon', 'spice', 'warm spicy'],
+    'earthy': ['earthy', 'dirt', 'soil', 'petrichor', 'mossy', 'mushroom'],
+    'powdery': ['powdery', 'powder', 'talc', 'soft'],
+    'oud': ['oud', 'agarwood', 'resin', 'incense'],
+    'fruity': ['fruity', 'fruit', 'berry', 'peach', 'apple'],
+    'aquatic': ['aquatic', 'ocean', 'sea', 'water', 'marine', 'salt'],
+    'amber': ['amber', 'warm', 'resinous', 'balsamic'],
+}
+
+def get_accord_boost(query: str, fragrance: dict) -> float:
+    query_lower = query.lower()
+    boost = 1.0
+
+    fragrance_accords = [
+        str(fragrance.get(f'main_accord_{i}', '')).lower()
+        for i in range(1, 6)
+    ]
+
+    for accord, keywords in ACCORD_KEYWORDS.items():
+        query_mentions_accord = any(kw in query_lower for kw in keywords)
+        fragrance_has_accord = any(accord in fa for fa in fragrance_accords)
+
+        if query_mentions_accord and fragrance_has_accord:
+            boost += 0.15 # 15% boost per matching accord
+        
+    return min(boost, 1.5) # cap boost at 50% to prevent runaway scores
+
 # Helper function for semantic search
 
 def perform_semantic_search(query: str, k: int = 20, engine: str = 'hybrid') -> List[Dict[str, Any]]:
@@ -123,11 +159,14 @@ def perform_semantic_search(query: str, k: int = 20, engine: str = 'hybrid') -> 
         for res in search_results:
             db_record = db_map.get(res['embedding_id'])
             if db_record:
+                boost = get_accord_boost(query, db_record)
                 final_results.append({
                     **db_record,
-                    'similarity_percent': round(res['similarity_score'] * 100, 2)  # Convert to percentage
+                    'similarity_percent': round(res['similarity_score'] * boost * 100, 2)  # Convert to percentage
                 })
-        return final_results
+        
+        final_results.sort(key=lambda x: x['similarity_percent'], reverse=True)
+        return final_results[:k]
     except Exception as e:
         logging.error(f"Error during semantic search: {e}")
         raise HTTPException(status_code=500, detail="Error during semantic search.")

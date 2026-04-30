@@ -29,7 +29,7 @@ FAISS_PATHS = {
 SBERT_MODELS = {
     'baseline': 'all-MiniLM-L6-v2',  # baseline uses the standard pre-trained model
     'hybrid': 'all-MiniLM-L6-v2',    # hybrid also uses the standard pre-trained model
-    'sbert': os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v1')  # sbert variant uses the fine-tuned model
+    'sbert': os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v2')  # sbert variant uses the fine-tuned model
 }
 
 # decides whether to include T5 descriptions
@@ -72,16 +72,23 @@ def clean_and_normalize_data(df: pd.DataFrame, include_t5: bool) -> pd.DataFrame
     print(f"Data cleaned: {len(df)} entries remaining after cleaning.")
 
     def build_text(row):
+        year = int(row['Year']) if pd.notna(row.get('Year')) and str(row['Year']) != 'nan' else None
+        year_str = f", released {year}" if year else ""
+
+        accord1 = str(row['mainaccord1']).replace('none', '').strip()
+        accord2 = str(row['mainaccord2']).replace('none', '').strip()
+        accords = ', '.join([a for a in [accord1, accord2] if a])
+
+        gender = str(row['Gender']).lower().strip()
+
         text = (
-            f"{row['Perfume']} by {row['Brand']}, {row['Year']}. "
-            f"{row['Gender']}. "
-            f"{row['mainaccord1']}, {row['mainaccord2']}. "
+            f"{row['Perfume']} by {row['Brand']}{year_str} is a {gender} fragrance. "
+            f"It smells {accords}. "
+            f"Notes: {row['clean_notes']}."
         )
 
         if include_t5 and 't5_description' in row and pd.notna(row.get('t5_description')):
-            text += f" Sensory AI Description: {row['t5_description']}."
-
-        text += f" Notes: {row['clean_notes']}."
+            text += f" {row['t5_description']}"
 
         return text
     
