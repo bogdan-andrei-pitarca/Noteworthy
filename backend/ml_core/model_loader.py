@@ -22,8 +22,8 @@ FAISS_INDEX_PATHS = {
 }
 
 SBERT_MODEL_PATHS = {
-    'base': 'all-MiniLM-L6-v2',  # baseline uses the standard pre-trained model
-    'finetuned': os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v2')  # sbert variant uses the fine-tuned model
+    'base': 'all-mpnet-base-v2',  # baseline uses the standard pre-trained model
+    'finetuned': os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v3')  # sbert variant uses the fine-tuned model
 }
 
 ml_assets: Dict[str, Any] = {

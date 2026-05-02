@@ -108,6 +108,22 @@ def get_accord_boost(query: str, fragrance: dict) -> float:
     return min(boost, 1.5) # cap boost at 50% to prevent runaway scores
 
 # Helper function for semantic search
+def lexical_overlap(query: str, fragrance: dict) -> float:
+    """Calculates keyword overlap between query and key fragrance notes"""
+    query_words = set(query.lower().replace(',', '').split())
+
+    # combine notes and accords into a searchable text block
+    target_text = (
+        str(fragrance.get('all_notes', '')) + ' ' +
+        str(fragrance.get('main_accord_1', '')) + ' ' +
+        str(fragrance.get('main_accord_2', ''))
+    ).lower()
+
+    fragrance_words = set(target_text.replace('[', '').replace(']', '').replace("'", "").replace(',', '').split())
+
+    overlap = len(query_words.intersection(fragrance_words))
+
+    return min(overlap / 4.0, 1.0) # cap at 4 matching keywords 
 
 def perform_semantic_search(query: str, k: int = 20, engine: str = 'hybrid') -> List[Dict[str, Any]]:
     """
@@ -159,10 +175,13 @@ def perform_semantic_search(query: str, k: int = 20, engine: str = 'hybrid') -> 
         for res in search_results:
             db_record = db_map.get(res['embedding_id'])
             if db_record:
-                boost = get_accord_boost(query, db_record)
+                semantic_score = float(res['similarity_score'])
+                lexical_score = lexical_overlap(query, db_record)
+                accord_boost = get_accord_boost(query, db_record)
+                final_score = (semantic_score * 0.75) + (lexical_score * 0.20) + ((accord_boost - 1.0) * 0.05) # accord boost contributes up to an additional 5%
                 final_results.append({
                     **db_record,
-                    'similarity_percent': round(res['similarity_score'] * boost * 100, 2)  # Convert to percentage
+                    'similarity_percent': round(final_score * 100, 2)  # Convert to percentage
                 })
         
         final_results.sort(key=lambda x: x['similarity_percent'], reverse=True)

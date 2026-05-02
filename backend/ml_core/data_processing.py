@@ -1,3 +1,5 @@
+import ast
+
 import pandas as pd
 import numpy as np
 import faiss
@@ -27,9 +29,9 @@ FAISS_PATHS = {
 
 # SBERT model paths, one for each variant 
 SBERT_MODELS = {
-    'baseline': 'all-MiniLM-L6-v2',  # baseline uses the standard pre-trained model
-    'hybrid': 'all-MiniLM-L6-v2',    # hybrid also uses the standard pre-trained model
-    'sbert': os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v2')  # sbert variant uses the fine-tuned model
+    'baseline': 'all-mpnet-base-v2',  # baseline uses the standard pre-trained model
+    'hybrid': 'all-mpnet-base-v2',    # hybrid also uses the standard pre-trained model
+    'sbert': os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v3')  # sbert variant uses the fine-tuned model
 }
 
 # decides whether to include T5 descriptions
@@ -72,25 +74,28 @@ def clean_and_normalize_data(df: pd.DataFrame, include_t5: bool) -> pd.DataFrame
     print(f"Data cleaned: {len(df)} entries remaining after cleaning.")
 
     def build_text(row):
-        year = int(row['Year']) if pd.notna(row.get('Year')) and str(row['Year']) != 'nan' else None
-        year_str = f", released {year}" if year else ""
+        # parse the notes list
+        notes = row.get('all_notes', '[]')
+        notes_list = []
+        try:
+            if isinstance(notes, str):
+                notes_list = ast.literal_eval(notes)
+        except:
+            notes_list = []
 
-        accord1 = str(row['mainaccord1']).replace('none', '').strip()
-        accord2 = str(row['mainaccord2']).replace('none', '').strip()
-        accords = ', '.join([a for a in [accord1, accord2] if a])
+        top_notes = notes_list[:8] if notes_list else []
 
-        gender = str(row['Gender']).lower().strip()
+        accords = [str(row.get(f'mainaccord{i}', '')).replace('none', '').strip() for i in range(1, 4)]
+        accords = [a for a in accords if a]
 
-        text = (
-            f"{row['Perfume']} by {row['Brand']}{year_str} is a {gender} fragrance. "
-            f"It smells {accords}. "
-            f"Notes: {row['clean_notes']}."
-        )
+        # build dense semantic string
+        text = f"Accords: {', '.join(accords)}. "
+        text += f"Notes: {', '.join(top_notes)}. "
 
-        if include_t5 and 't5_description' in row and pd.notna(row.get('t5_description')):
-            text += f" {row['t5_description']}"
+        if include_t5 and 't5_description' in row and pd.notna(row['t5_description']):
+            text += f"Profile: {row['t5_description']}."
 
-        return text
+        return text.strip()
     
     df['embedding_text'] = df.apply(build_text, axis=1)
 

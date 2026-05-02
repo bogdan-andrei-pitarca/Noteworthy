@@ -3,6 +3,7 @@ import pandas as pd
 import json
 import os 
 import sys
+import ast
 from dotenv import load_dotenv
 from uvicorn import main
 
@@ -26,7 +27,7 @@ that would lead someone to search for this fragrance.
 
 Rules:
 - Queries should be 5-15 words
-- Use sensory language, not note names
+- Prefer sensory language, but occasionally include specific notes if natural (e.g., vanilla, oud, rose, leather)
 - Vary the style: one mood-based, one object-based, one experience-based
 - Never use the fragrance name or brand
 - Return ONLY a JSON array of 3 strings, nothing else
@@ -40,7 +41,7 @@ def prepare_batch():
     df = pd.read_csv(DATA_PATH)
 
     # sample 500 fragrances stratified by mainaccord1
-    sample = df.groupby('mainaccord1', group_keys=False).apply(
+    sample = df.groupby(['mainaccord1', 'Gender'], group_keys=False).apply(
         lambda x: x.nlargest(min(10, len(x)), 'Rating Count')
     ).head(500)
 
@@ -162,15 +163,31 @@ def retrieve_results():
             # 3. Parse the cleaned string
             queries = json.loads(clean_json_str)
 
-            # the positive is what we want SBERT to map the query to - the perfume's embedding text
-            embedding_text = (
-                f"{row.get('Perfume', '')} by {row.get('Brand', '')}. "
-                f"Notes: {row.get('clean_notes', '')}. "
-                f"{row.get('t5_description', '')}"
-            )
+            # 1. Parse the notes list (matching data_processing.py exactly)
+            raw_notes = row.get('all_notes', '[]')
+            notes_list = []
+            try:
+                notes_list = ast.literal_eval(str(raw_notes))
+            except:
+                notes_list = []
+
+            top_notes = notes_list[:8] if notes_list else []
+
+            # 2. Extract Accords
+            accords = [str(row.get(f'mainaccord{i}', '')).replace('none', '').strip() for i in range(1, 4)]
+            accords = [a for a in accords if a]
+
+            # 3. Build dense semantic string
+            embedding_text = f"Accords: {', '.join(accords)}. "
+            embedding_text += f"Notes: {', '.join(top_notes)}. "
+
+            if pd.notna(row.get('t5_description')):
+                embedding_text += f"Profile: {row.get('t5_description')}."
+
+            embedding_text = embedding_text.strip()
 
             for query in queries:
-                pairs.append({'anchor': query.strip(), 'positive': embedding_text})
+                pairs.append({'embedding_id': embedding_id, 'anchor': query.strip(), 'positive': embedding_text})
 
         except Exception as e:
             print(f"Error processing result for embedding_id {embedding_id}: {e}")
