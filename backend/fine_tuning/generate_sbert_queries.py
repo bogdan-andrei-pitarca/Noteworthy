@@ -7,12 +7,13 @@ import ast
 from dotenv import load_dotenv
 from uvicorn import main
 
+
 load_dotenv(os.path.join(os.path.dirname(os.path.dirname(__file__)), '.env'))
 
 # paths
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_PATH = os.path.join(BASE_DIR, 'data', 'fra_data_with_descriptions.csv')
+DATA_PATH = os.path.join(BASE_DIR, 'data', 'fra_data_processed.csv')
 SBERT_DIR = os.path.join(BASE_DIR, 'fine_tuning', 'datasets', 'sbert')
 
 # files
@@ -21,19 +22,24 @@ BATCH_JSONL = os.path.join(SBERT_DIR, 'query_batch_requests.jsonl')
 BATCH_ID_FILE = os.path.join(SBERT_DIR, 'query_batch_id.txt')
 OUTPUT_PATH = os.path.join(SBERT_DIR, 'sbert_query_pairs.csv')
 
-SYSTEM_PROMPT = """You generate realistic search queries that a fragrance buyer might type.
-Given a fragrance's notes and description, write 3 different natural language queries 
-that would lead someone to search for this fragrance.
+# path to backend/fine_tuning/utils/sampling.py
+sys.path.append(os.path.join(os.path.dirname(__file__), 'utils'))
+from sampling import get_stratified_sample
+
+SYSTEM_PROMPT = """You are a normal, everyday person looking for a perfume in a search engine. 
+Write 3 realistic, casual search queries based on the provided fragrance accords and notes.
 
 Rules:
 - Queries should be 5-15 words
 - Prefer sensory language, but occasionally include specific notes if natural (e.g., vanilla, oud, rose, leather)
 - Vary the style: one mood-based, one object-based, one experience-based
 - Never use the fragrance name or brand
+- DO NOT use poetic, marketing or abstract language.
+- Write EXACTLY how a real person types into a search bar.
 - Return ONLY a JSON array of 3 strings, nothing else
 
 Example output:
-["warm cozy amber on a cold night", "smells like old books and leather", "dark smoky wood after rain"]"""
+["old dusty books", "dark smoky church incense", "bitter coffee and dark chocolate"]"""
 
 def prepare_batch():
     """Reads the DS, samples it, and creates the JSONL requests file."""
@@ -41,9 +47,7 @@ def prepare_batch():
     df = pd.read_csv(DATA_PATH)
 
     # sample 500 fragrances stratified by mainaccord1
-    sample = df.groupby(['mainaccord1', 'Gender'], group_keys=False).apply(
-        lambda x: x.nlargest(min(10, len(x)), 'Rating Count')
-    ).head(500)
+    sample = get_stratified_sample(df, target=500)
 
     print(f"Sampled {len(sample)} fragrances for query generation.")
     
@@ -51,7 +55,7 @@ def prepare_batch():
 
     requests = []
     for _, row in sample.iterrows():
-        user_content = f"Notes: {row['all_notes']}\nDescription: {row.get('t5_description', 'not available')}"
+        user_content = f"Accord: {row['mainaccord1']}\nNotes: {row['all_notes']}"
         requests.append({
             "custom_id": f"query-{row['embedding_id']}",
             "params": {
@@ -163,28 +167,11 @@ def retrieve_results():
             # 3. Parse the cleaned string
             queries = json.loads(clean_json_str)
 
-            # 1. Parse the notes list (matching data_processing.py exactly)
-            raw_notes = row.get('all_notes', '[]')
-            notes_list = []
-            try:
-                notes_list = ast.literal_eval(str(raw_notes))
-            except:
-                notes_list = []
+            embedding_text = row.get('embedding_text', '')
 
-            top_notes = notes_list[:8] if notes_list else []
-
-            # 2. Extract Accords
-            accords = [str(row.get(f'mainaccord{i}', '')).replace('none', '').strip() for i in range(1, 4)]
-            accords = [a for a in accords if a]
-
-            # 3. Build dense semantic string
-            embedding_text = f"Accords: {', '.join(accords)}. "
-            embedding_text += f"Notes: {', '.join(top_notes)}. "
-
-            if pd.notna(row.get('t5_description')):
-                embedding_text += f"Profile: {row.get('t5_description')}."
-
-            embedding_text = embedding_text.strip()
+            if not embedding_text:
+                print(f"Skipping {embedding_id}: No embedding_text found in processed data.")
+                continue
 
             for query in queries:
                 pairs.append({'embedding_id': embedding_id, 'anchor': query.strip(), 'positive': embedding_text})

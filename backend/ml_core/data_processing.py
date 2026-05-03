@@ -31,7 +31,7 @@ FAISS_PATHS = {
 SBERT_MODELS = {
     'baseline': 'all-mpnet-base-v2',  # baseline uses the standard pre-trained model
     'hybrid': 'all-mpnet-base-v2',    # hybrid also uses the standard pre-trained model
-    'sbert': os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v4')  # sbert variant uses the fine-tuned model
+    'sbert': os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v5')  # sbert variant uses the fine-tuned model
 }
 
 # decides whether to include T5 descriptions
@@ -101,7 +101,7 @@ def clean_and_normalize_data(df: pd.DataFrame, include_t5: bool) -> pd.DataFrame
     df['embedding_text'] = df.apply(build_text, axis=1)
 
     # filter for output
-    output_cols = ['embedding_id','url', 'Perfume', 'Brand', 'Gender', 'Year', 'Rating Value', 'Rating Count', 'all_notes', 'embedding_text']
+    output_cols = ['embedding_id','url', 'Perfume', 'Brand', 'Gender', 'Year', 'Rating Value', 'Rating Count', 'all_notes', 'embedding_text', 't5_description']
 
     accord_cols = [c for c in df.columns if c.startswith('mainaccord')]
 
@@ -139,7 +139,8 @@ def create_embeddings_and_faiss_index(df: pd.DataFrame, model_path: str, index_p
     print(f"Saving FAISS index to {index_path}...")
 
     faiss.write_index(index, index_path)
-    df.to_csv(CLEAN_DATA_PATH, index=False)
+    if include_t5:
+        df.to_csv(CLEAN_DATA_PATH, index=False)
 
     print("FAISS index and cleaned data saved successfully.")
     
