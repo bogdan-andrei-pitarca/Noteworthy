@@ -31,7 +31,7 @@ FAISS_PATHS = {
 SBERT_MODELS = {
     'baseline': 'all-mpnet-base-v2',  # baseline uses the standard pre-trained model
     'hybrid': 'all-mpnet-base-v2',    # hybrid also uses the standard pre-trained model
-    'sbert': os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v3')  # sbert variant uses the fine-tuned model
+    'sbert': os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_sbert_v4')  # sbert variant uses the fine-tuned model
 }
 
 # decides whether to include T5 descriptions
@@ -68,8 +68,9 @@ def clean_and_normalize_data(df: pd.DataFrame, include_t5: bool) -> pd.DataFrame
     df['clean_notes'] = df['all_notes'].apply(normalize_notes)
 
     # CREATE UNIQUE EMBEDDING ID
-    df.reset_index(drop=True, inplace=True)
-    df['embedding_id'] = df.index
+    if 'embedding_id' not in df.columns:
+        df.reset_index(inplace=True, drop=True)
+        df['embedding_id'] = df.index
 
     print(f"Data cleaned: {len(df)} entries remaining after cleaning.")
 
