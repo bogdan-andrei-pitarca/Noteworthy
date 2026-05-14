@@ -140,7 +140,7 @@ def create_embeddings_and_faiss_index(df: pd.DataFrame, model_path: str, index_p
 
     faiss.write_index(index, index_path)
     if include_t5:
-        df.to_csv(CLEAN_DATA_PATH, index=False)
+        df.to_csv(DATA_WITH_DESC_PATH, index=False)
 
     print("FAISS index and cleaned data saved successfully.")
     

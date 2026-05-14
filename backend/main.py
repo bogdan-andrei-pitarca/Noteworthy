@@ -67,130 +67,14 @@ async def startup_event():
     logging.info("Loading ML assets on startup...")
     load_ml_assets()
     assets = get_ml_assets()
-    if assets.get('generator_model') and assets.get('generator_tokenizer'):
-        app.state.predictor = FragrancePredictor(assets['generator_model'], assets['generator_tokenizer'])
+    app.state.predictor = FragrancePredictor(
+        generator_model=assets.get('generator_model'),
+        generator_tokenizer=assets.get('generator_tokenizer'),
+        embedding_models=assets.get('embedding_models'),
+        faiss_indices=assets.get('faiss_indices')
+    )
     logging.info("FastAPI startup complete. ML assets loaded successfully.")
 
-
-ACCORD_KEYWORDS = {
-    'leather': ['leather', 'suede', 'animalic'],
-    'smoky': ['smoky', 'smoke', 'tobacco', 'birch'],
-    'woody': ['woody', 'wood', 'cedar', 'sandalwood', 'forest'],
-    'fresh': ['fresh', 'clean', 'laundry', 'aquatic', 'marine'],
-    'floral': ['floral', 'flower', 'rose', 'jasmine', 'bloom'],
-    'sweet': ['sweet', 'vanilla', 'caramel', 'gourmand', 'candy'],
-    'citrus': ['citrus', 'lemon', 'orange', 'bergamot', 'grapefruit'],
-    'spicy': ['spicy', 'pepper', 'cinnamon', 'spice', 'warm spicy'],
-    'earthy': ['earthy', 'dirt', 'soil', 'petrichor', 'mossy', 'mushroom'],
-    'powdery': ['powdery', 'powder', 'talc', 'soft'],
-    'oud': ['oud', 'agarwood', 'resin', 'incense'],
-    'fruity': ['fruity', 'fruit', 'berry', 'peach', 'apple'],
-    'aquatic': ['aquatic', 'ocean', 'sea', 'water', 'marine', 'salt'],
-    'amber': ['amber', 'warm', 'resinous', 'balsamic'],
-}
-
-def get_accord_boost(query: str, fragrance: dict) -> float:
-    query_lower = query.lower()
-    boost = 1.0
-
-    fragrance_accords = [
-        str(fragrance.get(f'main_accord_{i}', '')).lower()
-        for i in range(1, 6)
-    ]
-
-    for accord, keywords in ACCORD_KEYWORDS.items():
-        query_mentions_accord = any(kw in query_lower for kw in keywords)
-        fragrance_has_accord = any(accord in fa for fa in fragrance_accords)
-
-        if query_mentions_accord and fragrance_has_accord:
-            boost += 0.15 # 15% boost per matching accord
-        
-    return min(boost, 1.5) # cap boost at 50% to prevent runaway scores
-
-# Helper function for semantic search
-def lexical_overlap(query: str, fragrance: dict) -> float:
-    """Calculates keyword overlap between query and key fragrance notes"""
-    query_words = set(query.lower().replace(',', '').split())
-
-    # combine notes and accords into a searchable text block
-    target_text = (
-        str(fragrance.get('all_notes', '')) + ' ' +
-        str(fragrance.get('main_accord_1', '')) + ' ' +
-        str(fragrance.get('main_accord_2', ''))
-    ).lower()
-
-    fragrance_words = set(target_text.replace('[', '').replace(']', '').replace("'", "").replace(',', '').split())
-
-    overlap = len(query_words.intersection(fragrance_words))
-
-    return min(overlap / 4.0, 1.0) # cap at 4 matching keywords 
-
-def perform_semantic_search(query: str, k: int = 20, engine: str = 'hybrid') -> List[Dict[str, Any]]:
-    """
-    Performs semantic search using the FAISS index and SentenceTransformer model.
-
-    :param query: Description
-    :type query: str
-    :param k: Description
-    :type k: int
-    :param engine: Description
-    :type engine: str
-    :return: Description
-    :rtype: List[Dict[str, Any]]
-    """
-
-    assets = get_ml_assets()
-    faiss_index = assets['faiss_indices'].get(engine)
-
-    model_type = 'finetuned' if engine == 'sbert' else 'base'
-    embedding_model = assets['embedding_models'].get(model_type)
-
-    if not faiss_index or not embedding_model:
-        raise HTTPException(status_code=503, detail="AI services not fully initialized.")
-    
-    try:
-        # 1. Encode the query text
-        query_embedding = embedding_model.encode([query], convert_to_tensor=False).astype(np.float32)
-
-        # 2. Perform FAISS search (D=Similarities, I=Indices/embedding_ids)
-        D, I = faiss_index.search(query_embedding, k)
-
-        search_results = []
-        for idx, score in zip(I[0], D[0]):
-            if idx < 0:
-                continue  # Skip invalid indices
-            search_results.append({
-                'embedding_id': int(idx),
-                'similarity_score': float(score)
-            })
-        
-        # 3. Fetch fragrance details from the database
-        embedding_ids = [res['embedding_id'] for res in search_results]
-        db_records = fragrance_repo.get_fragrances_by_ids(embedding_ids)
-
-        # 4. Merge similarity scores with database records
-        final_results = []
-        db_map = {rec['embedding_id']: rec for rec in db_records}
-
-        for res in search_results:
-            db_record = db_map.get(res['embedding_id'])
-            if db_record:
-                semantic_score = float(res['similarity_score'])
-                lexical_score = lexical_overlap(query, db_record)
-                accord_boost = get_accord_boost(query, db_record)
-                final_score = (semantic_score * 0.75) + (lexical_score * 0.20) + ((accord_boost - 1.0) * 0.05) # accord boost contributes up to an additional 5%
-                final_results.append({
-                    **db_record,
-                    'similarity_percent': round(final_score * 100, 2)  # Convert to percentage
-                })
-        
-        final_results.sort(key=lambda x: x['similarity_percent'], reverse=True)
-        return final_results[:k]
-    except Exception as e:
-        logging.error(f"Error during semantic search: {e}")
-        raise HTTPException(status_code=500, detail="Error during semantic search.")
-
-# API Endpoints
 
 @app.get("/", tags=["Health Check"])
 async def root():
@@ -200,14 +84,19 @@ async def root():
 async def search_by_smell(
     query: str = Query(..., min_length=3, description="Natural language description of the desired fragrance's characteristics."),
     k: int = Query(20, gt=0, le=100, description="Number of top similar fragrances to retrieve."),\
-    engine: str = Query('hybrid', pattern="^(baseline|hybrid|sbert)$", description="Which FAISS index and embedding model to use for search.")
+    engine: str = Query('sbert', pattern="^(baseline|hybrid|sbert)$", description="Which FAISS index and embedding model to use for search.")
 ):
     """
     Perform a semantic search for fragrances based on a textual description of smell characteristics.
     """
     logging.info(f"Received smell search query: {query} with top k={k}")
-    results = perform_semantic_search(query, k, engine)
-    return {"query": query, "results": results}
+    try:
+        results = app.state.predictor.perform_semantic_search(query, k=k, engine=engine)
+        return {"query": query, "results": results}
+    except ValueError as ve:
+        logging.error(f"Value error during search: {ve}")
+        raise HTTPException(status_code=400, detail=str(ve))
+   
 
 @app.get("/search/notes_to_description", tags=["AI Generation"])
 async def generate_description(
@@ -218,17 +107,13 @@ async def generate_description(
     Uses the fine-tuned T5.
     Includes Redis caching to prevent redudant ML inferences.
     """
-    assets = get_ml_assets()
-    generator_model = assets.get('generator_model')
-    generator_tokenizer = assets.get('generator_tokenizer')
+    predictor = app.state.predictor
 
-    if generator_model is None or generator_tokenizer is None:
+    if predictor.model is None:
         raise HTTPException(
             status_code=503, 
             detail="T5 Model is not loaded. Check backend logs for path errors."
         )
-    
-    predictor = app.state.predictor
     
     notes = sanitise_notes_input(notes)
     if len(notes) < 3:

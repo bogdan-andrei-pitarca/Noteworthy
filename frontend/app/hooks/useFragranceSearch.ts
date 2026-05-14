@@ -8,7 +8,7 @@ import { SearchMode, SearchEngine, FragranceRecord, DescriptionResponse } from '
 
 export function useFragranceSearch() {
     const [mode, setMode] = useState<SearchMode>('notes_to_smell');
-    const [engine, setEngine] = useState<SearchEngine>('hybrid'); // default search engine
+    const [engine, setEngine] = useState<SearchEngine>('sbert'); // default search engine
     
     const [smellQuery, setSmellQuery] = useState<string>('');
     const [notesQuery, setNotesQuery] = useState<string>('');
@@ -19,6 +19,8 @@ export function useFragranceSearch() {
 
     const [searchMatches, setSearchMatches] = useState<FragranceRecord[]>([]);
     const [descriptionResult, setDescriptionResult] = useState<DescriptionResponse | null>(null);
+
+    const [showScores, setShowScores] = useState(false);
 
     const performSearch = useCallback(async () => {
 
@@ -68,5 +70,7 @@ export function useFragranceSearch() {
         searchMatches,
         descriptionResult,
         performSearch,
+        showScores,
+        setShowScores
     }
 }

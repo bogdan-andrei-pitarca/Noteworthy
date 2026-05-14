@@ -21,6 +21,8 @@ export default function AIModelInterface() {
     searchMatches,
     descriptionResult,
     performSearch,
+    showScores,
+    setShowScores
   } = useFragranceSearch();
 
   // determine active query based on mode
@@ -34,7 +36,7 @@ export default function AIModelInterface() {
         { /* Header Section */}
         <header className="text-center border-b pb-6">
           <h1 className="text-3xl font-extrabold tracking-tight text-fuchsia-800 mb-2">Noteworthy AI</h1>
-          <p className="text-gray-600 text-lg mt-2">Bimodal pipeline using SBERT for retrival and T5 for generation.</p>
+          <p className="text-gray-600 text-lg mt-2">Bimodal pipeline using SBERT for retrieval and T5 for generation.</p>
         </header>
 
         <div className="max-w-3xl mx-auto">
@@ -73,12 +75,25 @@ export default function AIModelInterface() {
 
               {/* SBERT OUTPUT (THE MARKETPLACE GRID) */}
               {searchMatches.length > 0 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {searchMatches.map((match) => (
-                    <ResultCard key={match.embedding_id} result={match} />
-                  ))}
-                </div>
-              )}
+                <>
+                    <div className="flex justify-end pr-1">
+                        <button
+                            onClick={() => setShowScores(s => !s)}
+                            className="text-xs text-gray-500 hover:text-fuchsia-700 flex items-center gap-1.5 transition"
+                        >
+                            <span className={`w-8 h-4 rounded-full transition-colors duration-200 flex items-center px-0.5 ${showScores ? 'bg-fuchsia-500' : 'bg-gray-300'}`}>
+                                <span className={`w-3 h-3 bg-white rounded-full shadow transition-transform duration-200 ${showScores ? 'translate-x-4' : 'translate-x-0'}`} />
+                            </span>
+                            Similarity scores
+                        </button>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {searchMatches.map((match, index) => (
+                            <ResultCard key={match.embedding_id} result={match} index={index} showScores={showScores} />
+                        ))}
+                    </div>
+                </>
+            )}
 
               {/* NO RESULTS */}
               {!searchMatches.length && !descriptionResult && (

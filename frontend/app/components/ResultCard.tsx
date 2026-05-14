@@ -6,16 +6,33 @@ import { fragranceService } from '../services/api';
 
 interface ResultCardProps {
     result: FragranceRecord;
+    index: number;
+    showScores?: boolean; // optional prop to toggle score display 
 }
 
-const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
+const ResultCard: React.FC<ResultCardProps> = ({ result, index, showScores = false }) => {
     // local state for AI description
     const [aiDescription, setAiDescription] = useState<string | null>(null);
     const [isGenerating, setIsGenerating] = useState<boolean>(false);
 
-    const scoreColor = result.similarity_percent > 80 ? 'bg-green-100 text-green-800' :
-                       result.similarity_percent > 60 ? 'bg-yellow-100 text-yellow-800' :
-                       'bg-red-100 text-red-800';
+    const getBadgeInfo = (percent: number, rank: number) => {
+        // Rank 1 gets special treatment regardless of raw score
+        if (rank === 0) {
+            return percent > 50 
+                ? { text: "Perfect Match", color: "bg-fuchsia-100 text-fuchsia-800 border-fuchsia-200" }
+                : { text: "Best Vibe Match", color: "bg-fuchsia-100 text-fuchsia-800 border-fuchsia-200" };
+        }
+        
+        // The rest are graded on the calibrated curve
+        if (percent >= 75) return { text: "Strong Match", color: "bg-green-100 text-green-800 border-green-200" };
+        if (percent >= 50) return { text: "Good Match", color: "bg-blue-100 text-blue-800 border-blue-200" };
+        if (percent >= 25) return { text: "Conceptual Match", color: "bg-indigo-100 text-indigo-800 border-indigo-200" };
+        
+        // Distant matches are neutral gray, not aggressive red
+        return { text: "Distant Match", color: "bg-gray-100 text-gray-700 border-gray-200" };
+    };
+
+    const badge = getBadgeInfo(result.similarity_percent, index);
 
     const accords = [
         result.main_accord_1,
@@ -45,13 +62,13 @@ const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
             <div>
                 <div className="flex justify-between items-start mb-3">
                     <h3 className="text-xl font-bold text-fuschia-800 capitalize leading-tight">
-                        {(result.perfume_name || '').replace(/_/g, ' ')} by {result.brand} {result.launch_year ? `(${result.launch_year})` : ''}
+                        {(result.perfume_name || '').replace(/-/g, ' ')} by {(result.brand || '').replace(/-/g, ' ')} {result.launch_year ? `(${result.launch_year})` : ''}
                     </h3>
                     <a href={result.url} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-fuschia-500 transition ml-2">
                         <ExternalLink className="w-4 h-4" />
                     </a>
                 </div>
-                <p className="text-sm text-gray-500 mb-2 font-semibold">{result.brand}</p>
+                <p className="text-sm text-gray-500 mb-2 font-semibold">{(result.brand || '').replace(/-/g, ' ')}</p>
 
                 <div className="flex flex-wrap gap-2 mb-3">
                     {accords.map(accord => (
@@ -88,9 +105,13 @@ const ResultCard: React.FC<ResultCardProps> = ({ result }) => {
             </div>
 
             <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
-                <span className={`px-4 py-1.5 text-sm font-bold rounded-full shadow-inner ${scoreColor}`}>
-                    {result.similarity_percent}% Match
+                <span className={`px-4 py-1.5 text-sm font-bold rounded-full shadow-inner border ${badge.color}`}>
+                    {badge.text}
+                    {showScores && (
+                        <span className="opacity-60 ml-1 font-normal text-xs">({result.similarity_percent}%)</span>
+                    )}
                 </span>
+                
                 <span className="text-xs text-gray-500 italic">Gender: {result.gender}</span>
             </div>
         </div>

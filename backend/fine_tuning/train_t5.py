@@ -81,6 +81,7 @@ def main():
         learning_rate=5e-5,
         per_device_train_batch_size=16, # increased from 8 since colab can handle it
         per_device_eval_batch_size=16, # same 
+        label_smoothing_factor=0.1, # helps prevent overfitting by making the model less confident in its predictions, which can improve generalization.
         weight_decay=0.01,
         save_total_limit=2, # reduced to save colab disk space
         num_train_epochs=5,
