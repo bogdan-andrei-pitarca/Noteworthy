@@ -6,11 +6,11 @@ pandas>=2.0.0
 numpy>=1.24.0
 
 # ── Hugging Face stack ────────────────────────────────────────────────────────
-transformers>=4.40.0       # T5ForConditionalGeneration, T5Tokenizer
+transformers==4.39.3     # T5ForConditionalGeneration, T5Tokenizer
 datasets>=2.18.0           # Dataset.from_pandas(), train_test_split
 evaluate>=0.4.0            # evaluate.load() for ROUGE and BERTScore metrics
 rouge_score>=0.1.2         # ROUGE metric
-bert-score>=0.3.13          # BERTScore metric
+bert-score==0.3.13          # BERTScore metric
 accelerate>=0.27.0         # Required backend for Seq2SeqTrainer
 
 # ── Training utilities ────────────────────────────────────────────────────────

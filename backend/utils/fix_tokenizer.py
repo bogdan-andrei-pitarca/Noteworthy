@@ -1,6 +1,6 @@
 from transformers import T5Tokenizer
 
-model_path = r"D:\faculta\licenta\Noteworthy\backend\fine_tuning\models\noteworthy_t5_v3"
+model_path = r"D:\faculta\licenta\Noteworthy\backend\fine_tuning\models\noteworthy_t5_v4"
 
 tokenizer = T5Tokenizer.from_pretrained("t5-base", legacy=False)
 

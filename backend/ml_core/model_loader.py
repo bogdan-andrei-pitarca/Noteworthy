@@ -13,7 +13,7 @@ load_dotenv()  # Load environment variables from .env file
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) 
 DATA_DIR = os.path.join(BASE_DIR, 'data')
-FT_MODEL_PATH = os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_t5_v3') # PATH TO MODEL - CHANGE IF UPDATED
+FT_MODEL_PATH = os.path.join(BASE_DIR, 'fine_tuning', 'models', 'noteworthy_t5_v4') # PATH TO MODEL - CHANGE IF UPDATED
 
 FAISS_INDEX_PATHS = {
     'baseline': os.path.join(DATA_DIR, 'fra_faiss_index_baseline.bin'),

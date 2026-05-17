@@ -9,7 +9,7 @@ import nltk
 # PATHS
 # adapted for colab - in local, these are set in the utils files and imported into this one, but for better modularity and to avoid path issues in colab, I'm defining them directly here.
 DATA_PATH = '/content/t5_golden_dataset_claude_v2.csv'
-MODEL_OUTPUT_DIR = '/content/noteworthy_t5_v3'
+MODEL_OUTPUT_DIR = '/content/noteworthy_t5_v4'
 
 # download NLTK data for ROUGE evaluation
 nltk.download('punkt_tab', quiet=True)
@@ -78,6 +78,7 @@ def main():
     training_args = Seq2SeqTrainingArguments(
         output_dir=MODEL_OUTPUT_DIR,
         eval_strategy="epoch",
+        save_strategy="epoch",
         learning_rate=5e-5,
         per_device_train_batch_size=16, # increased from 8 since colab can handle it
         per_device_eval_batch_size=16, # same 
@@ -88,7 +89,6 @@ def main():
         predict_with_generate=True, # this tells the trainer to actually generate descriptions during evaluation, so that we can compute ROUGE scores on the generated text instead of just the raw logits.
         logging_dir='./logs',
         logging_steps=50
-        # use_cpu=True
     )
 
     data_collator = DataCollatorForSeq2Seq(tokenizer, model=model) # dynamically pads inputs and labels to max length so they are all equal within a batch. required to perform matrix multiplication.

@@ -9,7 +9,7 @@ import numpy as np
 from repository import fragrance_repo
 
 BANNED_OUTPUT_PATTERNS = [
-    r'\b(\w{3,})\w*\b(?:\s+\w+){0,3}\s+\1\w*\b', # bans phrases like smoky smoke, woody wood, etc.
+    r'\b(\w{3,})\w*\b(?:\s+\w+){0,6}\s+\1\w*\b', 
 ]
 
 OVERUSED_COMBINATIONS = [
@@ -50,15 +50,25 @@ class FragrancePredictor:
         self.embedding_models = embedding_models
         self.faiss_indices = faiss_indices
 
-    def check_quality(self, description: str) -> bool:
+    def check_quality(self, description: str, original_notes: str = "") -> bool:
         for pattern in BANNED_OUTPUT_PATTERNS:
             if re.search(pattern, description.lower()):
                 return False
-        if len(description.split()) < 8: # arbitrary minimum length check
+        if len(description.split()) < 8:
             return False
         for w1, w2 in OVERUSED_COMBINATIONS:
             if w1 in description.lower() and w2 in description.lower():
                 return False
+        
+        # check for direct note name reproduction
+        if original_notes:
+            notes_list = [n.strip().lower() for n in original_notes.replace('[', '').replace(']', '').replace("'", "").split(',')]
+            desc_lower = description.lower()
+            # if more than 2 note names appear verbatim in the output, reject
+            direct_matches = sum(1 for note in notes_list if len(note) > 4 and note in desc_lower)
+            if direct_matches > 2:
+                return False
+        
         return True
 
     def generate_description(self, notes: str) -> str:
@@ -86,7 +96,7 @@ class FragrancePredictor:
         description = self.tokenizer.decode(outputs[0], skip_special_tokens=True)
 
         # quality check
-        if not self.check_quality(description):
+        if not self.check_quality(description, original_notes=notes):
             logging.warning(f"Low quality output detected, retrying...")
             with torch.no_grad():
                 outputs = self.model.generate(
