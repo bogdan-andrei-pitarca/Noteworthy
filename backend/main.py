@@ -6,6 +6,9 @@ import logging
 from typing import List, Dict, Any, Optional
 import numpy as np
 import redis
+import json
+import asyncio
+from functools import partial
 from ml_core.model_loader import get_ml_assets, load_ml_assets
 from repository import fragrance_repo
 from ml_core.predictor import FragrancePredictor
@@ -89,10 +92,35 @@ async def search_by_smell(
     """
     Perform a semantic search for fragrances based on a textual description of smell characteristics.
     """
-    logging.info(f"Received smell search query: {query} with top k={k}")
+    clean_query = query.strip().lower()
+    logging.info(f"Received smell search query: {clean_query} with top k={k}")
+
+    cache_key = f"smell_search:{engine}:{k}:{clean_query}"
+
+    if redis_client:
+        try:
+            cached_result = redis_client.get(cache_key)
+            if cached_result:
+                logging.info(f"Cache hit for query: {clean_query}")
+                return SmellSearchResponse(**json.loads(cached_result))
+        except Exception as e:
+            logging.error(f"Error accessing Redis cache: {e}")
+
+    logging.info(f"Cache miss for query: {clean_query}. Performing semantic search...")
+
     try:
         results = app.state.predictor.perform_semantic_search(query, k=k, engine=engine)
-        return {"query": query, "results": results}
+        response_data = {"query": query, "results": results}
+
+        if redis_client:
+            try:
+                redis_client.setex(cache_key, 86400, json.dumps(response_data, default=float))
+                logging.info(f"Saved search results to cache for query: {clean_query}")
+            except Exception as e:
+                logging.error(f"Error saving to Redis cache: {e}")
+
+        return response_data 
+    
     except ValueError as ve:
         logging.error(f"Value error during search: {ve}")
         raise HTTPException(status_code=400, detail=str(ve))
@@ -135,7 +163,11 @@ async def generate_description(
     logging.info(f"Cache miss for notes: {notes}. Generating description via T5...")
     
     try:
-        description = predictor.generate_description(notes)
+        loop = asyncio.get_event_loop()
+        description = await loop.run_in_executor(
+            None, 
+            partial(predictor.generate_description, notes)
+        )
     except Exception as e:
         logging.error(f"Error during description generation: {e}")
         raise HTTPException(status_code=500, detail="Error during description generation.")

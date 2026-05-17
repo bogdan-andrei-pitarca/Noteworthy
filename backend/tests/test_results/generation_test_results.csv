@@ -1,11 +1,11 @@
 input_notes,output,latency_sec
-vanilla,It smells like a fruit stand next to an old spice store.,1.28
-cedarwood,It smells like the beginning of a forest clearing...,1.37
-"bergamot, lemon, black pepper, leather, tobacco, oud, rose, iris, patchouli, vetiver, oakmoss, amber, civet","It smells like a leather jacket left in an old wooden shed, where dried tobacco sticks are stored, with something earthy and slightly woody underneath.",1.6
-"grapefruit, yuzu, mint, basil, lavender, rosemary, pine, cedar, sandalwood, musk, tonka bean, vanilla","It smells like citrus peel and yuzu at first, then resinous white flowers, with a hint of vanilla and woody musk.",1.89
-"aquatic sea salt, heavy dark smoke, sweet cotton candy","It smells like sea salt, bitter dark smoke, and sweet cotton candy mixed with creamy honey.",1.96
-"icy mint, burning hot chili pepper, warm amber","It smells like icy mint and hot chili pepper at first, then warm amber, with a warm, powdery finish.",1.36
-"pepperoni pizza, motor oil, gasoline","It smells like pepperoni pizza at first, then softens into a powdery gasoline base.",1.58
-"wet dog, old library books, copper coins","It smells like a wet dog and old library books at first, then settles into something warm and coppery.",6.59
-"solar notes, moonlight accord, stardust, frozen water","It smells like a dusty hive near the shore, where sunlight smothers a smoky surface, then lingering on a wooden shelf, where dust and powdery soil meet a warm, iced-up feel.",22.26
-"roasted coffee beans, dark chocolate, bitter almond, warm musk","It smells like dark coffee beans and dark chocolate, with a soft almondiness that's slightly warm.",17.3
+vanilla,It smells like a fruit stand next to an old spice store.,1.62
+cedarwood,It smells like wood-based upholstery melted into the night.,2.2
+"bergamot, lemon, black pepper, leather, tobacco, oud, rose, iris, patchouli, vetiver, oakmoss, amber, civet","It smells like a leather jacket left in a vintage store — sharp citrus and spiced leather, with something earthy and powdery beneath the surface.",3.8
+"grapefruit, yuzu, mint, basil, lavender, rosemary, pine, cedar, sandalwood, musk, tonka bean, vanilla","It smells like citrus peel and yuzu at first, then resinous white flowers, with a hint of vanilla and woody musk.",2.06
+"aquatic sea salt, heavy dark smoke, sweet cotton candy","It smells like salty aqua, with heavy dark smoke and slightly soft cotton candy in the background.",2.77
+"icy mint, burning hot chili pepper, warm amber","It smells like icy mint and hot chili pepper at first, then warm amber, with a warm, powdery finish.",1.93
+"pepperoni pizza, motor oil, gasoline","It smells like pepperoni pizza at first, then softens into a powdery gasoline base.",1.83
+"wet dog, old library books, copper coins","It smells like a wet dog and old library books at first, then settles into something warm and coppery.",1.71
+"solar notes, moonlight accord, stardust, frozen water","It smells like a solar panel left open in the middle of the night, with something powdery and warm beneath the surface.",1.36
+"roasted coffee beans, dark chocolate, bitter almond, warm musk","It smells like dark chocolate and vanilla in a coffee shop, with something soft and musky underneath.",3.6

@@ -9,7 +9,9 @@ import numpy as np
 from repository import fragrance_repo
 
 BANNED_OUTPUT_PATTERNS = [
-    r'\b(\w{3,})\w*\b(?:\s+\w+){0,6}\s+\1\w*\b', 
+    r'\b(\w{4,})\b(?:\s+\w+){0,2}\s+\1\b',  # same word within 3-word window
+    r'\b(\w{4,})y\b(?:\s+\w+){0,3}\s+\1\b',  # adjectival form: "woody wood", "salty salt"
+    r'\b(\w{4,})\b(?:\s+\w+){0,3}\s+\1y\b',  # inverse: "wood woody"
 ]
 
 OVERUSED_COMBINATIONS = [
@@ -36,6 +38,16 @@ ACCORD_KEYWORDS = {
     'aquatic': ['aquatic', 'ocean', 'sea', 'water', 'marine', 'salt'],
     'amber': ['amber', 'warm', 'resinous', 'balsamic'],
 }
+
+SEMANTIC_REPETITION_GROUPS = [
+    {'wood', 'woody', 'wooden', 'woodsy'},
+    {'smoke', 'smoky', 'smoking', 'smoked'},
+    {'spice', 'spicy', 'spiced'},
+    {'leather', 'leathery'},
+    {'earth', 'earthy'},
+    {'sweet', 'sweetness', 'sweetly'},
+    {'warm', 'warmth', 'warming'},
+]
 
 class FragrancePredictor:
     def __init__(self, generator_model, generator_tokenizer, embedding_models, faiss_indices):
@@ -68,6 +80,12 @@ class FragrancePredictor:
             direct_matches = sum(1 for note in notes_list if len(note) > 4 and note in desc_lower)
             if direct_matches > 2:
                 return False
+            
+        desc_words = set(description.lower().split())
+        for group in SEMANTIC_REPETITION_GROUPS:
+            matches = desc_words.intersection(group)
+            if len(matches) >= 2:
+                return False
         
         return True
 
@@ -75,7 +93,6 @@ class FragrancePredictor:
         # encapsulate logic for generating description from notes using the T5 model
         task_prefix = f"describe fragrance: {notes}"
 
-        print(f"DEBUG: The model is seeing exactly this: |{task_prefix}|")
 
         # handle tokenization
         inputs = self.tokenizer(task_prefix, return_tensors="pt").to(self.device)
@@ -84,7 +101,7 @@ class FragrancePredictor:
         with torch.no_grad():
             outputs = self.model.generate(
                 **inputs,
-                max_new_tokens=60,
+                max_new_tokens=48,
                 num_beams=4,
                 no_repeat_ngram_size=2,
                 repetition_penalty=1.4,
@@ -101,7 +118,7 @@ class FragrancePredictor:
             with torch.no_grad():
                 outputs = self.model.generate(
                     **inputs,
-                    max_new_tokens=60,
+                    max_new_tokens=48,
                     do_sample=True,
                     temperature=0.8,
                     top_p=0.92,
