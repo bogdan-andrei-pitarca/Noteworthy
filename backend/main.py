@@ -6,7 +6,7 @@ import redis
 from ml_core.model_loader import get_ml_assets, load_ml_assets
 from ml_core.predictor import FragrancePredictor
 
-from routers import search
+from routers import search, auth
 
 logging.basicConfig(level=logging.INFO)
 
@@ -33,7 +33,7 @@ app.add_middleware(
 
 # mount routers
 app.include_router(search.router)
-# app.include_router(auth.router)
+app.include_router(auth.router)
 
 @app.on_event("startup")
 async def startup_event():
