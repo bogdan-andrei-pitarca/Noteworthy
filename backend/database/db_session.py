@@ -35,6 +35,7 @@ def get_connection():
 def initialize_database(conn):
     """Initializes the database by creating necessary tables."""
     sql_schema = """
+    -- 1. Fragrances Table
     CREATE TABLE IF NOT EXISTS fragrances (
             -- Primary Key and Foreign Key to FAISS index
             embedding_id INT PRIMARY KEY, 
@@ -55,6 +56,22 @@ def initialize_database(conn):
             -- Text data used for AI/Display
             all_notes TEXT,        
             embedding_text TEXT    
+        );
+
+        -- 2. Users Table
+        CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
+            email VARCHAR(255) UNIQUE NOT NULL,
+            hashed_password TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+
+        -- 3. Favorites Table (Join Table)
+        CREATE TABLE IF NOT EXISTS favorites (
+            user_id INT REFERENCES users(id) ON DELETE CASCADE,
+            embedding_id INT REFERENCES fragrances(embedding_id) ON DELETE CASCADE,
+            added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (user_id, embedding_id)
         );
     """
 
