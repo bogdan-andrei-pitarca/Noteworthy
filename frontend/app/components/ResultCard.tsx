@@ -15,7 +15,11 @@ const ResultCard: React.FC<ResultCardProps> = ({ result, index, showScores = fal
     const [aiDescription, setAiDescription] = useState<string | null>(null);
     const [isGenerating, setIsGenerating] = useState<boolean>(false);
 
-    const getBadgeInfo = (percent: number, rank: number) => {
+    const getBadgeInfo = (percent: number | undefined, rank: number) => {
+        if (percent === undefined) {
+            return { text: "", color: "" };
+        }
+
         // Rank 1 gets special treatment regardless of raw score
         if (rank === 0) {
             return percent > 50 
@@ -105,12 +109,14 @@ const ResultCard: React.FC<ResultCardProps> = ({ result, index, showScores = fal
             </div>
 
             <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
-                <span className={`px-4 py-1.5 text-sm font-bold rounded-full shadow-inner border ${badge.color}`}>
-                    {badge.text}
-                    {showScores && (
-                        <span className="opacity-60 ml-1 font-normal text-xs">({result.similarity_percent}%)</span>
-                    )}
-                </span>
+                {result.similarity_percent !== undefined && (
+                    <span className={`px-4 py-1.5 text-sm font-bold rounded-full shadow-inner border ${badge.color}`}>
+                        {badge.text}
+                        {showScores && (
+                            <span className="opacity-60 ml-1 font-normal text-xs">({result.similarity_percent}%)</span>
+                        )}
+                    </span>
+                )}
                 
                 <span className="text-xs text-gray-500 italic">Gender: {result.gender}</span>
             </div>

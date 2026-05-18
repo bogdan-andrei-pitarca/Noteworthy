@@ -7,7 +7,7 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from typing import List, Optional
 
-class FragranceRecord(BaseModel):
+class FragranceBase(BaseModel):
     embedding_id: int
     perfume_name: str
     brand: str
@@ -22,11 +22,13 @@ class FragranceRecord(BaseModel):
     main_accord_4: str
     main_accord_5: str
     all_notes: str
+
+class FragranceSearchResult(FragranceBase):
     similarity_percent: float
 
 class SmellSearchResponse(BaseModel):
     query: str
-    results: List[FragranceRecord]
+    results: List[FragranceSearchResult]
 
 # Initialize the router. Note we strip the "/search" prefix out of the @router.get paths below
 router = APIRouter(prefix="/search", tags=["AI Retrieval & Generation"])

@@ -1,7 +1,7 @@
 import logging
 from datetime import datetime, timedelta
 from fastapi import APIRouter, HTTPException, Depends, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel, EmailStr
 from passlib.context import CryptContext
 from jose import JWTError, jwt
@@ -89,12 +89,12 @@ async def register_user(user: UserCreate):
         conn.close()
 
 @router.post("/login", response_model=Token)
-async def login_user(user: UserLogin):
+async def login_user(form_data: OAuth2PasswordRequestForm = Depends()):
     conn = get_connection()
     try:
         with conn.cursor() as cur:
             # look up user
-            cur.execute("SELECT id, hashed_password FROM users WHERE email = %s", (user.email,))
+            cur.execute("SELECT id, hashed_password FROM users WHERE email = %s", (form_data.username,))
             db_user = cur.fetchone()
             
             if not db_user:
@@ -107,7 +107,7 @@ async def login_user(user: UserLogin):
             user_id, hashed_pwd = db_user
             
             # verify password mathematically
-            if not verify_password(user.password, hashed_pwd):
+            if not verify_password(form_data.password, hashed_pwd):
                 raise HTTPException(
                     status_code=status.HTTP_401_UNAUTHORIZED, 
                     detail="Invalid email or password",

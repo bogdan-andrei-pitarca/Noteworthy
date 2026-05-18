@@ -17,7 +17,7 @@ export interface FragranceRecord {
     main_accord_4: string;
     main_accord_5: string;
     all_notes: string;
-    similarity_percent: number;
+    similarity_percent?: number;
 }
 
 export interface SmellSearchResponse{
