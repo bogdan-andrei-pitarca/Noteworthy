@@ -1,5 +1,5 @@
+import { API_BASE_URL } from './apiConfig';
 import { SmellSearchResponse, DescriptionResponse } from "../types/FragranceTypes";
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
 
 export const fragranceService = {
     async searchBySmell(query: string, engine: string, limit: number = 20): Promise<SmellSearchResponse> {
@@ -7,12 +7,9 @@ export const fragranceService = {
         const response = await fetch(`${API_BASE_URL}/search/smell?query=${encodedQuery}&k=${limit}&engine=${engine}`);
 
         if (!response.ok) {
-            const errorData = await response.json().catch(
-                () => ({ detail: 'Backend error occurred' })
-            )
+            const errorData = await response.json().catch(() => ({ detail: 'Backend error occurred' }));
             throw new Error(errorData.detail || `Error ${response.status}`);
         }
-
         return response.json();
     },
 
@@ -21,13 +18,9 @@ export const fragranceService = {
         const response = await fetch(`${API_BASE_URL}/search/notes_to_description?notes=${encodedNotes}`);
 
         if (!response.ok) {
-            const errorData = await response.json().catch(
-                () => ({ detail: 'Backend error occurred' })
-            );
-
+            const errorData = await response.json().catch(() => ({ detail: 'Backend error occurred' }));
             throw new Error(errorData.detail || `Error ${response.status}`);
         }
-
         return response.json();
     }
-}
+};

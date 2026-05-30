@@ -20,7 +20,13 @@ def run_quantitative_eval(sample_size=100):
     print("Loading ML assets...")
     load_ml_assets()
     assets = get_ml_assets()
-    predictor = FragrancePredictor(assets['generator_model'], assets['generator_tokenizer'])
+    
+    predictor = FragrancePredictor(
+        generator_model=assets.get('generator_model'), 
+        generator_tokenizer=assets.get('generator_tokenizer'),
+        embedding_models=assets.get('embedding_models'),
+        faiss_indices=assets.get('faiss_indices')
+    )
 
     # load dataset
     if not os.path.exists(GOLDEN_DATASET_PATH):

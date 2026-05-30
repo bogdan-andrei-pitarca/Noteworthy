@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { fragranceService } from '../services/api';
+import { fragranceService } from '../services';
 import { SearchMode, SearchEngine, FragranceRecord, DescriptionResponse } from '../types/FragranceTypes';
 
 /**

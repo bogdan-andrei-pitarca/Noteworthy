@@ -1,12 +1,12 @@
 engine,query,rank_1,rank_2,rank_3,latency_sec
-sbert,sweet tangy nectarines and vanilla,[89.16%] Mead by Nuancielo,[87.76%] No Limits Woman by Bruno Banani,[81.24%] Daisy Delight by Marc Jacobs,0.06
-sbert,dark smoky oud with rose,[82.98%] Miss Dior 2012 by Dior,[82.63%] Rock The Ages Tudor Rose Amber by Jo Malone London,[80.98%] A Garota Que Passa De Biquini Goiaba by Quem Disse Berenice,0.06
-sbert,old dusty library books,[26.23%] Valentino Uomo Edition Noire by Valentino,[25.75%] School by Rook Perfumes,[25.39%] Romantica Exotica by Anna Sui,0.06
-sbert,gasoline and hot rubber,[57.42%] Lapidus Pour Homme Black Extreme by Ted Lapidus,[43.25%] School by Rook Perfumes,[33.89%] Patchouli by Phebo,0.06
-sbert,a walk through a damp pine forest in the rain,[48.4%] Opium Poesie De Chine Pour Homme by Yves Saint Laurent,[46.98%] Raw Vetiver by Zara,[46.77%] Tuberose by Jo Malone London,0.05
-sbert,vnnilla and pchouli,[30.32%] L Envol De Cartier Eau De Parfum by Cartier,[29.01%] Sweet Jasmine by Lanvin,[28.56%] Black Intensitive Aoud by Mancera,0.07
-sbert,swet lether,[20.12%] Magnolia by Monotheme Venezia,[19.46%] Hypnotic Poison Eau Secrete by Dior,[18.8%] Tonka by Reminiscence,0.06
-sbert,I want to smell like a billionaire sitting in a leather chair smoking a Cuban cigar while drinking dark roasted coffee,[59.77%] Azuree by Estee Lauder,[51.58%] Absolute by Massimo Dutti,[48.89%] No 89 by Floris,0.07
-sbert,burning hot fire and freezing cold ice,[28.71%] Tumulte by Christian Lacroix,[28.58%] Tribute For Women by Mary Kay,[28.56%] Parfum Sacre by Caron,0.06
-sbert,clean fresh laundry covered in dirty mud,[48.6%] Aroma Terapia Energia Pro Dia by O Boticario,[34.99%] Plume Blanche 1901 by Lalique,[31.87%] Toy Boy by Moschino,0.06
+sbert,sweet tangy nectarines and vanilla,[89.16%] Mead by Nuancielo,[87.76%] No Limits Woman by Bruno Banani,[81.24%] Daisy Delight by Marc Jacobs,0.13
+sbert,dark smoky oud with rose,[82.98%] Miss Dior 2012 by Dior,[82.63%] Rock The Ages Tudor Rose Amber by Jo Malone London,[80.98%] A Garota Que Passa De Biquini Goiaba by Quem Disse Berenice,0.08
+sbert,old dusty library books,[26.23%] Valentino Uomo Edition Noire by Valentino,[25.75%] School by Rook Perfumes,[25.39%] Romantica Exotica by Anna Sui,0.21
+sbert,gasoline and hot rubber,[57.42%] Lapidus Pour Homme Black Extreme by Ted Lapidus,[43.25%] School by Rook Perfumes,[33.89%] Patchouli by Phebo,0.21
+sbert,a walk through a damp pine forest in the rain,[48.4%] Opium Poesie De Chine Pour Homme by Yves Saint Laurent,[46.98%] Raw Vetiver by Zara,[46.77%] Tuberose by Jo Malone London,0.09
+sbert,vnnilla and pchouli,[30.32%] L Envol De Cartier Eau De Parfum by Cartier,[29.01%] Sweet Jasmine by Lanvin,[28.56%] Black Intensitive Aoud by Mancera,0.08
+sbert,swet lether,[20.12%] Magnolia by Monotheme Venezia,[19.46%] Hypnotic Poison Eau Secrete by Dior,[18.8%] Tonka by Reminiscence,0.08
+sbert,I want to smell like a billionaire sitting in a leather chair smoking a Cuban cigar while drinking dark roasted coffee,[59.77%] Azuree by Estee Lauder,[51.58%] Absolute by Massimo Dutti,[48.89%] No 89 by Floris,0.09
+sbert,burning hot fire and freezing cold ice,[28.71%] Tumulte by Christian Lacroix,[28.58%] Tribute For Women by Mary Kay,[28.56%] Parfum Sacre by Caron,0.08
+sbert,clean fresh laundry covered in dirty mud,[48.6%] Aroma Terapia Energia Pro Dia by O Boticario,[34.99%] Plume Blanche 1901 by Lalique,[31.87%] Toy Boy by Moschino,0.09
 sbert,ok,HTTP 422 (Expected),-,-,0.0

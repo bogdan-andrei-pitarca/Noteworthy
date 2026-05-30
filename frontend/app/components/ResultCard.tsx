@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { ExternalLink, Sparkles } from 'lucide-react';
 import { FragranceRecord } from '../types/FragranceTypes';
-import { fragranceService } from '../services/api';
+import { fragranceService } from '../services';
 
 interface ResultCardProps {
     result: FragranceRecord;
