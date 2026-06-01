@@ -7,6 +7,7 @@ import { FragranceRecord } from '../types/FragranceTypes';
 import ResultCard from "../components/ResultCard";
 import { RefreshCw, HeartCrack, LogIn } from "lucide-react";
 import Link from "next/link";
+import SkeletonCard from "../components/SkeletonCard";
 
 export default function FavoritesPage() {
     const { isAuthenticated, isLoading: isAuthLoading } = useAuth();
@@ -61,9 +62,11 @@ export default function FavoritesPage() {
     // show loading state while AuthContext is determining if user is authenticated
     if (isAuthLoading || (isAuthenticated && isLoading)) {
         return (
-            <div className="min-h-screen bg-gray-50 p-8 flex flex-col items-center justify-center">
-                <RefreshCw className="animate-spin text-fuchsia-600 w-12 h-12 mb-4" />
-                <p className="text-gray-500 animate-pulse">Loading your collection...</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Render 6 fake cards while waiting for the API */}
+                {[...Array(6)].map((_, i) => (
+                    <SkeletonCard key={i} />
+                ))}
             </div>
         );
     }

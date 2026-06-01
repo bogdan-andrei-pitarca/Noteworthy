@@ -6,6 +6,7 @@ import { useFragranceSearch } from "./hooks/useFragranceSearch";
 import ResultCard from "./components/ResultCard";
 import SearchBar from "./components/SearchBar";
 import { useAuth } from "./context/AuthContext";
+import SkeletonCard from "./components/SkeletonCard";
 
 export default function AIModelInterface() {
   const { isAuthenticated } = useAuth();
@@ -62,9 +63,10 @@ export default function AIModelInterface() {
         { /* RESULTS SECTION */}
         <div className="mt-8">
           {isLoading ? (
-            <div className="flex flex-col items-center justify-center py-20">
-              <RefreshCw className="animate-spin text-fuchsia-600 w-12 h-12 mb-4" />
-              <p className="text-gray-500 animate-pulse">Sniffing...</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <SkeletonCard key={index} />
+              ))}
             </div>
           ) : (
             <div className="space-y-10">
