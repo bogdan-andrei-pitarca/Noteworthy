@@ -5,8 +5,11 @@ import { RefreshCw, Sparkles } from "lucide-react";
 import { useFragranceSearch } from "./hooks/useFragranceSearch";
 import ResultCard from "./components/ResultCard";
 import SearchBar from "./components/SearchBar";
+import { useAuth } from "./context/AuthContext";
 
 export default function AIModelInterface() {
+  const { isAuthenticated } = useAuth();
+
   const {
     mode,
     setMode,
@@ -22,7 +25,9 @@ export default function AIModelInterface() {
     descriptionResult,
     performSearch,
     showScores,
-    setShowScores
+    setShowScores,
+    favoriteIds,
+    toggleFavorite
   } = useFragranceSearch();
 
   // determine active query based on mode
@@ -89,7 +94,15 @@ export default function AIModelInterface() {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {searchMatches.map((match, index) => (
-                            <ResultCard key={match.embedding_id} result={match} index={index} showScores={showScores} />
+                            <ResultCard
+                              key={match.embedding_id}
+                              result={match}
+                              index={index}
+                              showScores={showScores}
+                              isAuthenticated={isAuthenticated}
+                              isFavorite={favoriteIds.has(match.embedding_id)}
+                              onToggleFavorite={toggleFavorite}
+                            />
                         ))}
                     </div>
                 </>

@@ -1,12 +1,15 @@
-import { useState, useCallback } from 'react';
-import { fragranceService } from '../services';
+import { useState, useCallback, useEffect } from 'react';
+import { fragranceService, favoritesService } from '../services';
 import { SearchMode, SearchEngine, FragranceRecord, DescriptionResponse } from '../types/FragranceTypes';
+import { useAuth } from '../context/AuthContext';
 
 /**
  * Custom hook to manage fragrance search functionality.
  */
 
 export function useFragranceSearch() {
+    const { isAuthenticated } = useAuth();
+
     const [mode, setMode] = useState<SearchMode>('notes_to_smell');
     const [engine, setEngine] = useState<SearchEngine>('sbert'); // default search engine
     
@@ -21,6 +24,52 @@ export function useFragranceSearch() {
     const [descriptionResult, setDescriptionResult] = useState<DescriptionResponse | null>(null);
 
     const [showScores, setShowScores] = useState(false);
+
+    const [favoriteIds, setFavoriteIds] = useState<Set<number>>(new Set());
+
+    useEffect(() => {
+        const fetchFavorites = async () => {
+            if (isAuthenticated) {
+                try {
+                    const favorites = await favoritesService.getFavorites();
+                    const ids = new Set(favorites.map(f => f.embedding_id));
+                    setFavoriteIds(ids);
+                } catch (err) {
+                    console.error("Failed to fetch favorites:", err);
+                }
+            } else {
+                setFavoriteIds(new Set()); // clear if logged out
+            }
+        };
+
+        fetchFavorites();
+    }, [isAuthenticated]);
+
+    const toggleFavorite = async (embedding_id: number) => {
+        if (!isAuthenticated) return;
+
+        const isFavorited = favoriteIds.has(embedding_id);
+
+        try {
+            if (isFavorited) {
+                await favoritesService.removeFavorite(embedding_id);
+                setFavoriteIds(prev => {
+                    const newSet = new Set(prev);
+                    newSet.delete(embedding_id);
+                    return newSet;
+                });
+            } else {
+                await favoritesService.addFavorite(embedding_id);
+                setFavoriteIds(prev => {
+                    const newSet = new Set(prev);
+                    newSet.add(embedding_id);
+                    return newSet;
+                });
+            }
+        } catch (err) {
+            console.error("Failed to update favorite:", err);
+        }
+    }
 
     const performSearch = useCallback(async () => {
 
@@ -71,6 +120,8 @@ export function useFragranceSearch() {
         descriptionResult,
         performSearch,
         showScores,
-        setShowScores
+        setShowScores,
+        favoriteIds,
+        toggleFavorite
     }
 }

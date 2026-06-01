@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { ExternalLink, Sparkles } from 'lucide-react';
+import { ExternalLink, Heart, Sparkles } from 'lucide-react';
 import { FragranceRecord } from '../types/FragranceTypes';
 import { fragranceService } from '../services';
 
@@ -8,12 +8,23 @@ interface ResultCardProps {
     result: FragranceRecord;
     index: number;
     showScores?: boolean; // optional prop to toggle score display 
+    isFavorite?: boolean; // optional prop to indicate if this is in the favorites list
+    onToggleFavorite?: (id: number) => void; // callback for toggling favorite status
+    isAuthenticated?: boolean; // to conditionally show favorite button
 }
 
-const ResultCard: React.FC<ResultCardProps> = ({ result, index, showScores = false }) => {
+const ResultCard: React.FC<ResultCardProps> = ({
+    result,
+    index,
+    showScores = false,
+    isFavorite = false,
+    onToggleFavorite,
+    isAuthenticated = false
+}) => {
     // local state for AI description
     const [aiDescription, setAiDescription] = useState<string | null>(null);
     const [isGenerating, setIsGenerating] = useState<boolean>(false);
+    const [isHeartLoading, setIsHeartLoading] = useState(false);
 
     const getBadgeInfo = (percent: number | undefined, rank: number) => {
         if (percent === undefined) {
@@ -22,16 +33,16 @@ const ResultCard: React.FC<ResultCardProps> = ({ result, index, showScores = fal
 
         // Rank 1 gets special treatment regardless of raw score
         if (rank === 0) {
-            return percent > 50 
+            return percent > 50
                 ? { text: "Perfect Match", color: "bg-fuchsia-100 text-fuchsia-800 border-fuchsia-200" }
                 : { text: "Best Vibe Match", color: "bg-fuchsia-100 text-fuchsia-800 border-fuchsia-200" };
         }
-        
+
         // The rest are graded on the calibrated curve
         if (percent >= 75) return { text: "Strong Match", color: "bg-green-100 text-green-800 border-green-200" };
         if (percent >= 50) return { text: "Good Match", color: "bg-blue-100 text-blue-800 border-blue-200" };
         if (percent >= 25) return { text: "Conceptual Match", color: "bg-indigo-100 text-indigo-800 border-indigo-200" };
-        
+
         // Distant matches are neutral gray, not aggressive red
         return { text: "Distant Match", color: "bg-gray-100 text-gray-700 border-gray-200" };
     };
@@ -50,7 +61,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ result, index, showScores = fal
     // calls backend T5 API
     const handleGenerateDescription = async () => {
         setIsGenerating(true);
-        try{
+        try {
             const data = await fragranceService.generateDescription(result.all_notes);
             setAiDescription(data.description);
         } catch (error) {
@@ -61,16 +72,57 @@ const ResultCard: React.FC<ResultCardProps> = ({ result, index, showScores = fal
         }
     }
 
+    const handleHeartClick = async () => {
+        if (!onToggleFavorite || !isAuthenticated) return;
+
+        setIsHeartLoading(true);
+        try {
+            await onToggleFavorite(result.embedding_id);
+        } catch (error) {
+            console.error("Error toggling favorite:", error);
+        } finally {
+            setIsHeartLoading(false);
+        }
+    }
+
     return (
-        <div className="bg-white p-5 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition duration-200 transform hover:scale-[1.02] flex flex-col justify-between">
+        <div className="bg-white p-5 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition duration-200 transform hover:scale-[1.02] flex flex-col justify-between relative">
+
+            {/* Grouped Actions Container in the Top Right */}
+            <div className="absolute top-4 right-4 flex items-center gap-1">
+                {/* External Link */}
+                <a
+                    href={result.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 text-gray-400 hover:text-fuchsia-500 transition rounded-full hover:bg-gray-50"
+                    title="View on Fragrantica"
+                >
+                    <ExternalLink className="w-4 h-4" />
+                </a>
+
+                {/* Favorite Button (Only show if authenticated) */}
+                {isAuthenticated && (
+                    <button
+                        onClick={handleHeartClick}
+                        disabled={isHeartLoading}
+                        className={`p-2 rounded-full transition-colors ${isFavorite
+                                ? 'text-red-500 bg-red-50 hover:bg-red-100'
+                                : 'text-gray-400 bg-gray-50 hover:text-red-500 hover:bg-gray-100'
+                            } ${isHeartLoading ? 'opacity-50 cursor-wait' : ''}`}
+                        title={isFavorite ? "Remove from favorites" : "Add to favorites"}
+                    >
+                        <Heart className="w-5 h-5" fill={isFavorite ? "currentColor" : "none"} />
+                    </button>
+                )}
+            </div>
+
             <div>
-                <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xl font-bold text-fuschia-800 capitalize leading-tight">
+                {/* pr-24 ensures text wraps before hitting the icon group */}
+                <div className="flex justify-between items-start mb-3 pr-24">
+                    <h3 className="text-xl font-bold text-fuchsia-800 capitalize leading-tight">
                         {(result.perfume_name || '').replace(/-/g, ' ')} by {(result.brand || '').replace(/-/g, ' ')} {result.launch_year ? `(${result.launch_year})` : ''}
                     </h3>
-                    <a href={result.url} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-fuschia-500 transition ml-2">
-                        <ExternalLink className="w-4 h-4" />
-                    </a>
                 </div>
                 <p className="text-sm text-gray-500 mb-2 font-semibold">{(result.brand || '').replace(/-/g, ' ')}</p>
 
@@ -117,7 +169,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ result, index, showScores = fal
                         )}
                     </span>
                 )}
-                
+
                 <span className="text-xs text-gray-500 italic">Gender: {result.gender}</span>
             </div>
         </div>
