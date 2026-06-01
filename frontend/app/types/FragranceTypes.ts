@@ -23,6 +23,9 @@ export interface FragranceRecord {
 export interface SmellSearchResponse{
     query: string;
     results: FragranceRecord[];
+    current_page: number;
+    total_pages: number;
+    total_results: number;
 }
 
 export interface DescriptionResponse{

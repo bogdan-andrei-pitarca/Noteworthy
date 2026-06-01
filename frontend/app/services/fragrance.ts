@@ -2,9 +2,9 @@ import { API_BASE_URL } from './apiConfig';
 import { SmellSearchResponse, DescriptionResponse } from "../types/FragranceTypes";
 
 export const fragranceService = {
-    async searchBySmell(query: string, engine: string, limit: number = 20): Promise<SmellSearchResponse> {
+    async searchBySmell(query: string, engine: string, page: number = 1, limit: number = 12): Promise<SmellSearchResponse> {
         const encodedQuery = encodeURIComponent(query.trim());
-        const response = await fetch(`${API_BASE_URL}/search/smell?query=${encodedQuery}&k=${limit}&engine=${engine}`);
+        const response = await fetch(`${API_BASE_URL}/search/smell?query=${encodedQuery}&engine=${engine}&page=${page}&page_size=${limit}`);
 
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({ detail: 'Backend error occurred' }));

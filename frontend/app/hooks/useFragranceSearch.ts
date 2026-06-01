@@ -27,6 +27,9 @@ export function useFragranceSearch() {
 
     const [favoriteIds, setFavoriteIds] = useState<Set<number>>(new Set());
 
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(1);
+
     useEffect(() => {
         const fetchFavorites = async () => {
             if (isAuthenticated) {
@@ -73,7 +76,7 @@ export function useFragranceSearch() {
         }
     }
 
-    const performSearch = useCallback(async () => {
+    const performSearch = useCallback(async (pageToFetch: number = 1) => {
 
         // dynamically determine which query to use based on current mode
         const query = mode === 'notes_to_smell' ? notesQuery : smellQuery;
@@ -92,9 +95,11 @@ export function useFragranceSearch() {
                 const data = await fragranceService.generateDescription(query);
                 setDescriptionResult(data);
             } else {
-                const data = await fragranceService.searchBySmell(query, engine);
+                const data = await fragranceService.searchBySmell(query, engine, pageToFetch);
                 if (data.results.length > 0) {
                     setSearchMatches(data.results);
+                    setCurrentPage(data.current_page);
+                    setTotalPages(data.total_pages);
                 } else {
                     toast.error('No matching fragrances found. Try describing it differently!');
                 }
@@ -122,6 +127,8 @@ export function useFragranceSearch() {
         showScores,
         setShowScores,
         favoriteIds,
-        toggleFavorite
+        toggleFavorite,
+        currentPage,
+        totalPages
     }
 }

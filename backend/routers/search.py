@@ -6,6 +6,7 @@ from fastapi import APIRouter, HTTPException, Query, Request
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from typing import List, Optional
+import math
 
 class FragranceBase(BaseModel):
     embedding_id: int
@@ -29,6 +30,9 @@ class FragranceSearchResult(FragranceBase):
 class SmellSearchResponse(BaseModel):
     query: str
     results: List[FragranceSearchResult]
+    current_page: int
+    total_pages: int
+    total_results: int
 
 # Initialize the router. Note we strip the "/search" prefix out of the @router.get paths below
 router = APIRouter(prefix="/search", tags=["AI Retrieval & Generation"])
@@ -37,14 +41,15 @@ router = APIRouter(prefix="/search", tags=["AI Retrieval & Generation"])
 async def search_by_smell(
     request: Request,
     query: str = Query(..., min_length=3),
-    k: int = Query(20, gt=0, le=100),
+    page: int = Query(1, ge=1), # page nr
+    page_size: int = Query(12, ge=1), # items per page
     engine: str = Query('sbert', pattern="^(baseline|hybrid|sbert)$")
 ):
     clean_query = query.strip().lower()
     predictor = request.app.state.predictor
     redis_client = request.app.state.redis_client
 
-    cache_key = f"smell_search:{engine}:{k}:{clean_query}"
+    cache_key = f"smell_search:{engine}:{page}:{page_size}:{clean_query}"
     
     if redis_client:
         try:
@@ -57,8 +62,26 @@ async def search_by_smell(
 
     logging.info(f"Cache miss for query: '{clean_query}'. Computing via FAISS/SBERT...")
     try:
-        results = predictor.perform_semantic_search(query, k=k, engine=engine)
-        response_data = {"query": query, "results": results}
+        # get top 60 results from FAISS
+        MAX_RESULTS = 60
+        all_results = predictor.perform_semantic_search(query, k=MAX_RESULTS, engine=engine)
+
+        # calculate pagination
+        total_results = len(all_results)
+        total_pages = math.ceil(total_results / page_size)
+
+        # slice the array for the current page
+        start_idx = (page - 1) * page_size
+        end_idx = start_idx + page_size
+        paginated_results = all_results[start_idx:end_idx]
+
+        response_data = {
+            "query": query,
+            "results": paginated_results,
+            "current_page": page,
+            "total_pages": total_pages,
+            "total_results": total_results
+        }
         
         if redis_client:
             redis_client.setex(cache_key, 86400, json.dumps(jsonable_encoder(response_data)))
