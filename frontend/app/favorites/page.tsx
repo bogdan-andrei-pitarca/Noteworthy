@@ -8,13 +8,13 @@ import ResultCard from "../components/ResultCard";
 import { RefreshCw, HeartCrack, LogIn } from "lucide-react";
 import Link from "next/link";
 import SkeletonCard from "../components/SkeletonCard";
+import toast from "react-hot-toast";
 
 export default function FavoritesPage() {
     const { isAuthenticated, isLoading: isAuthLoading } = useAuth();
 
     const [favorites, setFavorites] = useState<FragranceRecord[]>([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
 
     // track the favorite IDs so the ResultCard can show the correct heart state
     const [favoriteIds, setFavoriteIds] = useState<Set<number>>(new Set());
@@ -31,7 +31,7 @@ export default function FavoritesPage() {
                 setFavorites(data);
                 setFavoriteIds(new Set(data.map(f => f.embedding_id)));
             } catch (err: any) {
-                setError('Failed to load favorites. Please try again later.');
+                toast.error('Failed to load favorites. Please try again later.');
             } finally {
                 setIsLoading(false);
             }
@@ -55,7 +55,7 @@ export default function FavoritesPage() {
                 return newSet;
             });
         } catch (err) {
-            setError('Failed to remove favorite. Please try again.');
+            toast.error('Failed to remove favorite. Please try again.');
         }
     };
 
@@ -90,7 +90,7 @@ export default function FavoritesPage() {
     }
 
     // show empty state (logged in but no favorites)
-    if (favorites.length === 0 && !error) {
+    if (favorites.length === 0) {
         return (
             <div className="min-h-screen bg-gray-50 p-8">
                 <div className="max-w-6xl mx-auto">
@@ -128,12 +128,6 @@ export default function FavoritesPage() {
                         </button>
                     </Link>
                 </header>
-
-                {error && (
-                    <div className="p-4 mb-8 bg-red-50 text-red-700 rounded-lg border border-red-200">
-                        {error}
-                    </div>
-                )}
 
                 <div className="grid text-gray-800 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {favorites.map((fragrance, index) => (

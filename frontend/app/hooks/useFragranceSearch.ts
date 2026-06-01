@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { fragranceService, favoritesService } from '../services';
 import { SearchMode, SearchEngine, FragranceRecord, DescriptionResponse } from '../types/FragranceTypes';
 import { useAuth } from '../context/AuthContext';
+import toast from 'react-hot-toast';
 
 /**
  * Custom hook to manage fragrance search functionality.
@@ -18,7 +19,6 @@ export function useFragranceSearch() {
     // We maintain separate state for each query type to preserve user input when switching modes
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
 
     const [searchMatches, setSearchMatches] = useState<FragranceRecord[]>([]);
     const [descriptionResult, setDescriptionResult] = useState<DescriptionResponse | null>(null);
@@ -58,6 +58,7 @@ export function useFragranceSearch() {
                     newSet.delete(embedding_id);
                     return newSet;
                 });
+                toast.success('Removed from favorites');
             } else {
                 await favoritesService.addFavorite(embedding_id);
                 setFavoriteIds(prev => {
@@ -65,9 +66,10 @@ export function useFragranceSearch() {
                     newSet.add(embedding_id);
                     return newSet;
                 });
+                toast.success('Added to favorites');
             }
         } catch (err) {
-            console.error("Failed to update favorite:", err);
+            toast.error('Failed to update favorite');
         }
     }
 
@@ -77,12 +79,11 @@ export function useFragranceSearch() {
         const query = mode === 'notes_to_smell' ? notesQuery : smellQuery;
 
         if (!query.trim()) {
-            setError('Please fill out the field before searching.');
+            toast.error('Please enter a query to search!');
             return;
         }
 
         setIsLoading(true);
-        setError(null);
         setSearchMatches([]);
         setDescriptionResult(null);
 
@@ -95,11 +96,11 @@ export function useFragranceSearch() {
                 if (data.results.length > 0) {
                     setSearchMatches(data.results);
                 } else {
-                    setError('No matching fragrances found. Try describing it differently!');
+                    toast.error('No matching fragrances found. Try describing it differently!');
                 }
             }
         } catch (err: any) {
-            setError(err.message || 'An unexpected error occurred.');
+            toast.error(err.message || 'An unexpected error occurred.');
         } finally {
             setIsLoading(false);
         }
@@ -115,7 +116,6 @@ export function useFragranceSearch() {
         notesQuery,
         setNotesQuery,
         isLoading,
-        error,
         searchMatches,
         descriptionResult,
         performSearch,

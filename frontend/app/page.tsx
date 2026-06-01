@@ -21,7 +21,6 @@ export default function AIModelInterface() {
     notesQuery,
     setNotesQuery,
     isLoading,
-    error,
     searchMatches,
     descriptionResult,
     performSearch,
@@ -56,9 +55,6 @@ export default function AIModelInterface() {
             handleSearch={performSearch}
           />
         </div>
-
-        {/* ERROR DISPLAY */}
-        {error && <div className="p-4 bg-red-50 text-red-700 rounded-lg border border-red-200">{error}</div>}
 
         { /* RESULTS SECTION */}
         <div className="mt-8">

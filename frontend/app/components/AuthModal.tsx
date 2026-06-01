@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { X, Mail, Lock, Loader2, AlertCircle } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { authService } from '../services';
+import toast from 'react-hot-toast';
+
 
 interface AuthModalProps {
     isOpen: boolean;
@@ -15,7 +17,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+
 
     const { login } = useAuth();
 
@@ -23,20 +25,21 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        setError(null);
         setIsLoading(true);
 
         try {
             let data;
             if (isLogin) {
                 data = await authService.login({email, password});
+                toast.success('Welcome back!');
             } else {
                 data = await authService.register({email, password});
+                toast.success('Account created successfully!');
             }
             login(data.access_token);
             onClose();
-        } catch (err) {
-            setError('Authentication failed. Please try again.');
+        } catch (err: any) {
+            toast.error(err.message || 'Authentication failed. Please try again.');
         } finally {
             setIsLoading(false);
         }
@@ -63,13 +66,6 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                             : "Sign up to start building your personalized scent collection!"}
                     </p>
                 </div>
-
-                {error && (
-                    <div className="mb-4 p-3 bg-red-50 text-red-700 text-sm rounded-lg flex items-start border border-red-100">
-                        <AlertCircle className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
-                        {error}
-                    </div>
-                )}
                     
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
@@ -114,10 +110,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 <div className="mt-6 text-center text-sm text-gray-500">
                     {isLogin ? "Don't have an account? " : "Already have an account? "}
                     <button 
-                        onClick={() => {
-                            setIsLogin(!isLogin);
-                            setError(null);
-                        }}
+                        onClick={() => setIsLogin(!isLogin)}
                         className="text-fuchsia-600 font-semibold hover:underline"
                     >
                         {isLogin ? 'Sign up' : 'Sign in'}

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useState, useEffect, ReactNode, useContext } from 'react';
+import toast from 'react-hot-toast';
 
 interface AuthContextType {
     isAuthenticated: boolean;
@@ -32,12 +33,14 @@ export const AuthProvider = ({children }: {children: ReactNode}) => {
         localStorage.setItem('noteworthy_token', newToken);
         setToken(newToken);
         setIsAuthenticated(true);
+        toast.success('Logged in successfully.');
     };
 
     const logout = () => {
         localStorage.removeItem('noteworthy_token');
         setToken(null);
         setIsAuthenticated(false);
+        toast.success('Logged out successfully.');
     };
 
     return (
