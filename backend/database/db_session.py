@@ -84,11 +84,13 @@ def initialize_database(conn):
         logging.error(f"Error initializing the database: {e}")
         raise
 
+try:
+    conn = get_connection()
+    initialize_database(conn)
+    conn.close()
+    logging.info("Database setup completed successfully.")
+except Exception as e:
+    logging.error(f"Database setup failed: {e}")
+
 if __name__ == "__main__":
-    try:
-        conn = get_connection()
-        initialize_database(conn)
-        conn.close()
-        logging.info("Database setup complete.")
-    except Exception as e:
-        logging.error(f"Database setup failed: {e}")
+    pass

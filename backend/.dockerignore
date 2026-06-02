@@ -1,0 +1,23 @@
+# Environments
+.venv/
+venv/
+env/
+.env
+
+# Cache
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Bulletproof ML Ignore (The **/ catches it even if nested)
+**/.cache/
+**/huggingface/
+**/*.bin
+**/*.safetensors
+**/*.h5
+**/*.pt
+**/models/
+**/model/
+**/data/
+**/Data/
+**/Models/

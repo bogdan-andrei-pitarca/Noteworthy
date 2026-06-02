@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+.git
+.env*.local
+npm-debug.log*
+__tests__
+jest.config.ts
+jest.setup.ts

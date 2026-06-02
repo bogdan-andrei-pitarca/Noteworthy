@@ -1,0 +1,61 @@
+version: '3.8'
+
+services:
+  # the postgres DB
+  db:
+    image: postgres:15-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: macaroane13
+      POSTGRES_DB: fragrance_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  # the redis cache
+  redis:
+    image: redis:7-alpine
+    restart: always
+    ports:
+      - "6379:6379"
+
+  # the FastAPI backend
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    # injects all secrets
+    env_file:
+      - ./backend/.env
+    environment:
+      # docker handles dns automatically 
+      - DB_HOST=db
+      - REDIS_HOST=redis
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      # enables hot-reloading
+      - ./backend:/app
+
+  # next.js frontend
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+
+volumes:
+  pgdata:

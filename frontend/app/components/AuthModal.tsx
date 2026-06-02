@@ -18,6 +18,11 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
+    const toggleAuthMode = () => {
+        setIsLogin(!isLogin);
+        setEmail('');
+        setPassword('');
+    }
 
     const { login } = useAuth();
 
@@ -77,6 +82,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                                autoComplete={isLogin ? "username" : "email"}
                                 className="w-full text-gray-900 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none transition"
                                 placeholder="you@example.com"
                             />
@@ -92,6 +98,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                                 required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
+                                autoComplete={isLogin ? "current-password" : "new-password"}
                                 className="w-full text-gray-900 pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-fuchsia-500 focus:border-fuchsia-500 outline-none transition"
                                 placeholder="••••••••"
                             />
@@ -110,7 +117,8 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 <div className="mt-6 text-center text-sm text-gray-500">
                     {isLogin ? "Don't have an account? " : "Already have an account? "}
                     <button 
-                        onClick={() => setIsLogin(!isLogin)}
+                        type="button"
+                        onClick={toggleAuthMode}
                         className="text-fuchsia-600 font-semibold hover:underline"
                     >
                         {isLogin ? 'Sign up' : 'Sign in'}

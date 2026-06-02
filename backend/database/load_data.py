@@ -2,7 +2,7 @@ import pandas as pd
 import psycopg
 import logging
 import os
-from db_session import get_connection, initialize_database
+from database.db_session import get_connection, initialize_database
 
 logging.basicConfig(level=logging.INFO)
 

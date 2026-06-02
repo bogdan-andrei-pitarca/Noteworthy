@@ -54,7 +54,7 @@ export default function AIModelInterface() {
             setEngine={setEngine}
             query={activeQuery}
             setQuery={setActiveQuery}
-            handleSearch={performSearch}
+            handleSearch={() => performSearch(1)}
           />
         </div>
 
