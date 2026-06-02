@@ -68,7 +68,7 @@ describe('ResultCard Component', () => {
 
     });
 
-    it('hides the heart button if unauthenticated, but shows it and responds to clicks when authenticated',  () => {
+    it('hides the heart button if unauthenticated, but shows it and responds to clicks when authenticated', async () => {
         const mockToggleFavorite = jest.fn();
 
         // scenario A: unauthenticated
@@ -96,7 +96,10 @@ describe('ResultCard Component', () => {
 
         // trigger interaction
         fireEvent.click(heartButton);
-        expect(mockToggleFavorite).toHaveBeenCalledWith(101);
+        
+        await waitFor(() => {
+            expect(mockToggleFavorite).toHaveBeenCalledWith(101);
+        });
     });
 
     it('conditionally displays the similarity match score percentage based on configurations', () => {
