@@ -19,4 +19,5 @@ backend/fine_tuning/models/*.zip
 **/noteworthy_t5_v1/
 **/checkpoint-*/
 *.bin
-*.safetensors   
+*.safetensors
+.env   
