@@ -1,5 +1,5 @@
 import { API_BASE_URL } from './apiConfig';
-import { SmellSearchResponse, DescriptionResponse } from "../types/FragranceTypes";
+import { SmellSearchResponse, DescriptionResponse, FragranceRecord } from "../types/FragranceTypes";
 
 export const fragranceService = {
     async searchBySmell(query: string, engine: string, page: number = 1, limit: number = 12): Promise<SmellSearchResponse> {
@@ -20,6 +20,22 @@ export const fragranceService = {
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({ detail: 'Backend error occurred' }));
             throw new Error(errorData.detail || `Error ${response.status}`);
+        }
+        return response.json();
+    },
+
+    async getFragranceById(id: number): Promise<FragranceRecord> {
+        const response = await fetch(`${API_BASE_URL}/search/details/${id}`);
+        if (!response.ok) {
+            throw new Error(`Error fetching fragrance details: ${response.statusText}`);
+        }
+        return response.json();
+    },
+
+    async getSimilarFragrances(id: number, engine: string = 'sbert'): Promise<FragranceRecord[]> {
+        const response = await fetch(`${API_BASE_URL}/search/similar/${id}?engine=${engine}`);
+        if (!response.ok) {
+            throw new Error(`Error fetching similar fragrances: ${response.statusText}`);
         }
         return response.json();
     }

@@ -1,36 +1,88 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { RefreshCw, Search, Sparkles } from "lucide-react";
+import { useState, useEffect, useRef, Suspense } from "react";
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
+import { RefreshCw, Search, Sparkles, Loader2 } from "lucide-react";
 import { useFragranceSearch } from "./hooks/useFragranceSearch";
 import ResultCard from "./components/ResultCard";
 import SearchBar from "./components/SearchBar";
 import { useAuth } from "./context/AuthContext";
 import SkeletonCard from "./components/SkeletonCard";
 
-export default function AIModelInterface() {
+function AIModelInterface() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const hasHydrated = useRef(false);
+  const [pendingAutoSearch, setPendingAutoSearch] = useState(false);
+
   const { isAuthenticated } = useAuth();
 
   const {
-    mode,
-    setMode,
-    engine,
-    setEngine,
-    smellQuery,
-    setSmellQuery,
-    notesQuery,
-    setNotesQuery,
-    isLoading,
-    searchMatches,
-    descriptionResult,
-    performSearch,
-    showScores,
-    setShowScores,
-    favoriteIds,
-    toggleFavorite,
-    currentPage,
-    totalPages
+    mode, setMode,
+    engine, setEngine,
+    smellQuery, setSmellQuery,
+    notesQuery, setNotesQuery,
+    isLoading, searchMatches, descriptionResult,
+    performSearch, showScores, setShowScores,
+    favoriteIds, toggleFavorite, currentPage, totalPages
   } = useFragranceSearch();
+
+  // read url and trigger state updates
+  useEffect(() => {
+    const urlMode = searchParams.get('mode');
+    const urlNotes = searchParams.get('notes');
+    const urlSmell = searchParams.get('smell');
+    const urlEngine = searchParams.get('engine');
+
+    if (urlMode && !hasHydrated.current) {
+      if (urlMode === 'notes_to_smell' || urlMode === 'smell_to_notes') setMode(urlMode);
+      if (urlEngine) setEngine(urlEngine as any);
+
+      if (urlMode === 'notes_to_smell' && urlNotes) {
+        setNotesQuery(urlNotes);
+        if (!descriptionResult) setPendingAutoSearch(true);
+      } else if (urlMode === 'smell_to_notes' && urlSmell) {
+        setSmellQuery(urlSmell);
+        if (searchMatches.length === 0) setPendingAutoSearch(true);
+      }
+    }
+  }, [searchParams, descriptionResult, searchMatches.length, setEngine, setMode, setNotesQuery, setSmellQuery]);
+
+  // fire search after react finished
+  useEffect(() => {
+    if (pendingAutoSearch) {
+      const urlNotes = searchParams.get('notes');
+      const urlSmell = searchParams.get('smell');
+
+      // Mathematically verify the input box matches the URL before searching
+      const isNotesReady = mode === 'notes_to_smell' && notesQuery === urlNotes;
+      const isSmellReady = mode === 'smell_to_notes' && smellQuery === urlSmell;
+
+      if (isNotesReady || isSmellReady) {
+        hasHydrated.current = true;
+        setPendingAutoSearch(false);
+        performSearch(1);
+      }
+    }
+  }, [pendingAutoSearch, notesQuery, smellQuery, mode, performSearch, searchParams]);
+
+  // update the URL when the user hits search
+  const executeSearchWithUrl = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('mode', mode);
+    if (mode === 'notes_to_smell') {
+      params.set('notes', notesQuery);
+      params.delete('smell');
+    } else {
+      params.set('smell', smellQuery);
+      params.set('engine', engine);
+      params.delete('notes');
+    }
+    router.push(`${pathname}?${params.toString()}`);
+
+    performSearch(1);
+  };
 
   // determine active query based on mode
   const activeQuery = mode === 'notes_to_smell' ? notesQuery : smellQuery;
@@ -70,7 +122,7 @@ export default function AIModelInterface() {
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-800 pb-20">
 
-      {/* 1. Hero Section (Dark with Radial Gradient) */}
+      {/* Hero Section (Dark with Radial Gradient) */}
       <div
         className="relative w-full pt-24 pb-32 px-6 overflow-hidden"
         style={{
@@ -90,7 +142,7 @@ export default function AIModelInterface() {
         </div>
       </div>
 
-      {/* 2. Main Content Area (Overlapping the Hero) */}
+      {/* Main Content Area (Overlapping the Hero) */}
       <div className="max-w-6xl mx-auto px-6 -mt-16 relative z-20 space-y-8">
 
         {/* Search Bar Container */}
@@ -102,7 +154,7 @@ export default function AIModelInterface() {
             setEngine={setEngine}
             query={activeQuery}
             setQuery={setActiveQuery}
-            handleSearch={() => performSearch(1)}
+            handleSearch={executeSearchWithUrl}
           />
         </div>
 
@@ -159,7 +211,10 @@ export default function AIModelInterface() {
                   {totalPages > 1 && (
                     <div className="flex items-center justify-center space-x-6 mt-12 pt-8 border-t border-gray-200">
                       <button
-                        onClick={() => performSearch(currentPage - 1)}
+                        onClick={() => {
+                          performSearch(currentPage - 1);
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
                         disabled={currentPage === 1 || isLoading}
                         className="px-5 py-2 rounded-xl font-semibold text-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-fuchsia-600 hover:border-fuchsia-200 shadow-sm"
                       >
@@ -169,7 +224,10 @@ export default function AIModelInterface() {
                         Page <strong className="text-gray-900">{currentPage}</strong> of <strong className="text-gray-900">{totalPages}</strong>
                       </span>
                       <button
-                        onClick={() => performSearch(currentPage + 1)}
+                        onClick={() => {
+                          performSearch(currentPage + 1);
+                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
                         disabled={currentPage === totalPages || isLoading}
                         className="px-5 py-2 rounded-xl font-semibold text-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-fuchsia-600 hover:border-fuchsia-200 shadow-sm"
                       >
@@ -181,20 +239,32 @@ export default function AIModelInterface() {
               )}
 
               {/* NO RESULTS */}
-              {((mode === 'notes_to_smell' && !descriptionResult) || 
+              {((mode === 'notes_to_smell' && !descriptionResult) ||
                 (mode === 'smell_to_notes' && searchMatches.length === 0)) && (
-                <div className="text-center py-24 border-2 border-dashed border-gray-200 rounded-3xl bg-white shadow-sm">
-                  <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Search className="w-8 h-8 text-gray-300" />
+                  <div className="text-center py-24 border-2 border-dashed border-gray-200 rounded-3xl bg-white shadow-sm">
+                    <div className="w-16 h-16 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <Search className="w-8 h-8 text-gray-300" />
+                    </div>
+                    <h3 className="text-lg font-bold text-gray-700 mb-1">Ready to explore</h3>
+                    <p className="text-gray-500 max-w-md mx-auto">Enter fragrance notes or describe a scent to begin searching the catalog.</p>
                   </div>
-                  <h3 className="text-lg font-bold text-gray-700 mb-1">Ready to explore</h3>
-                  <p className="text-gray-500 max-w-md mx-auto">Enter fragrance notes or describe a scent to begin searching the catalog.</p>
-                </div>
-              )}
+                )}
             </div>
           )}
         </div>
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <Loader2 className="w-8 h-8 animate-spin text-fuchsia-600" />
+      </div>
+    }>
+      <AIModelInterface />
+    </Suspense>
   );
 }

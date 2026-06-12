@@ -7,6 +7,7 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
 from typing import List, Optional
 import math
+from repository import fragrance_repo
 
 class FragranceBase(BaseModel):
     embedding_id: int
@@ -148,6 +149,38 @@ async def generate_description(
             logging.error(f"Error saving to Redis cache: {e}")
 
     return {"description": description, "cached": False}
+
+
+@router.get("/details/{embedding_id}", response_model=FragranceBase)
+async def get_fragrance_detail(embedding_id: int):
+    """Fetch a single fragrance by its ID for the detail page."""
+    records = fragrance_repo.get_fragrances_by_ids([embedding_id])
+    if not records:
+        raise HTTPException(status_code=404, detail="Fragrance not found.")
+    return records[0]
+
+
+@router.get("/similar/{embedding_id}", response_model=List[FragranceSearchResult])
+async def get_similar_fragrances(request: Request, embedding_id: int, engine: str = 'sbert'):
+    """Item-to-Item retrieval: Finds similar fragrances based on an existing fragrance's profile."""
+    # fetch the target fragrance
+    records = fragrance_repo.get_fragrances_by_ids([embedding_id])
+    if not records:
+        raise HTTPException(status_code=404, detail="Fragrance not found")
+    
+    frag = records[0]
+    
+    # build a rich semantic query using its notes and top accords
+    query_text = f"{frag['all_notes']} {frag['main_accord_1']} {frag['main_accord_2']}"
+    
+    # perform standard semantic search
+    predictor = request.app.state.predictor
+    results = predictor.perform_semantic_search(query_text, k=6, engine=engine)
+    
+    # filter out the original fragrance and return the top 3 matches
+    similar_fragrances = [r for r in results if r['embedding_id'] != embedding_id][:3]
+    
+    return similar_fragrances
 
 def sanitise_notes_input(notes: str) -> str:
     """

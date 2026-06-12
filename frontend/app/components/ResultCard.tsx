@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { ExternalLink, Heart, Sparkles } from 'lucide-react';
 import { FragranceRecord } from '../types/FragranceTypes';
 import { fragranceService } from '../services';
+import Link from 'next/link';
 
 interface ResultCardProps {
     result: FragranceRecord;
@@ -107,8 +108,8 @@ const ResultCard: React.FC<ResultCardProps> = ({
                         onClick={handleHeartClick}
                         disabled={isHeartLoading}
                         className={`p-2 rounded-full transition-colors ${isFavorite
-                                ? 'text-red-500 bg-red-50 hover:bg-red-100'
-                                : 'text-gray-400 bg-gray-50 hover:text-red-500 hover:bg-gray-100'
+                            ? 'text-red-500 bg-red-50 hover:bg-red-100'
+                            : 'text-gray-400 bg-gray-50 hover:text-red-500 hover:bg-gray-100'
                             } ${isHeartLoading ? 'opacity-50 cursor-wait' : ''}`}
                         title={isFavorite ? "Remove from favorites" : "Add to favorites"}
                     >
@@ -120,9 +121,11 @@ const ResultCard: React.FC<ResultCardProps> = ({
             <div>
                 {/* pr-24 ensures text wraps before hitting the icon group */}
                 <div className="flex justify-between items-start mb-3 pr-24">
-                    <h3 className="text-xl font-bold text-fuchsia-800 capitalize leading-tight">
-                        {(result.perfume_name || '').replace(/-/g, ' ')} by {(result.brand || '').replace(/-/g, ' ')} {result.launch_year ? `(${result.launch_year})` : ''}
-                    </h3>
+                    <Link href={`/fragrance/${result.embedding_id}`}>
+                        <h3 className="text-xl font-bold text-fuchsia-800 capitalize leading-tight hover:underline cursor-pointer">
+                            {(result.perfume_name || '').replace(/-/g, ' ')} by {(result.brand || '').replace(/-/g, ' ')} {result.launch_year ? `(${result.launch_year})` : ''}
+                        </h3>
+                    </Link>
                 </div>
                 <p className="text-sm text-gray-500 mb-2 font-semibold">{(result.brand || '').replace(/-/g, ' ')}</p>
 
