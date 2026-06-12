@@ -1,12 +1,12 @@
 engine,query,rank_1,rank_2,rank_3,latency_sec
-hybrid,sweet tangy nectarines and vanilla,[80.21%] Malibu Surf by Juicy Couture,[72.81%] Fiery Pink Pepper Eau De Parfum by Molton Brown,[72.05%] Vespri Aromatico by Nobile 1942,0.08
-hybrid,dark smoky oud with rose,[77.0%] A Garota Que Passa De Biquini Goiaba by Quem Disse Berenice,[75.57%] Faberge Woodhue by Brut Parfums Prestige,[73.88%] Vibrant Leather Explosion by Zara,0.08
+hybrid,sweet tangy nectarines and vanilla,[84.65%] Sotoor Seen by Rasasi,[83.56%] Sublime by Ulric De Varens,[83.06%] Instance Frutas Vermelhas by Eudora,0.17
+hybrid,dark smoky oud with rose,[85.45%] Golden Moka by Xerjoff,[81.16%] Rose Blush Cologne 2024 by Jo Malone London,[81.1%] D Noir by Luciano Soprani,0.08
 hybrid,old dusty library books,[24.7%] School by Rook Perfumes,[23.9%] Walk On Air Sunshine by Kate Spade,[23.38%] Toy by Moschino,0.08
-hybrid,gasoline and hot rubber,[40.87%] Lapidus Pour Homme Black Extreme by Ted Lapidus,[29.48%] Vanille Pamplemousse by Laurence Dumont,[29.13%] Rook By Rook by Rook Perfumes,0.1
-hybrid,a walk through a damp pine forest in the rain,[35.12%] 214 Violeta Sandalo by O Boticario,[34.29%] Salvatore Ferragamo Pour Femme by Salvatore Ferragamo,[33.04%] Vaara by Penhaligon S,0.08
-hybrid,vnnilla and pchouli,[33.25%] Maxime by Avon,[32.06%] Narcisse by Fragonard,[31.45%] Horus by Natura,0.08
-hybrid,swet lether,[19.24%] Hypnotic Poison Eau Secrete by Dior,[18.34%] Amatus by Thera Cosmeticos,[18.31%] Eau De Lacoste L 12 12 Pour Elle Magnetic by Lacoste Fragrances,0.07
-hybrid,I want to smell like a billionaire sitting in a leather chair smoking a Cuban cigar while drinking dark roasted coffee,[47.38%] P S I Love You by Bath Body Works,[46.77%] Agua De Vetiver by Angel Schlesser,[46.36%] Hypnose Homme Eau Fraiche by Lancome,0.1
-hybrid,burning hot fire and freezing cold ice,[23.71%] Santo Incienso Sillage Sacre by The Different Company,[22.2%] Lotus Oud by Lotus,[22.13%] Montabaco Rio by Ormonde Jayne,0.09
-hybrid,clean fresh laundry covered in dirty mud,[22.22%] Aroma Terapia Energia Pro Dia by O Boticario,[15.38%] Plume Blanche 1901 by Lalique,[15.3%] Zwinger by Rammstein,0.09
-hybrid,ok,HTTP 422 (Expected),-,-,0.0
+hybrid,gasoline and hot rubber,[40.87%] Lapidus Pour Homme Black Extreme by Ted Lapidus,[34.39%] School by Rook Perfumes,[29.48%] Vanille Pamplemousse by Laurence Dumont,0.14
+hybrid,a walk through a damp pine forest in the rain,[39.79%] Seconde Peau by Courreges,[38.67%] Myrica Muse by Miller Harris,[35.12%] 214 Violeta Sandalo by O Boticario,0.1
+hybrid,vnnilla and pchouli,[33.25%] Maxime by Avon,[32.06%] Narcisse by Fragonard,[31.45%] Horus by Natura,0.07
+hybrid,swet lether,[19.24%] Hypnotic Poison Eau Secrete by Dior,[18.34%] Amatus by Thera Cosmeticos,[18.31%] Eau De Lacoste L 12 12 Pour Elle Magnetic by Lacoste Fragrances,0.09
+hybrid,I want to smell like a billionaire sitting in a leather chair smoking a Cuban cigar while drinking dark roasted coffee,[66.26%] Amberbomb by Laboratorio Olfattivo,[63.49%] Cafe Cacao by En Voyage Perfumes,[56.33%] Urban Hero by Jimmy Choo,0.08
+hybrid,burning hot fire and freezing cold ice,[23.71%] Santo Incienso Sillage Sacre by The Different Company,[22.2%] Lotus Oud by Lotus,[22.13%] Montabaco Rio by Ormonde Jayne,0.06
+hybrid,clean fresh laundry covered in dirty mud,[22.22%] Aroma Terapia Energia Pro Dia by O Boticario,[19.65%] Pierre De Velay No 56 by Roja Dove,[19.18%] Flwr 001 Alm by Zara,0.1
+hybrid,ok,HTTP 422 (Expected),-,-,0.01

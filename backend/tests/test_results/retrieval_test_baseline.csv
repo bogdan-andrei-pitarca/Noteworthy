@@ -1,12 +1,12 @@
 engine,query,rank_1,rank_2,rank_3,latency_sec
-baseline,sweet tangy nectarines and vanilla,[85.98%] Rose by Roja Dove,[85.76%] Fashion Addict by Oriflame,[77.61%] Narciso Eau De Toilette by Narciso Rodriguez,0.16
-baseline,dark smoky oud with rose,[80.47%] Faberge Woodhue by Brut Parfums Prestige,[79.89%] Vibrant Leather Explosion by Zara,[79.4%] Fruit D Amour Purple Gardenia by Emanuel Ungaro,0.09
-baseline,old dusty library books,[25.82%] School by Rook Perfumes,[25.15%] 214 Violeta Sandalo by O Boticario,[23.92%] Toy by Moschino,0.08
-baseline,gasoline and hot rubber,[55.24%] Lapidus Pour Homme Black Extreme by Ted Lapidus,[45.82%] School by Rook Perfumes,[34.07%] Halley by Tiziana Terenzi,0.07
-baseline,a walk through a damp pine forest in the rain,[36.33%] Desirtoxic L Intense by M Micallef,[33.69%] 214 Violeta Sandalo by O Boticario,[33.66%] Wellness By Clean Purity by Clean,0.08
-baseline,vnnilla and pchouli,[44.94%] Narcisse by Fragonard,[44.88%] Talento by Mendittorosa,[44.46%] Far Away Rebel Diva by Avon,0.08
-baseline,swet lether,[22.25%] L Homme Sport by Lanvin,[19.88%] Inside Out by The Gate Fragrances Paris,[18.94%] Cuir Blanc by Evody Parfums,0.07
-baseline,I want to smell like a billionaire sitting in a leather chair smoking a Cuban cigar while drinking dark roasted coffee,[51.9%] Cafe by Franck Boclet,[43.38%] Cherish The Moment by Avon,[40.37%] Blush Scent by Mary Kay,0.1
-baseline,burning hot fire and freezing cold ice,[23.64%] 69 Fahrenheit by Alexandria Fragrances,[23.58%] Dkny Be Extra Delicious by Donna Karan,[22.97%] Santo Incienso Sillage Sacre by The Different Company,0.09
-baseline,clean fresh laundry covered in dirty mud,[17.31%] Plume Blanche 1901 by Lalique,[16.0%] Ilia Ser by Natura,[15.74%] Amazing For Men by Bill Blass,0.08
-baseline,ok,HTTP 422 (Expected),-,-,0.0
+baseline,sweet tangy nectarines and vanilla,[88.0%] Guess 1981 Los Angeles Women by Guess,[87.71%] Sotoor Seen by Rasasi,[87.69%] Black Opium Nuit Blanche by Yves Saint Laurent,0.52
+baseline,dark smoky oud with rose,[87.92%] No 2 by Eutopie,[83.34%] Leather Oud by Dior,[82.95%] Oud Luxuria by Navitus Parfums,0.18
+baseline,old dusty library books,[25.82%] School by Rook Perfumes,[25.15%] 214 Violeta Sandalo by O Boticario,[23.92%] Toy by Moschino,0.17
+baseline,gasoline and hot rubber,[55.24%] Lapidus Pour Homme Black Extreme by Ted Lapidus,[45.82%] School by Rook Perfumes,[34.07%] Halley by Tiziana Terenzi,0.19
+baseline,a walk through a damp pine forest in the rain,[40.02%] Seconde Peau by Courreges,[39.38%] So Dupont Paris By Night Pour Femme by S T Dupont,[36.33%] Desirtoxic L Intense by M Micallef,0.26
+baseline,vnnilla and pchouli,[44.94%] Narcisse by Fragonard,[44.88%] Talento by Mendittorosa,[44.46%] Far Away Rebel Diva by Avon,0.2
+baseline,swet lether,[22.25%] L Homme Sport by Lanvin,[19.88%] Inside Out by The Gate Fragrances Paris,[18.94%] Cuir Blanc by Evody Parfums,0.24
+baseline,I want to smell like a billionaire sitting in a leather chair smoking a Cuban cigar while drinking dark roasted coffee,[58.25%] Collapse Of Hedonism Krakh Gedonizma by Khaikin,[51.9%] Cafe by Franck Boclet,[49.9%] Homme by David Beckham,0.19
+baseline,burning hot fire and freezing cold ice,[23.64%] 69 Fahrenheit by Alexandria Fragrances,[23.58%] Dkny Be Extra Delicious by Donna Karan,[22.97%] Santo Incienso Sillage Sacre by The Different Company,0.15
+baseline,clean fresh laundry covered in dirty mud,[17.31%] Plume Blanche 1901 by Lalique,[16.23%] Ice Land by Herve Gambs Paris,[16.0%] Ilia Ser by Natura,0.13
+baseline,ok,HTTP 422 (Expected),-,-,0.01

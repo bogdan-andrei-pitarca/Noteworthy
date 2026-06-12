@@ -1,3 +1,5 @@
+import os
+
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -14,7 +16,8 @@ app = FastAPI(title="Noteworthy Fragrances API", version="1.0")
 
 # --- Redis Setup ---
 try:
-    redis_client = redis.Redis(host='localhost', port=6379, db=0, decode_responses=True)
+    redis_host = os.environ.get("REDIS_HOST", "redis")
+    redis_client = redis.Redis(host=redis_host, port=6379, db=0, decode_responses=True)
     redis_client.ping()
     app.state.redis_client = redis_client # Attach to app state for routers to use
     logging.info("Connected to Redis successfully.")

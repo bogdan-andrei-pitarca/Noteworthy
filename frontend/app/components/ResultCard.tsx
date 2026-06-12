@@ -86,7 +86,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
     }
 
     return (
-        <div className="bg-white p-5 rounded-xl shadow-lg border border-gray-100 hover:shadow-2xl transition duration-200 transform hover:scale-[1.02] flex flex-col justify-between relative">
+        <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 border-l-4 border-l-fuchsia-500 hover:shadow-xl hover:shadow-fuchsia-900/5 transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between relative">
 
             {/* Grouped Actions Container in the Top Right */}
             <div className="absolute top-4 right-4 flex items-center gap-1">
@@ -128,7 +128,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
 
                 <div className="flex flex-wrap gap-2 mb-3">
                     {accords.map(accord => (
-                        <span key={accord} className="px-2 py-0.5 text-xs font-medium rounded-full bg-fuschia-50 text-fuschia-800 border border-fuschia-200 capitalize">
+                        <span key={accord} className="px-2.5 py-1 text-[11px] font-semibold tracking-wide rounded-md bg-zinc-100 text-zinc-600 border border-zinc-200 uppercase">
                             {accord}
                         </span>
                     ))}

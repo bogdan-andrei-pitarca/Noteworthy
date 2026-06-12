@@ -1,11 +1,11 @@
 input_notes,output,latency_sec
-vanilla,It smells like a fruit stand next to an old spice store.,1.18
-cedarwood,It smells like wood shavings on a wooden tree.,1.46
-"bergamot, lemon, black pepper, leather, tobacco, oud, rose, iris, patchouli, vetiver, oakmoss, amber, civet","It smells like a florist's pantry after hours — lemon-ripe flowers and sweet almonds hanging on the sofa, with a warm leather jacket that's dried up at the bottom.",3.06
-"grapefruit, yuzu, mint, basil, lavender, rosemary, pine, cedar, sandalwood, musk, tonka bean, vanilla","It smells like citrus peel and yuzu at first, then resinous white flowers, with a hint of vanilla and woody musk.",1.59
-"aquatic sea salt, heavy dark smoke, sweet cotton candy","It smells like warm sea salt mixed with a thick dark smoke that's a touch molassesy, with a crisp-sweet cotton candy-like warmth underneath.",2.3
-"icy mint, burning hot chili pepper, warm amber","It smells like icy mint and hot chili pepper at first, then warm amber, with a warm, powdery finish.",1.23
-"pepperoni pizza, motor oil, gasoline","It smells like pepperoni pizza at first, then softens into a powdery gasoline base.",1.22
-"wet dog, old library books, copper coins","It smells like a wet dog and old library books at first, then settles into something warm and coppery.",1.32
-"solar notes, moonlight accord, stardust, frozen water","It smells like a solar panel left open in the middle of the night, with something powdery and warm beneath the surface.",1.1
-"roasted coffee beans, dark chocolate, bitter almond, warm musk","It smells like dark chocolate and roasted coffee beans at first, then cool almonds, with a warm, woody sweetness that’s lingering in your hands.",2.8
+vanilla,It smells like a fruit stand next to an old spice store.,1.34
+cedarwood,"It smells like a spice shop next to a coffee shop, with a woody base and a warm woody-woody woody base.",1.43
+"bergamot, lemon, black pepper, leather, tobacco, oud, rose, iris, patchouli, vetiver, oakmoss, amber, civet","It smells like a spice store near a vintage dresser — sweet citrus, sweet leather, and something a bit bitter that is damp.",1.88
+"grapefruit, yuzu, mint, basil, lavender, rosemary, pine, cedar, sandalwood, musk, tonka bean, vanilla","It smells like citrus peel and yuzu at first, then resinous white flowers, with a hint of vanilla and woody musk.",1.13
+"aquatic sea salt, heavy dark smoke, sweet cotton candy","It smells like a beach bar next to a salty water hole, with a slightly bittersweet edge that feels like dried peaches and citrus peels.",1.58
+"icy mint, burning hot chili pepper, warm amber","It smells like icy mint and hot chili pepper at first, then warm amber, with a warm, powdery finish.",0.9
+"pepperoni pizza, motor oil, gasoline","It smells like pepperoni pizza at first, then softens into a powdery gasoline base.",0.87
+"wet dog, old library books, copper coins","It smells like a wet dog and old library books at first, then settles into something warm and coppery.",0.92
+"solar notes, moonlight accord, stardust, frozen water","It smells like a solar panel left open in the middle of the night, with something powdery and warm beneath the surface.",0.82
+"roasted coffee beans, dark chocolate, bitter almond, warm musk","It smells like a coffee shop where dark chocolate meets roasted almonds, with something soft and slightly leathery lingering in the background.",1.71
