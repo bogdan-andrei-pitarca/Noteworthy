@@ -141,11 +141,11 @@ function AIModelInterface() {
   // note chips, to avoid blank page
   const popularNotes = ['Bergamot', 'Jasmine', 'Musk', 'Patchouli', 'Vanilla', 'Sandalwood', 'Amber'];
   const surpriseCombos = [
-    "concrete, rubber, coffee",
-    "vinyl, blood, gin",
-    "cannabis, pear, leather",
-    "bubble gum, tuberose, ambroxan",
-    "cranberry, grapefruit, coffee"
+    "black cherry, bitter almond, tonka bean", 
+    "cherry, nectarine, red apple, pear, pineapple, litchi, peony, watermelon, lotus, cyclamen, jasmine, praline, sandalwood, amber, virginia cedar",
+    "green mandarin, mandarin orange, jasmine, neroli, amber, musk",  
+    "raspberry, pink pepper, orange blossom, white flowers, iris, black vanilla husk, benzoin",
+    "cardamom, sandalwood, violet, leather"    
   ];
 
   return (

@@ -1,9 +1,9 @@
 from transformers import T5ForConditionalGeneration, T5Tokenizer
 import torch
 
-model_path = r"D:\faculta\licenta\Noteworthy\backend\fine_tuning\models\noteworthy_t5_v3"
+model_path = "./fine_tuning/models/noteworthy_t5_v4"
 
-print("--- Loading noteworthy_t5_v3 ---")
+print("--- Loading noteworthy_t5_v4 ---")
 tokenizer = T5Tokenizer.from_pretrained(model_path, legacy=False)
 model = T5ForConditionalGeneration.from_pretrained(model_path)
 

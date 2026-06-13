@@ -44,7 +44,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             login(data.access_token);
             onClose();
         } catch (err: any) {
-            toast.error(err.message || 'Authentication failed. Please try again.');
+            toast.error('Authentication failed. Please retry with valid credentials.');
         } finally {
             setIsLoading(false);
         }
