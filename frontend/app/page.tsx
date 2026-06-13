@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
-import { RefreshCw, Search, Sparkles, Loader2 } from "lucide-react";
+import { RefreshCw, Search, Sparkles, Loader2, ArrowRight } from "lucide-react";
 import { useFragranceSearch } from "./hooks/useFragranceSearch";
 import ResultCard from "./components/ResultCard";
 import SearchBar from "./components/SearchBar";
@@ -84,6 +84,23 @@ function AIModelInterface() {
     performSearch(1);
   };
 
+  // takes t5 output and feeds it into SBERT
+  const handleBridgeSearch = () => {
+      if (!descriptionResult) return;
+      setMode('smell_to_notes');
+      setSmellQuery(descriptionResult.description);
+      
+      const params = new URLSearchParams(searchParams.toString());
+      params.set('mode', 'smell_to_notes');
+      params.set('smell', descriptionResult.description);
+      params.set('engine', engine);
+      params.delete('notes');
+      router.push(`${pathname}?${params.toString()}`);
+      
+      // Let our robust useEffect handle the synchronized execution!
+      setPendingAutoSearch(true);
+  }
+
   // determine active query based on mode
   const activeQuery = mode === 'notes_to_smell' ? notesQuery : smellQuery;
   const setActiveQuery = mode === 'notes_to_smell' ? setNotesQuery : setSmellQuery;
@@ -93,7 +110,9 @@ function AIModelInterface() {
     "old dusty library books...",
     "warm cashmere by a fireplace...",
     "smoky leather and dark rum...",
-    "fresh rain on concrete..."
+    "fresh rain on concrete...",
+    "citrusy bergamot and lavender...",
+    "old jazz club with a hint of mystery..."
   ];
   const [exampleIndex, setExampleIndex] = useState(0);
   const [displayText, setDisplayText] = useState("");
@@ -118,6 +137,16 @@ function AIModelInterface() {
 
     return () => clearTimeout(timeout);
   }, [displayText, isDeleting, exampleIndex]);
+
+  // note chips, to avoid blank page
+  const popularNotes = ['Bergamot', 'Jasmine', 'Musk', 'Patchouli', 'Vanilla', 'Sandalwood', 'Amber'];
+  const surpriseCombos = [
+    "concrete, rubber, coffee",
+    "vinyl, blood, gin",
+    "cannabis, pear, leather",
+    "bubble gum, tuberose, ambroxan",
+    "cranberry, grapefruit, coffee"
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-800 pb-20">
@@ -156,6 +185,28 @@ function AIModelInterface() {
             setQuery={setActiveQuery}
             handleSearch={executeSearchWithUrl}
           />
+          
+          {/* note chips */}
+          {mode === 'notes_to_smell' && (
+             <div className="mt-4 flex flex-wrap items-center justify-center gap-2 animate-in fade-in slide-in-from-top-2 duration-300">
+                <span className="text-sm font-semibold text-gray-500 mr-1">Try adding:</span>
+                {popularNotes.map(note => (
+                    <button 
+                        key={note} 
+                        onClick={() => setNotesQuery(prev => prev ? `${prev}, ${note}` : note)} 
+                        className="px-3 py-1 bg-white border border-gray-200 rounded-full text-xs font-medium text-gray-600 hover:border-fuchsia-300 hover:text-fuchsia-600 hover:shadow-sm transition-all"
+                    >
+                        + {note}
+                    </button>
+                ))}
+                <button 
+                    onClick={() => setNotesQuery(surpriseCombos[Math.floor(Math.random() * surpriseCombos.length)])} 
+                    className="px-3 py-1 bg-fuchsia-50 border border-fuchsia-200 rounded-full text-xs font-bold text-fuchsia-700 hover:bg-fuchsia-100 transition-all flex items-center shadow-sm"
+                >
+                    <Sparkles className="w-3 h-3 mr-1" /> Surprise Me
+                </button>
+             </div>
+          )}
         </div>
 
         { /* 3. RESULTS SECTION (Light Theme) */}
@@ -175,6 +226,16 @@ function AIModelInterface() {
                     <Sparkles size={18} /> Description
                   </div>
                   <p className="text-2xl text-gray-800 italic font-serif leading-relaxed"> "{descriptionResult.description}" </p>
+
+                  {/* the bridge button */}
+                  <div className="pt-6 border-t border-fuchsia-100 flex justify-end">
+                      <button
+                          onClick={handleBridgeSearch}
+                          className="flex items-center gap-2 px-6 py-2.5 bg-fuchsia-600 text-white rounded-xl font-semibold text-sm hover:bg-fuchsia-700 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
+                      >
+                          <Search className="w-4 h-4" /> Find perfumes with this vibe <ArrowRight className="w-4 h-4" />
+                      </button>
+                  </div>
                 </div>
               )}
 

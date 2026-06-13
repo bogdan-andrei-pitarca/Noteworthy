@@ -35,6 +35,9 @@ class SmellSearchResponse(BaseModel):
     total_pages: int
     total_results: int
 
+class ProfileRequest(BaseModel):
+    favorite_ids: List[int]
+
 # Initialize the router. Note we strip the "/search" prefix out of the @router.get paths below
 router = APIRouter(prefix="/search", tags=["AI Retrieval & Generation"])
 
@@ -182,6 +185,26 @@ async def get_similar_fragrances(request: Request, embedding_id: int, engine: st
     
     return similar_fragrances
 
+@router.post("/profile/radar", tags=["User Profile"])
+async def generate_scent_profile(request: ProfileRequest):
+    """
+    Generates a personal scent profile based on favorited perfumes.
+    """
+    if not request.favorite_ids:
+        return []
+    
+    profile_data = fragrance_repo.get_user_scent_profile(request.favorite_ids)
+
+    # max value, so we can scale the radar chart properly
+    total_accords = sum(item['A'] for item in profile_data) if profile_data else 1
+
+    # add a 'fullMark' key required by recharts to scale the radar web
+    for item in profile_data:
+        item['fullMark'] = profile_data[0]['A'] + 1 if profile_data else 10
+        item['subject'] = item['subject'].capitalize()
+
+    return profile_data
+ 
 def sanitise_notes_input(notes: str) -> str:
     """
     Ensures the input exactly matches the ['note1', 'note2'] format 

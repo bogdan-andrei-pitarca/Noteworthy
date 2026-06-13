@@ -1,20 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { fragranceService } from "@/app/services";
 import { FragranceRecord } from "@/app/types/FragranceTypes";
 import { Sparkles, ExternalLink, ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
-import ResultCard from "@/app/components/ResultCard"; 
+import ResultCard from "@/app/components/ResultCard";
 
 export default function FragranceDetail() {
     const params = useParams();
     const id = Number(params.id);
+    const router = useRouter();
 
     const [fragrance, setFragrance] = useState<FragranceRecord | null>(null);
     const [aiDescription, setAiDescription] = useState<string | null>(null);
-    const [similar, setSimilar] = useState<FragranceRecord[]>([]); 
+    const [similar, setSimilar] = useState<FragranceRecord[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isGenerating, setIsGenerating] = useState(true);
 
@@ -24,12 +25,12 @@ export default function FragranceDetail() {
             try {
                 const data = await fragranceService.getFragranceById(id);
                 setFragrance(data);
-                
+
                 // fetch similar fragrances in parallel
                 fragranceService.getSimilarFragrances(id)
                     .then(setSimilar)
                     .catch(console.error);
-                
+
                 // trigger the T5 generation
                 if (data.all_notes) {
                     const descData = await fragranceService.generateDescription(data.all_notes);
@@ -56,7 +57,7 @@ export default function FragranceDetail() {
 
     // clean up accords for display
     const accords = [
-        fragrance.main_accord_1, fragrance.main_accord_2, fragrance.main_accord_3, 
+        fragrance.main_accord_1, fragrance.main_accord_2, fragrance.main_accord_3,
         fragrance.main_accord_4, fragrance.main_accord_5
     ].filter(a => a && a.toLowerCase() !== 'none');
 
@@ -66,9 +67,9 @@ export default function FragranceDetail() {
     return (
         <div className="min-h-screen bg-gray-50 pb-20">
             <div className="max-w-4xl mx-auto px-6 pt-12">
-                <Link href="/" className="inline-flex items-center text-sm font-semibold text-fuchsia-600 hover:text-fuchsia-800 mb-8 transition">
+                <button onClick={() => router.back()} className="inline-flex items-center text-sm font-semibold text-fuchsia-600 hover:text-fuchsia-800 mb-8 transition cursor-pointer">
                     <ArrowLeft className="w-4 h-4 mr-2" /> Back to Search
-                </Link>
+                </button>
 
                 <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
                     {/* Header Section */}
@@ -82,7 +83,7 @@ export default function FragranceDetail() {
                         <p className="text-lg text-zinc-400 font-medium capitalize">
                             by {fragrance.brand.replace(/-/g, ' ')} {fragrance.launch_year ? `(${fragrance.launch_year})` : ''}
                         </p>
-                        
+
                         <div className="flex flex-wrap gap-2 mt-4">
                             {accords.map(accord => (
                                 <span key={accord} className="px-3 py-1 text-xs font-bold tracking-wide rounded-md bg-white/10 text-zinc-200 border border-white/20 uppercase">
@@ -94,7 +95,7 @@ export default function FragranceDetail() {
 
                     <div className="p-8">
                         {/* T5 Generative Section */}
-                        <div className="mb-8 p-6 bg-gradient-to-br from-fuchsia-50 to-white rounded-2xl border border-fuchsia-100 shadow-sm relative overflow-hidden"> 
+                        <div className="mb-8 p-6 bg-gradient-to-br from-fuchsia-50 to-white rounded-2xl border border-fuchsia-100 shadow-sm relative overflow-hidden">
                             <div className="flex items-center gap-2 mb-3 text-fuchsia-700 font-bold uppercase tracking-widest text-xs">
                                 <Sparkles size={16} /> Noteworthy AI Interpretation
                             </div>
@@ -103,7 +104,7 @@ export default function FragranceDetail() {
                                     <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Analyzing notes and generating description...
                                 </div>
                             ) : (
-                                <p className="text-xl text-gray-800 italic font-serif leading-relaxed"> 
+                                <p className="text-xl text-gray-800 italic font-serif leading-relaxed">
                                     "{aiDescription}"
                                 </p>
                             )}
@@ -121,7 +122,7 @@ export default function FragranceDetail() {
                                     ))}
                                 </div>
                             </div>
-                            
+
                             <div>
                                 <h3 className="text-base font-bold text-gray-900 mb-3 border-b pb-2">Details</h3>
                                 <ul className="space-y-2 text-sm">

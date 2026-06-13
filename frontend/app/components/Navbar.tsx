@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useAuth } from '../context/AuthContext';
-import { Droplets, Heart, LogOut, UserCircle } from 'lucide-react';
+import { Droplets, Heart, LogOut, UserCircle, Hexagon } from 'lucide-react';
 import { useState } from 'react';
 import AuthModal from './AuthModal';
 
@@ -28,6 +28,12 @@ export default function Navbar() {
                     <div className="flex items-center space-x-6">
                         {isAuthenticated ? (
                             <>
+                                <Link
+                                    href="/profile"
+                                    className="flex items-center text-zinc-400 hover:text-fuchsia-400 transition font-medium text-sm pr-4 md:pr-6 border-r border-zinc-800"
+                                >
+                                    <Hexagon className="w-4 h-4 mr-1.5" /> Scent DNA
+                                </Link>
                                 <Link
                                     href="/favorites"
                                     className="flex items-center text-zinc-400 hover:text-fuchsia-400 transition font-medium text-sm"

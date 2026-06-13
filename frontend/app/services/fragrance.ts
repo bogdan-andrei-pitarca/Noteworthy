@@ -38,5 +38,19 @@ export const fragranceService = {
             throw new Error(`Error fetching similar fragrances: ${response.statusText}`);
         }
         return response.json();
+    },
+
+    async getScentProfile(favoriteIds: number[]): Promise<any[]> {
+        const response = await fetch(`${API_BASE_URL}/search/profile/radar`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ favorite_ids: favoriteIds })
+        });
+        if (!response.ok) {
+            throw new Error(`Error fetching scent profile: ${response.statusText}`);
+        }
+        return response.json();
     }
 };
