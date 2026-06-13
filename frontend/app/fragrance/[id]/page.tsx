@@ -48,11 +48,11 @@ export default function FragranceDetail() {
     }, [id]);
 
     if (isLoading) {
-        return <div className="min-h-screen flex items-center justify-center bg-gray-50"><Loader2 className="w-8 h-8 animate-spin text-fuchsia-600" /></div>;
+        return <div className="min-h-screen flex items-center justify-center bg-zinc-950"><Loader2 className="w-8 h-8 animate-spin text-fuchsia-600" /></div>;
     }
 
     if (!fragrance) {
-        return <div className="min-h-screen flex items-center justify-center bg-gray-50 text-xl font-bold">Fragrance not found.</div>;
+        return <div className="min-h-screen flex items-center justify-center bg-zinc-950 text-xl font-bold text-zinc-200">Fragrance not found.</div>;
     }
 
     // clean up accords for display
@@ -65,13 +65,13 @@ export default function FragranceDetail() {
     const cleanNotes = fragrance.all_notes.replace(/['\[\]]/g, '').split(',').map(n => n.trim());
 
     return (
-        <div className="min-h-screen bg-gray-50 pb-20">
+        <div className="min-h-screen bg-zinc-950 pb-20">
             <div className="max-w-4xl mx-auto px-6 pt-12">
-                <button onClick={() => router.back()} className="inline-flex items-center text-sm font-semibold text-fuchsia-600 hover:text-fuchsia-800 mb-8 transition cursor-pointer">
+                <button onClick={() => router.back()} className="inline-flex items-center text-sm font-semibold text-fuchsia-600 hover:text-fuchsia-400 mb-8 transition cursor-pointer">
                     <ArrowLeft className="w-4 h-4 mr-2" /> Back to Search
                 </button>
 
-                <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+                <div className="bg-zinc-900 rounded-3xl shadow-xl border border-zinc-800 overflow-hidden">
                     {/* Header Section */}
                     <div className="bg-zinc-950 px-8 py-6 text-white relative">
                         <a href={fragrance.url} target="_blank" rel="noopener noreferrer" className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 rounded-full transition">
@@ -95,16 +95,16 @@ export default function FragranceDetail() {
 
                     <div className="p-8">
                         {/* T5 Generative Section */}
-                        <div className="mb-8 p-6 bg-gradient-to-br from-fuchsia-50 to-white rounded-2xl border border-fuchsia-100 shadow-sm relative overflow-hidden">
-                            <div className="flex items-center gap-2 mb-3 text-fuchsia-700 font-bold uppercase tracking-widest text-xs">
+                        <div className="mb-8 p-6 bg-gradient-to-br from-fuchsia-500/10 to-zinc-900 rounded-2xl border border-fuchsia-500/20 relative overflow-hidden">
+                            <div className="flex items-center gap-2 mb-3 text-fuchsia-400 font-bold uppercase tracking-widest text-xs">
                                 <Sparkles size={16} /> Noteworthy AI Interpretation
                             </div>
                             {isGenerating ? (
-                                <div className="flex items-center text-fuchsia-600 italic">
+                                <div className="flex items-center text-fuchsia-400 italic">
                                     <Loader2 className="w-4 h-4 mr-2 animate-spin" /> Analyzing notes and generating description...
                                 </div>
                             ) : (
-                                <p className="text-xl text-gray-800 italic font-serif leading-relaxed">
+                                <p className="text-xl text-zinc-200 italic font-serif leading-relaxed">
                                     "{aiDescription}"
                                 </p>
                             )}
@@ -113,10 +113,10 @@ export default function FragranceDetail() {
                         {/* Data Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <div className="md:col-span-2">
-                                <h3 className="text-base font-bold text-gray-900 mb-3 border-b pb-2">Complete Note Pyramid</h3>
+                                <h3 className="text-base font-bold text-zinc-100 mb-3 border-b border-zinc-800 pb-2">Complete Note Pyramid</h3>
                                 <div className="flex flex-wrap gap-2">
                                     {cleanNotes.map((note, i) => (
-                                        <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-lg text-sm font-medium capitalize">
+                                        <span key={i} className="px-3 py-1 bg-zinc-800 text-zinc-300 rounded-lg text-sm font-medium capitalize">
                                             {note}
                                         </span>
                                     ))}
@@ -124,11 +124,11 @@ export default function FragranceDetail() {
                             </div>
 
                             <div>
-                                <h3 className="text-base font-bold text-gray-900 mb-3 border-b pb-2">Details</h3>
+                                <h3 className="text-base font-bold text-zinc-100 mb-3 border-b border-zinc-800 pb-2">Details</h3>
                                 <ul className="space-y-2 text-sm">
-                                    <li className="flex justify-between"><span className="text-gray-500">Gender</span> <span className="font-semibold text-gray-900 capitalize">{fragrance.gender}</span></li>
-                                    <li className="flex justify-between"><span className="text-gray-500">Rating</span> <span className="font-semibold text-gray-900">{fragrance.rating_value} / 5</span></li>
-                                    <li className="flex justify-between"><span className="text-gray-500">Reviews</span> <span className="font-semibold text-gray-900">{fragrance.rating_count?.toLocaleString()}</span></li>
+                                    <li className="flex justify-between"><span className="text-zinc-400">Gender</span> <span className="font-semibold text-zinc-100 capitalize">{fragrance.gender}</span></li>
+                                    <li className="flex justify-between"><span className="text-zinc-400">Rating</span> <span className="font-semibold text-zinc-100">{fragrance.rating_value} / 5</span></li>
+                                    <li className="flex justify-between"><span className="text-zinc-400">Reviews</span> <span className="font-semibold text-zinc-100">{fragrance.rating_count?.toLocaleString()}</span></li>
                                 </ul>
                             </div>
                         </div>
@@ -138,7 +138,7 @@ export default function FragranceDetail() {
                 {/* "more like this" section */}
                 {similar.length > 0 && (
                     <div className="mt-12">
-                        <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight mb-6 flex items-center gap-2">
+                        <h2 className="text-2xl font-extrabold text-zinc-100 tracking-tight mb-6 flex items-center gap-2">
                             You Might Also Like
                         </h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

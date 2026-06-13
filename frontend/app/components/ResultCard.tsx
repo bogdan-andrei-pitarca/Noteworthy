@@ -35,17 +35,17 @@ const ResultCard: React.FC<ResultCardProps> = ({
         // Rank 1 gets special treatment regardless of raw score
         if (rank === 0) {
             return percent > 50
-                ? { text: "Perfect Match", color: "bg-fuchsia-100 text-fuchsia-800 border-fuchsia-200" }
-                : { text: "Best Vibe Match", color: "bg-fuchsia-100 text-fuchsia-800 border-fuchsia-200" };
+                ? { text: "Perfect Match", color: "bg-fuchsia-500/20 text-fuchsia-300 border-fuchsia-500/30" }
+                : { text: "Best Vibe Match", color: "bg-fuchsia-500/20 text-fuchsia-300 border-fuchsia-500/30" };
         }
 
         // The rest are graded on the calibrated curve
-        if (percent >= 75) return { text: "Strong Match", color: "bg-green-100 text-green-800 border-green-200" };
-        if (percent >= 50) return { text: "Good Match", color: "bg-blue-100 text-blue-800 border-blue-200" };
-        if (percent >= 25) return { text: "Conceptual Match", color: "bg-indigo-100 text-indigo-800 border-indigo-200" };
+        if (percent >= 75) return { text: "Strong Match", color: "bg-green-500/15 text-green-400 border-green-500/30" };
+        if (percent >= 50) return { text: "Good Match", color: "bg-blue-500/15 text-blue-400 border-blue-500/30" };
+        if (percent >= 25) return { text: "Conceptual Match", color: "bg-indigo-500/15 text-indigo-400 border-indigo-500/30" };
 
         // Distant matches are neutral gray, not aggressive red
-        return { text: "Distant Match", color: "bg-gray-100 text-gray-700 border-gray-200" };
+        return { text: "Distant Match", color: "bg-zinc-800 text-zinc-400 border-zinc-700" };
     };
 
     const badge = getBadgeInfo(result.similarity_percent, index);
@@ -87,7 +87,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
     }
 
     return (
-        <div className="bg-white p-6 rounded-2xl shadow-md border border-gray-100 border-l-4 border-l-fuchsia-500 hover:shadow-xl hover:shadow-fuchsia-900/5 transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between relative">
+        <div className="bg-zinc-900/70 backdrop-blur-sm p-6 rounded-2xl border border-zinc-800 border-l-4 border-l-fuchsia-500 hover:border-zinc-700 hover:shadow-xl hover:shadow-fuchsia-500/10 transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between relative">
 
             {/* Grouped Actions Container in the Top Right */}
             <div className="absolute top-4 right-4 flex items-center gap-1">
@@ -96,7 +96,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
                     href={result.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 text-gray-400 hover:text-fuchsia-500 transition rounded-full hover:bg-gray-50"
+                    className="p-2 text-zinc-400 hover:text-fuchsia-500 transition rounded-full hover:bg-zinc-800"
                     title="View on Fragrantica"
                 >
                     <ExternalLink className="w-4 h-4" />
@@ -108,8 +108,8 @@ const ResultCard: React.FC<ResultCardProps> = ({
                         onClick={handleHeartClick}
                         disabled={isHeartLoading}
                         className={`p-2 rounded-full transition-colors ${isFavorite
-                            ? 'text-red-500 bg-red-50 hover:bg-red-100'
-                            : 'text-gray-400 bg-gray-50 hover:text-red-500 hover:bg-gray-100'
+                            ? 'text-red-500 bg-red-500/15 hover:bg-red-500/25'
+                            : 'text-zinc-400 bg-zinc-800 hover:text-red-500 hover:bg-zinc-700'
                             } ${isHeartLoading ? 'opacity-50 cursor-wait' : ''}`}
                         title={isFavorite ? "Remove from favorites" : "Add to favorites"}
                     >
@@ -122,40 +122,40 @@ const ResultCard: React.FC<ResultCardProps> = ({
                 {/* pr-24 ensures text wraps before hitting the icon group */}
                 <div className="flex justify-between items-start mb-3 pr-24">
                     <Link href={`/fragrance/${result.embedding_id}`}>
-                        <h3 className="text-xl font-bold text-fuchsia-800 capitalize leading-tight hover:underline cursor-pointer">
+                        <h3 className="text-xl font-bold text-fuchsia-400 capitalize leading-tight hover:underline cursor-pointer">
                             {(result.perfume_name || '').replace(/-/g, ' ')} by {(result.brand || '').replace(/-/g, ' ')} {result.launch_year ? `(${result.launch_year})` : ''}
                         </h3>
                     </Link>
                 </div>
-                <p className="text-sm text-gray-500 mb-2 font-semibold">{(result.brand || '').replace(/-/g, ' ')}</p>
+                <p className="text-sm text-zinc-400 mb-2 font-semibold">{(result.brand || '').replace(/-/g, ' ')}</p>
 
                 <div className="flex flex-wrap gap-2 mb-3">
                     {accords.map(accord => (
-                        <span key={accord} className="px-2.5 py-1 text-[11px] font-semibold tracking-wide rounded-md bg-zinc-100 text-zinc-600 border border-zinc-200 uppercase">
+                        <span key={accord} className="px-2.5 py-1 text-[11px] font-semibold tracking-wide rounded-md bg-zinc-800 text-zinc-300 border border-zinc-700 uppercase">
                             {accord}
                         </span>
                     ))}
                 </div>
 
-                <div className="text-xs text-gray-600 space-y-1">
-                    <p><strong className="text-gray-700">Rating: {result.rating_value ?? 'N/A'} ({result.rating_count ?? '0'} reviews)</strong></p>
-                    <p><strong className="text-gray-700">Launch Year: {result.launch_year ?? 'N/A'}</strong></p>
+                <div className="text-xs text-zinc-400 space-y-1">
+                    <p><strong className="text-zinc-300">Rating: {result.rating_value ?? 'N/A'} ({result.rating_count ?? '0'} reviews)</strong></p>
+                    <p><strong className="text-zinc-300">Launch Year: {result.launch_year ?? 'N/A'}</strong></p>
                 </div>
             </div>
 
             <div className="mt-auto">
                 {/* AI GENERATED DESCRIPTION SECTION */}
-                <div className="bg-gray-50 p-3 rounded-lg border border-gray-100 mb-4 min-h-[80px] flex flex-col justify-center">
+                <div className="bg-zinc-800/50 p-3 rounded-lg border border-zinc-700 mb-4 min-h-[80px] flex flex-col justify-center">
                     {aiDescription ? (
-                        <div className="text-sm text-gray-700 italic font-serif leading-relaxed">
-                            <Sparkles className="w-3 h-3 inline-block mr-1 text-fuschia-500 mb-1" />
+                        <div className="text-sm text-zinc-300 italic font-serif leading-relaxed">
+                            <Sparkles className="w-3 h-3 inline-block mr-1 text-fuchsia-500 mb-1" />
                             "{aiDescription}"
                         </div>
                     ) : (
                         <button
                             onClick={handleGenerateDescription}
                             disabled={isGenerating}
-                            className="w-full py-2 px-4 bg-fuchsia-100 text-fuchsia-700 text-sm font-semibold rounded-md hover:bg-fuchsia-200 transition disabled:opacity-50"
+                            className="w-full py-2 px-4 bg-fuchsia-500/20 text-fuchsia-300 text-sm font-semibold rounded-md hover:bg-fuchsia-500/30 transition disabled:opacity-50"
                         >
                             {isGenerating ? 'Generating...' : 'Find out how this smells!'}
                         </button>
@@ -163,7 +163,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
                 </div>
             </div>
 
-            <div className="mt-4 pt-4 border-t border-gray-100 flex justify-between items-center">
+            <div className="mt-4 pt-4 border-t border-zinc-800 flex justify-between items-center">
                 {result.similarity_percent !== undefined && (
                     <span className={`px-4 py-1.5 text-sm font-bold rounded-full shadow-inner border ${badge.color}`}>
                         {badge.text}
@@ -173,7 +173,7 @@ const ResultCard: React.FC<ResultCardProps> = ({
                     </span>
                 )}
 
-                <span className="text-xs text-gray-500 italic">Gender: {result.gender}</span>
+                <span className="text-xs text-zinc-500 italic">Gender: {result.gender}</span>
             </div>
         </div>
     )

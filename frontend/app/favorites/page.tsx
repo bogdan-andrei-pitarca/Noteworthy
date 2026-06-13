@@ -62,11 +62,13 @@ export default function FavoritesPage() {
     // show loading state while AuthContext is determining if user is authenticated
     if (isAuthLoading || (isAuthenticated && isLoading)) {
         return (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {/* Render 6 fake cards while waiting for the API */}
-                {[...Array(6)].map((_, i) => (
-                    <SkeletonCard key={i} />
-                ))}
+            <div className="min-h-screen bg-zinc-950 p-8">
+                <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {/* Render 6 fake cards while waiting for the API */}
+                    {[...Array(6)].map((_, i) => (
+                        <SkeletonCard key={i} />
+                    ))}
+                </div>
             </div>
         );
     }
@@ -74,10 +76,10 @@ export default function FavoritesPage() {
     // show not logged in state
     if (!isAuthenticated) {
         return (
-            <div className="min-h-screen bg-gray-50 p-8 flex flex-col items-center justify-center text-center">
-                <LogIn className="w-16 h-16 text-gray-300 mb-4" />
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">You aren't signed in</h2>
-                <p className="text-gray-500 max-w-md mb-6">
+            <div className="min-h-screen bg-zinc-950 p-8 flex flex-col items-center justify-center text-center">
+                <LogIn className="w-16 h-16 text-zinc-600 mb-4" />
+                <h2 className="text-2xl font-bold text-zinc-200 mb-2">You aren't signed in</h2>
+                <p className="text-zinc-400 max-w-md mb-6">
                     Sign in to your account to view your personalized collection of saved fragrances.
                 </p>
                 <Link href="/">
@@ -92,19 +94,19 @@ export default function FavoritesPage() {
     // show empty state (logged in but no favorites)
     if (favorites.length === 0) {
         return (
-            <div className="min-h-screen bg-gray-50 p-8">
+            <div className="min-h-screen bg-zinc-950 p-8">
                 <div className="max-w-6xl mx-auto">
-                    <header className="border-b pb-6 mb-10">
-                        <h1 className="text-3xl font-extrabold tracking-tight text-fuchsia-800">Your Collection</h1>
+                    <header className="border-b border-zinc-800 pb-6 mb-10">
+                        <h1 className="text-3xl font-extrabold tracking-tight text-fuchsia-400">Your Collection</h1>
                     </header>
-                    <div className="flex flex-col items-center justify-center py-20 text-center border-2 border-dashed border-gray-200 rounded-3xl bg-white">
-                        <HeartCrack className="w-16 h-16 text-gray-300 mb-4" />
-                        <h2 className="text-xl font-bold text-gray-800 mb-2">No favorites yet</h2>
-                        <p className="text-gray-500 max-w-md mb-6">
+                    <div className="flex flex-col items-center justify-center py-20 text-center border-2 border-dashed border-zinc-800 rounded-3xl bg-zinc-900/50">
+                        <HeartCrack className="w-16 h-16 text-zinc-600 mb-4" />
+                        <h2 className="text-xl font-bold text-zinc-200 mb-2">No favorites yet</h2>
+                        <p className="text-zinc-400 max-w-md mb-6">
                             You haven't saved any fragrances to your collection. Head back to the search page to explore!
                         </p>
                         <Link href="/">
-                            <button className="bg-fuchsia-100 text-fuchsia-700 border border-fuchsia-200 px-6 py-2 rounded-lg font-semibold hover:bg-fuchsia-200 transition">
+                            <button className="bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/30 px-6 py-2 rounded-lg font-semibold hover:bg-fuchsia-500/30 transition">
                                 Discover Fragrances
                             </button>
                         </Link>
@@ -115,21 +117,21 @@ export default function FavoritesPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-50 p-8">
+        <div className="min-h-screen bg-zinc-950 p-8">
             <div className="max-w-6xl mx-auto">
-                <header className="border-b pb-6 mb-8 flex justify-between items-end">
+                <header className="border-b border-zinc-800 pb-6 mb-8 flex justify-between items-end">
                     <div>
-                        <h1 className="text-3xl font-extrabold tracking-tight text-fuchsia-800 mb-2">Your Collection</h1>
-                        <p className="text-gray-600">You have saved {favorites.length} {favorites.length === 1 ? 'fragrance' : 'fragrances'}.</p>
+                        <h1 className="text-3xl font-extrabold tracking-tight text-fuchsia-400 mb-2">Your Collection</h1>
+                        <p className="text-zinc-400">You have saved {favorites.length} {favorites.length === 1 ? 'fragrance' : 'fragrances'}.</p>
                     </div>
                     <Link href="/">
-                        <button className="text-sm font-semibold text-fuchsia-600 hover:text-fuchsia-800 hover:underline">
+                        <button className="text-sm font-semibold text-fuchsia-600 hover:text-fuchsia-400 hover:underline">
                             &larr; Back to Search
                         </button>
                     </Link>
                 </header>
 
-                <div className="grid text-gray-800 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {favorites.map((fragrance, index) => (
                         <ResultCard 
                             key={fragrance.embedding_id} 
